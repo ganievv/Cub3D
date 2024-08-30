@@ -1,0 +1,6 @@
+cub3d
+libft.a
+*.txt
+*.o
+./mlx42/
+./libft/
