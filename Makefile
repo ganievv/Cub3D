@@ -6,7 +6,7 @@
 #    By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/08/28 16:07:11 by sganiev          ###   ########.fr        #
+#    Updated: 2024/08/30 17:18:30 by sganiev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ RESET		:= \033[0m
 #****************************************************************************#
 all: $(NAME)
 
-$(NAME): $(MLX42LIB) $(OBJ)
+$(NAME): submodules_init $(MLX42LIB) $(OBJ)
 	@echo "$(BLUE)Linking $@...$(RESET)"
 	@$(CC) $(CFLAGS) $(MLX42FLAGS) $^ -o $@
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
@@ -63,10 +63,15 @@ $(ODIR) $(DDIR):
 	@mkdir -p $(ODIR) $(DDIR)
 
 $(MLX42LIB):
-	@echo "$(BLUE)Building MLX42 library...$(RESET)"
+	@echo "$(BLUE)Building mlx42 library...$(RESET)"
 	@cmake -S ./mlx42 -B $(MLXBUILDDIR)
 	@cmake --build $(MLXBUILDDIR) -j4
-	@echo "$(GREEN)MLX42 library created successfully!$(RESET)"
+	@echo "$(GREEN)Mlx42 library created successfully!$(RESET)"
+
+submodules_init:
+	@echo "$(BLUE)Initializing and updating submodules...$(RESET)"
+	@git submodule update --init
+	@echo "$(GREEN)Submodules initialized and updated!$(RESET)"
 
 clean:
 	@echo "$(YELLOW)Cleaning object and dependency files...$(RESET)"
@@ -84,4 +89,4 @@ re: fclean all
 
 -include $(DEPFILES)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re submodules_init
