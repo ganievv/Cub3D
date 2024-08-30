@@ -6,7 +6,7 @@
 #    By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/08/30 17:18:30 by sganiev          ###   ########.fr        #
+#    Updated: 2024/08/30 17:34:48 by sganiev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ SRC_PARSER	:=
 
 SRC			:= $(SRC_MAIN) $(SRC_PARSER)
 
-ODIR		:= ./obj
-DDIR		:= $(ODIR)/.deps
+BUILDDIR	:= ./build
+ODIR		:= $(BUILDDIR)/obj
+DDIR		:= $(BUILDDIR)/deps
 OBJ			:= $(patsubst %.c,$(ODIR)/%.o,$(SRC))
 DEPFILES	:= $(patsubst %.c,$(DDIR)/%.d,$(SRC))
 DEPFLAGS	=  -MMD -MP -MF $(DDIR)/$*.d
@@ -51,7 +52,7 @@ RESET		:= \033[0m
 #****************************************************************************#
 all: $(NAME)
 
-$(NAME): submodules_init $(MLX42LIB) $(OBJ)
+$(NAME): $(MLX42LIB) $(OBJ)
 	@echo "$(BLUE)Linking $@...$(RESET)"
 	@$(CC) $(CFLAGS) $(MLX42FLAGS) $^ -o $@
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
@@ -63,15 +64,13 @@ $(ODIR) $(DDIR):
 	@mkdir -p $(ODIR) $(DDIR)
 
 $(MLX42LIB):
+	@echo "$(BLUE)Initializing and updating the mlx42 submodule...$(RESET)"
+	@git submodule update --init
+	@echo "$(GREEN)Submodule initialized and updated!$(RESET)"
 	@echo "$(BLUE)Building mlx42 library...$(RESET)"
 	@cmake -S ./mlx42 -B $(MLXBUILDDIR)
 	@cmake --build $(MLXBUILDDIR) -j4
 	@echo "$(GREEN)Mlx42 library created successfully!$(RESET)"
-
-submodules_init:
-	@echo "$(BLUE)Initializing and updating submodules...$(RESET)"
-	@git submodule update --init
-	@echo "$(GREEN)Submodules initialized and updated!$(RESET)"
 
 clean:
 	@echo "$(YELLOW)Cleaning object and dependency files...$(RESET)"
@@ -80,7 +79,7 @@ clean:
 
 fclean: clean
 	@echo "$(RED)Cleaning all build files...$(RESET)"
-	@rm -rf $(ODIR)
+	@rm -rf $(BUILDDIR)
 	@rm -f $(NAME)
 	@rm -rf $(MLXBUILDDIR)
 	@echo "$(RED)Fully cleaned including executable and libraries.$(RESET)"
@@ -89,4 +88,4 @@ re: fclean all
 
 -include $(DEPFILES)
 
-.PHONY: all clean fclean re submodules_init
+.PHONY: all clean fclean re

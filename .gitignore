@@ -1,4 +1,7 @@
 cub3d
 libft.a
+libmlx42.a
+./build/
 *.txt
 *.o
+*.d
