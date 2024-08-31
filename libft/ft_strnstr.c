@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/08/30 19:52:23 by tnakas           ###   ########.fr       */
+/*   Created: 2024/03/06 12:17:18 by tnakas            #+#    #+#             */
+/*   Updated: 2024/03/10 21:31:01 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "../mlx42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+char	*ft_strnstr(const char *str, const char *sub, size_t l)
+{
+	size_t	i;
+	size_t	j;
 
-#endif
+	if (!*sub)
+		return ((char *)str);
+	i = 0;
+	while (str[i] && i < l)
+	{
+		j = 0;
+		while (str[i + j] && sub[j] && i + j < l
+			&& str[i + j] == sub[j])
+			j++;
+		if (!sub[j])
+			return ((char *)(str + i));
+		i++;
+	}
+	return (NULL);
+}

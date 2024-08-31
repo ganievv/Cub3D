@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/08/30 19:52:23 by tnakas           ###   ########.fr       */
+/*   Created: 2024/08/02 16:06:05 by tnakas            #+#    #+#             */
+/*   Updated: 2024/08/19 15:43:15 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "../mlx42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new_ptr;
 
-#endif
+	if (new_size == 0)
+	{
+		ft_free(ptr, old_size);
+		return (NULL);
+	}
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+	{
+		return (NULL);
+	}
+	if (ptr)
+	{
+		ft_memcpy(new_ptr, ptr, new_size);
+		free(ptr);
+		ptr = NULL;
+	}
+	return (new_ptr);
+}

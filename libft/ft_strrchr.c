@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/08/30 19:52:23 by tnakas           ###   ########.fr       */
+/*   Created: 2024/03/06 12:17:21 by tnakas            #+#    #+#             */
+/*   Updated: 2024/03/14 18:37:24 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
+//because is int I must cast it as a character
+char	*ft_strrchr(char *str, int c)
+{
+	int	i;
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "../mlx42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
-
-#endif
+	i = 0;
+	i = ft_strlen(str);
+	i++;
+	while (--i >= 0)
+	{
+		if (str[i] == (char)c)
+			return ((char *)(str + i));
+	}
+	return (NULL);
+}

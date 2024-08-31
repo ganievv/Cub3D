@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/08/30 19:52:23 by tnakas           ###   ########.fr       */
+/*   Created: 2024/03/06 12:17:15 by tnakas            #+#    #+#             */
+/*   Updated: 2024/03/10 15:14:35 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "../mlx42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+int	ft_strncmp(char const *s1, char const *s2, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < n && (*(s1 + i) || *(s2 + i)))
+	{
+		if (*(s1 + i) != *(s2 + i))
+			return ((unsigned char)(*(s1 + i)) -(unsigned char)(*(s2 + i)));
+		i++;
+	}
+	return (0);
+}

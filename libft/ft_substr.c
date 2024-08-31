@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/08/30 19:52:23 by tnakas           ###   ########.fr       */
+/*   Created: 2024/03/17 02:35:46 by tnakas            #+#    #+#             */
+/*   Updated: 2024/03/17 03:34:12 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "../mlx42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+char	*ft_substr(const char *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (start > ft_strlen(s))
+		len = 0;
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	sub = (char *)malloc(sizeof(char) *(len + 1));
+	if (!sub)
+		return (NULL);
+	while (i < len)
+	{
+		sub[i] = s[i + start];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}

@@ -3,19 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/08/30 19:22:22 by sganiev          ###   ########.fr        #
+#    Updated: 2024/08/30 20:02:01 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 
-INCDIRS		:= -I./include/ -I./mlx42/include
+INCDIRS		:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR) \
+				-lft #-fsanitize=address
 
 CC			:= gcc
 CFLAGS		:= -g -Wall -Wextra -Werror $(INCDIRS)
+LIBFT_DIR 	:= libft
 
 VPATH		:=  ./src/main
 
@@ -28,6 +30,7 @@ BUILDDIR	:= ./build
 ODIR		:= $(BUILDDIR)/obj
 DDIR		:= $(BUILDDIR)/deps
 OBJ			:= $(patsubst %.c,$(ODIR)/%.o,$(SRC))
+LIBFT 		:= $(LIBFT_DIR)/libft.a
 DEPFILES	:= $(patsubst %.c,$(DDIR)/%.d,$(SRC))
 DEPFLAGS	=  -MMD -MP -MF $(DDIR)/$*.d
 
@@ -52,12 +55,17 @@ RESET		:= \033[0m
 #****************************************************************************#
 all: $(BUILDDIR) $(NAME)
 
-$(NAME): $(MLX42LIB) $(OBJ)
+$(NAME): $(MLX42LIB) $(OBJ) $(LIBFT)
 	@echo "$(BLUE)Linking $@...$(RESET)"
-	@$(CC) $(CFLAGS) $(MLX42FLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $(MLX42FLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
 
-$(ODIR)/%.o: %.c
+$(LIBFT):
+	@echo "$(BLUE)Compiling libft...$(RESET)"
+	@$(MAKE) -C $(LIBFT_DIR)
+	@echo "$(GREEN)Library libft created successfully!$(RESET)"
+
+$(ODIR)/%.o: %.c | $(ODIR) $(DDIR)
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 $(MLX42LIB):
@@ -79,12 +87,15 @@ submodules_init:
 
 clean:
 	@echo "$(YELLOW)Cleaning object and dependency files...$(RESET)"
+	@$(MAKE) -C $(LIBFT_DIR) clean
 	@rm -f $(OBJ) $(DEPFILES)
 	@echo "$(YELLOW)Cleaned up object files and temporary files.$(RESET)"
 
 fclean: clean
 	@echo "$(RED)Cleaning all build files...$(RESET)"
 	@rm -rf $(BUILDDIR)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -rf $(ODIR)
 	@rm -f $(NAME)
 	@rm -rf $(MLXBUILDDIR)
 	@echo "$(RED)Fully cleaned including executable and libraries.$(RESET)"
