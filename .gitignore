@@ -2,6 +2,7 @@ cub3d
 libft.a
 libmlx42.a
 ./build/
+testing
 *.txt
 *.o
 *.d
