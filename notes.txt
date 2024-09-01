@@ -1,3 +1,5 @@
+
+here is *.cub file.
 That is a valid input all the map must be surrounded by '1'
 
 NO ./path_to_the_north_texture
