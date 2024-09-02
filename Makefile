@@ -3,52 +3,53 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
+#    By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/09/02 18:58:56 by tnakas           ###   ########.fr        #
+#    Updated: 2024/09/02 21:55:29 by sganiev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= cub3D
+NAME			:= cub3D
 
-INCDIRS		:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR) \
+INCDIRS			:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR) \
 				-lft #-fsanitize=address
 
-CC			:= gcc
-CFLAGS		:= -g -Wall -Wextra -Werror $(INCDIRS)
-LIBFT_DIR 	:= libft
+CC				:= gcc
+CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
+LIBFT_DIR 		:= libft
 
-VPATH		:=  ./src/main ./src/parser
+VPATH			:=  ./src/main ./src/parser
 
-SRC_MAIN	:= main.c
-SRC_PARSER	:= p_cub_file.c p_map.c p_nsew.c parser.c
+SRC_MAIN		:= main.c
+SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c
+SRC_RAY_CASTER	:= ray_caster.c
 
-SRC			:= $(SRC_MAIN) $(SRC_PARSER)
+SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
-BUILDDIR	:= ./build
-ODIR		:= $(BUILDDIR)/obj
-DDIR		:= $(BUILDDIR)/deps
-OBJ			:= $(patsubst %.c,$(ODIR)/%.o,$(SRC))
-LIBFT 		:= $(LIBFT_DIR)/libft.a
-DEPFILES	:= $(patsubst %.c,$(DDIR)/%.d,$(SRC))
-DEPFLAGS	=  -MMD -MP -MF $(DDIR)/$*.d
+BUILDDIR		:= ./build
+ODIR			:= $(BUILDDIR)/obj
+DDIR			:= $(BUILDDIR)/deps
+OBJ				:= $(patsubst %.c,$(ODIR)/%.o,$(SRC))
+LIBFT 			:= $(LIBFT_DIR)/libft.a
+DEPFILES		:= $(patsubst %.c,$(DDIR)/%.d,$(SRC))
+DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 
 #****************************************************************************#
 #                                   MLX42                                    #
 #****************************************************************************#
-MLXBUILDDIR	:= ./mlx42/build
-MLX42LIB	:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS	:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLXBUILDDIR		:= ./mlx42/build
+MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
+MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 
 #****************************************************************************#
 #                                   COLORS                                   #
 #****************************************************************************#
-RED			:= \033[0;31m
-GREEN		:= \033[0;32m
-YELLOW		:= \033[1;33m
-BLUE		:= \033[0;34m
-RESET		:= \033[0m
+RED				:= \033[0;31m
+GREEN			:= \033[0;32m
+YELLOW			:= \033[1;33m
+BLUE			:= \033[0;34m
+RESET			:= \033[0m
 
 #****************************************************************************#
 #                                   RULES                                    #

@@ -27,6 +27,24 @@
 # define ROTATION_SPEED 0.015
 # define MOVE_SPEED 2
 # define VIEW_PLANE 60
+
+/* Compass directions */
+typedef enum e_compass_dir
+{
+	EAST,
+	NORTH,
+	WEST,
+	SOUTH
+}	t_compass_dir;
+
+/* Represents a 2D point
+*  with x and y coordinates. */
+typedef struct s_coords
+{
+	int			x;
+	int			y;
+}	t_coords;
+
 // here is a struct for the player
 // x, y are the coordinates
 // right left forword right are the flags that they will 
@@ -39,19 +57,40 @@
 //view_plane is the total range of the view in grades
 typedef struct s_player
 {
-	int			x;
-	int			y;
-	bool		right;
-	bool		left;
-	bool		forward;
-	bool		backward;
-	double		angle;
-	bool		rot_right;
-	bool		rot_left;
-	bool		rot_up;
-	bool		rot_down;
-	float		view_plane;
+	t_compass_dir	direction;
+	t_coords		coords;
+	double			fov_angle; /* a field of view */
+	double			viewing_angle;
+	int				height;
+
+	bool			right;
+	bool			left;
+	bool			forward;
+	bool			backward;
+	double			angle;
+	bool			rot_right;
+	bool			rot_left;
+	bool			rot_up;
+	bool			rot_down;
+	float			view_plane;
 }	t_player;
+
+/* projection plane */
+typedef struct s_plane
+{
+	int			height;
+	int			width;
+	t_coords	center_coords;
+}	t_plane;
+
+typedef struct s_dimensions
+{
+	int				cube_size;
+	double			wall_floor_angle;
+	double			len_to_plane_center;
+	double			ray_angle_step;
+}	t_dimensions;
+
 // ahelping struct for the ray not necessayry to keep it until the end
 // the angle is includes in the total range of the view plane (ex. -60 to 60)
 // the dist  is the distance from the plane
@@ -64,25 +103,29 @@ typedef struct s_ray
 	double	dist;
 	bool	is_wall;
 }	t_ray;
+
 // here is the struct for the map
 // not necessayry to keep it as it is
 typedef struct s_map
 {
-	char	**map_array_input;
+	char	**map;
 	int		width;
 	int		height;
-	int		x_pos_player;
-	int		y_pos_player;
 }	t_map;
+
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
 {
 	mlx_image_t	*img;
 	mlx_t		*mlx_p;
 	t_ray		*ray;
-	t_map		*map;
-	t_player	*player;
+	t_map		map;
+	t_player	player;
+	t_plane		plane;
 }	t_cub3d;
+
+/*----------ray_caster-----------*/
+void	cast_rays(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 void	free_double_array(char **str);
