@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_cub_file_utils.c                                 :+:      :+:    :+:   */
+/*   p_cub_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 23:07:21 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/02 23:08:44 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/02 23:26:51 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-static void	print_double_str_array(char	**array)
-{
-	int	i;
-
-	i = -1;
-	while (array && array[++i])
-		printf("%s", array[i]);
-}
 
 static void	arr_strcpy(char ***dest, char **src, int *i, char **next_line)
 {

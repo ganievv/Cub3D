@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/02 21:48:14 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/02 23:27:22 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	set_player_viewing_angle(t_cub3d *info);
 void	check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
+void	print_double_str_array(char	**array);
 void	free_double_array(char **str);
 char	**arr_strdup(char **arr, int size);
 char	**open_and_get_all_lines(char	*path_to_the_file);

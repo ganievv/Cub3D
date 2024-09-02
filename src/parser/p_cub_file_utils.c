@@ -6,11 +6,20 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/02 23:10:29 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/02 23:26:59 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	print_double_str_array(char	**array)
+{
+	int	i;
+
+	i = -1;
+	while (array && array[++i])
+		printf("%s", array[i]);
+}
 
 // I will use the open and read with get_next_line
 void	free_double_array(char **str)
