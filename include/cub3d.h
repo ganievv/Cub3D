@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/02 23:27:22 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/03 00:04:12 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,57 @@ typedef struct s_coords
 	int			y;
 }	t_coords;
 
+typedef struct s_color
+{
+	uint8_t		red;
+	uint8_t		green;
+	uint8_t		blue;
+}	t_color;
+
+//====
+//orientation and texture path if is existing or color if is existing
+//or: NO or N, SO or S, WE or W, EA or E
+//path: path for texture
+typedef struct s_texture
+{
+	t_compass_dir	dir;
+	bool			is_path;
+	char			*path;
+	bool			is_color;
+	t_color			color;
+}	t_texture;
+
+// floor or ceiling struct
+typedef struct s_f_c
+{
+	char		*type;
+	t_color		color;
+}	t_f_c;
+
+// here is the struct for the map
+// not necessayry to keep it as it is
+typedef struct s_map
+{
+	char			**map;
+	int				width;
+	int				height;
+	int				x_player;
+	int				y_player;
+	t_compass_dir	dir;
+}	t_map;
+
+typedef struct s_input
+{
+	t_texture	no;
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
+
+	t_f_c		floor;
+	t_f_c		ceilling;
+
+	t_map		map;
+}	t_input;
 // here is a struct for the player
 // x, y are the coordinates
 // right left forword right are the flags that they will 
@@ -104,14 +155,6 @@ typedef struct s_ray
 	bool	is_wall;
 }	t_ray;
 
-// here is the struct for the map
-// not necessayry to keep it as it is
-typedef struct s_map
-{
-	char	**map;
-	int		width;
-	int		height;
-}	t_map;
 
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
