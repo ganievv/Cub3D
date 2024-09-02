@@ -131,6 +131,7 @@ void	ray_caster_init(t_dimensions *game_dims, t_cub3d *info);
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_direction(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
+void	check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 void	free_double_array(char **str);

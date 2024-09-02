@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_caster.c                                       :+:      :+:    :+:   */
+/*   grid_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 16:08:05 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/02 21:43:03 by sganiev          ###   ########.fr       */
+/*   Created: 2024-09-02 21:24:35 by sganiev           #+#    #+#             */
+/*   Updated: 2024-09-02 21:24:35 by sganiev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	cast_rays(t_cub3d *info)
+void	check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info)
 {
-	t_dimensions	game_dims;
-
-	ray_caster_init(&game_dims, info);
-	check_horizontal_intersect(&game_dims, info);
 }
