@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/08/30 20:02:01 by tnakas           ###   ########.fr        #
+#    Updated: 2024/09/02 18:58:56 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ CC			:= gcc
 CFLAGS		:= -g -Wall -Wextra -Werror $(INCDIRS)
 LIBFT_DIR 	:= libft
 
-VPATH		:=  ./src/main
+VPATH		:=  ./src/main ./src/parser
 
 SRC_MAIN	:= main.c
-SRC_PARSER	:= 
+SRC_PARSER	:= p_cub_file.c p_map.c p_nsew.c parser.c
 
 SRC			:= $(SRC_MAIN) $(SRC_PARSER)
 
