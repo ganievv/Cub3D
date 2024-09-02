@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/02 18:47:42 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/02 21:48:14 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 

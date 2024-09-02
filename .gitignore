@@ -5,3 +5,4 @@ libmlx42.a
 testing
 *.o
 *.d
+.vscode/
