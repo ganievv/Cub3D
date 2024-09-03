@@ -12,24 +12,23 @@
 
 #include "../../include/cub3d.h"
 
-void	ray_caster_init(t_dimensions *game_dims, t_cub3d *info)
+void	ray_caster_init(t_cub3d *info)
 {
-	game_dims->wall_floor_angle = 90.0;
-	game_dims->cube_size = 64; /*64x64x64*/
+	info->game_dims.wall_floor_angle = 90.0;
+	info->game_dims.cube_size = CUBE_SIZE; /*64x64x64*/
 
-	info->player.fov_angle = 60.0;
-	info->player.height = game_dims->cube_size / 2;
+	info->player.fov_angle = FOV_ANGLE;
+	info->player.height = info->game_dims.cube_size / 2;
 	set_player_coordinates(info);
-	set_player_direction(info);
 	set_player_viewing_angle(info);
 
-	info->plane.height = 200;
-	info->plane.width = 320;
+	info->plane.height = PLANE_HEIGHT;
+	info->plane.width = PLANE_WIDTH;
 	info->plane.center_coords.x = info->plane.width / 2;  // 160
 	info->plane.center_coords.y = info->plane.height / 2; // 100
 
-	game_dims->len_to_plane_center = calc_len_to_plane_center(info);
-	game_dims->ray_angle_step = calc_ray_angle_step(info);
+	info->game_dims.len_to_plane_center = calc_len_to_plane_center(info);
+	info->game_dims.ray_angle_step = calc_ray_angle_step(info);
 }
 
 /* Converts degrees to radians

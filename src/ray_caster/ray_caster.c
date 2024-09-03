@@ -12,10 +12,11 @@
 
 #include "../../include/cub3d.h"
 
-void	cast_rays(t_cub3d *info)
+void	cast_rays_preparation(t_cub3d *info)
 {
-	t_dimensions	game_dims;
-
-	ray_caster_init(&game_dims, info);
-	check_horizontal_intersect(&game_dims, info);
+	ray_caster_init(info);
+	info->ray = (t_ray *)malloc(sizeof(t_ray) * info->plane.width);
+	if (!info->ray)
+		return ;
+	check_horizontal_intersect(info);
 }

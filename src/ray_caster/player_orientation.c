@@ -12,6 +12,8 @@
 
 #include "../../include/cub3d.h"
 
+/* This function sets player coordinates based
+*  on their position ('N', 'S', 'E', 'W') on the map. */
 void	set_player_coordinates(t_cub3d *info)
 {
 	int	x;
@@ -34,25 +36,18 @@ void	set_player_coordinates(t_cub3d *info)
 	}
 }
 
-void	set_player_direction(t_cub3d *info)
-{
-	if (info->map.map[info->player.coords.y][info->player.coords.x] == 'E')
-		info->player.direction = EAST;
-	else if (info->map.map[info->player.coords.y][info->player.coords.x] == 'N')
-		info->player.direction = NORTH;
-	else if (info->map.map[info->player.coords.y][info->player.coords.x] == 'W')
-		info->player.direction = WEST;
-	else
-		info->player.direction = SOUTH;
-}
-
 void	set_player_viewing_angle(t_cub3d *info)
 {
-	if (info->player.direction == EAST)
+	int	x;
+	int	y;
+
+	x = info->player.coords.x;
+	y = info->player.coords.y;
+	if (info->map.map[y][x] == 'E')
 		info->player.viewing_angle = 0.0;
-	else if (info->player.direction == NORTH)
+	else if (info->map.map[y][x] == 'N')
 		info->player.viewing_angle = 90.0;
-	else if (info->player.direction == WEST)
+	else if (info->map.map[y][x] == 'W')
 		info->player.viewing_angle = 180.0;
 	else
 		info->player.viewing_angle = 270.0;

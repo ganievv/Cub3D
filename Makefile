@@ -13,19 +13,21 @@
 NAME			:= cub3D
 
 INCDIRS			:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR) \
-				-lft #-fsanitize=address
+				   -lft #-fsanitize=address
 
 CC				:= gcc
-CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
+CFLAGS			:= -g -lm -Wall -Wextra -Werror $(INCDIRS)
 LIBFT_DIR 		:= libft
 
 VPATH			:=  ./src/main ./src/parser ./src/ray_caster
 
 SRC_MAIN		:= main.c
+
 SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
-					p_cub_file_utils.c
-# SRC_RAY_CASTER	:= ray_caster.c ray_caster_init.c player_orientation.c \
-# 				   grid_intersections.c \
+				   p_cub_file_utils.c
+
+#SRC_RAY_CASTER	:= ray_caster.c ray_caster_init.c player_orientation.c \
+#				   grid_intersections.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
@@ -72,7 +74,7 @@ $(ODIR)/%.o: %.c | $(ODIR) $(DDIR)
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 $(MLX42LIB):
-	@make submodules_init
+	@$(MAKE) submodules_init
 	@echo "$(BLUE)Building mlx42 library...$(RESET)"
 	@cmake -S ./mlx42 -B $(MLXBUILDDIR)
 	@cmake --build $(MLXBUILDDIR) -j4

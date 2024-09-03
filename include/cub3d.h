@@ -22,8 +22,10 @@
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define WIDTH 900
-# define HEIGHT 450
+# define PLANE_WIDTH 320
+# define PLANE_HEIGHT 200
+# define FOV_ANGLE 60.0
+# define CUBE_SIZE 64
 # define ROTATION_SPEED 0.015
 # define MOVE_SPEED 2
 # define VIEW_PLANE 60
@@ -92,6 +94,7 @@ typedef struct s_input
 
 	t_map		map;
 }	t_input;
+
 // here is a struct for the player
 // x, y are the coordinates
 // right left forword right are the flags that they will 
@@ -130,6 +133,7 @@ typedef struct s_plane
 	t_coords	center_coords;
 }	t_plane;
 
+/* Required values for the ray_caster */
 typedef struct s_dimensions
 {
 	int				cube_size;
@@ -154,22 +158,22 @@ typedef struct s_ray
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
 {
-	mlx_image_t	*img;
-	mlx_t		*mlx_p;
-	t_ray		*ray;
-	t_map		map;
-	t_player	player;
-	t_plane		plane;
+	mlx_image_t		*img;
+	mlx_t			*mlx_p;
+	t_ray			*ray;
+	t_map			map;
+	t_player		player;
+	t_plane			plane;
+	t_dimensions	game_dims;
 }	t_cub3d;
 
-/*----------ray_caster-----------*/
-void		cast_rays(t_cub3d *info);
-double		degrees_to_radians(double degrees);
-void		ray_caster_init(t_dimensions *game_dims, t_cub3d *info);
-void		set_player_coordinates(t_cub3d *info);
-void		set_player_direction(t_cub3d *info);
-void		set_player_viewing_angle(t_cub3d *info);
-void		check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info);
+/*-----------------------ray_caster------------------------*/
+void	cast_rays_preparation(t_cub3d *info);
+void	ray_caster_init(t_cub3d *info);
+void	set_player_coordinates(t_cub3d *info);
+void	set_player_viewing_angle(t_cub3d *info);
+void	check_horizontal_intersect(t_cub3d *info);
+double	degrees_to_radians(double degrees);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);
@@ -186,4 +190,5 @@ char		**splited_by_comma(char *str);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
 bool		is_valid_splited_color_arg( char **splited);
+
 #endif
