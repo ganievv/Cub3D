@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/03 00:04:12 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/03 16:21:25 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@
 /* Compass directions */
 typedef enum e_compass_dir
 {
+	SPACE,
 	EAST,
 	NORTH,
 	WEST,
-	SOUTH
+	SOUTH,
+	FLOOR,
+	CIELLING
 }	t_compass_dir;
 
 /* Represents a 2D point
@@ -58,20 +61,13 @@ typedef struct s_color
 //path: path for texture
 typedef struct s_texture
 {
-	t_compass_dir	dir;
-	bool			is_path;
-	char			*path;
-	bool			is_color;
-	t_color			color;
+	t_compass_dir			dir;
+	bool					is_path;
+	char					*path;
+	bool					is_color;
+	t_color					color;
+	struct t_texture		*next;
 }	t_texture;
-
-// floor or ceiling struct
-typedef struct s_f_c
-{
-	char		*type;
-	t_color		color;
-}	t_f_c;
-
 // here is the struct for the map
 // not necessayry to keep it as it is
 typedef struct s_map
@@ -91,8 +87,8 @@ typedef struct s_input
 	t_texture	we;
 	t_texture	ea;
 
-	t_f_c		floor;
-	t_f_c		ceilling;
+	t_texture	floor;
+	t_texture	ceilling;
 
 	t_map		map;
 }	t_input;
@@ -110,7 +106,7 @@ typedef struct s_player
 {
 	t_compass_dir	direction;
 	t_coords		coords;
-	double			fov_angle; /* a field of view */
+	double			fov_angle;
 	double			viewing_angle;
 	int				height;
 
@@ -155,7 +151,6 @@ typedef struct s_ray
 	bool	is_wall;
 }	t_ray;
 
-
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
 {
@@ -168,17 +163,27 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 /*----------ray_caster-----------*/
-void	cast_rays(t_cub3d *info);
-double	degrees_to_radians(double degrees);
-void	ray_caster_init(t_dimensions *game_dims, t_cub3d *info);
-void	set_player_coordinates(t_cub3d *info);
-void	set_player_direction(t_cub3d *info);
-void	set_player_viewing_angle(t_cub3d *info);
-void	check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info);
+void		cast_rays(t_cub3d *info);
+double		degrees_to_radians(double degrees);
+void		ray_caster_init(t_dimensions *game_dims, t_cub3d *info);
+void		set_player_coordinates(t_cub3d *info);
+void		set_player_direction(t_cub3d *info);
+void		set_player_viewing_angle(t_cub3d *info);
+void		check_horizontal_intersect(t_dimensions	*game_dims, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
-void	print_double_str_array(char	**array);
-void	free_double_array(char **str);
-char	**arr_strdup(char **arr, int size);
-char	**open_and_get_all_lines(char	*path_to_the_file);
+void		print_double_str_array(char	**array);
+void		free_double_array(char **str);
+char		**arr_strdup(char **arr, int size);
+char		**open_and_get_all_lines(char	*path_to_the_file);
+//--------------Parsing_texture------------------------------
+t_texture	*texture_node_create(t_compass_dir dir, char *str);
+//--------------Parsing_texture_utils_one--------------------
+bool		is_valid_path(char *str);
+bool		is_color(char *str);
+char		**splited_by_comma(char *str);
+//--------------Parsing_texture_utils_two--------------------
+long		ft_pos_atol(char *str);
+bool		is_valid_color_arg(char	*str);
+bool		is_valid_splited_color_arg( char **splited);
 #endif

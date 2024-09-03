@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/02 23:26:59 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:34:10 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,3 @@ char	**arr_strdup(char **arr, int size)
 	}
 	return (res);
 }
-
-// and save in a two dimentional array the whole input
-// the method that I ll use:
-// char **unfiltered_str
