@@ -15,8 +15,5 @@
 void	cast_rays_preparation(t_cub3d *info)
 {
 	ray_caster_init(info);
-	info->ray = (t_ray *)malloc(sizeof(t_ray) * info->plane.width);
-	if (!info->ray)
-		return ;
 	check_horizontal_intersect(info);
 }

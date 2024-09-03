@@ -70,6 +70,7 @@ typedef struct s_texture
 	t_color					color;
 	struct t_texture		*next;
 }	t_texture;
+
 // here is the struct for the map
 // not necessayry to keep it as it is
 typedef struct s_map
@@ -160,7 +161,7 @@ typedef struct s_cub3d
 {
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
-	t_ray			*ray;
+	t_ray			ray[PLANE_WIDTH];
 	t_map			map;
 	t_player		player;
 	t_plane			plane;

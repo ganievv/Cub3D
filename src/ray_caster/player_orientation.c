@@ -12,8 +12,8 @@
 
 #include "../../include/cub3d.h"
 
-/* This function sets player coordinates based
-*  on their position ('N', 'S', 'E', 'W') on the map. */
+/* Sets player coordinates based on their
+*  position ('N', 'S', 'E', 'W') on the map. */
 void	set_player_coordinates(t_cub3d *info)
 {
 	int	x;
