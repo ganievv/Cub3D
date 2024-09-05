@@ -12,26 +12,26 @@
 
 #include "../../include/cub3d.h"
 
-void	cast_ray(int ray_index, t_cub3d *info)
+/* Calculates the ray intersection coordinates.
+*
+*  'intersect_point' - variable to store the x and y
+*   				   coordinates of the intersection.
+*                'p' - player's pixel coordinates.	 */
+void	cast_ray(t_ray *ray, t_cub3d *info)
 {
 	t_coords	intersect_point;
-	int			p_y;
+	t_coords	p;
 
-	p_y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
-	if (is_ray_facing_up(&info->ray[ray_index]))
-		intersect_point.y = floor(p_y / info->game_dims.cube_size)
-			* info->game_dims.cube_size - 1;
+	p.x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
+	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
+	if (is_northeast_s(ray))
+		xy_northeast_calc(ray, &p, &intersect_point, info);
+	else if (is_northwest_s(ray))
+		xy_northwest_calc(ray, &p, &intersect_point, info);
+	else if (is_southwest_s(ray))
+		xy_southwest_calc(ray, &p, &intersect_point, info);
 	else
-		intersect_point.y = floor(p_y / info->game_dims.cube_size)
-			* info->game_dims.cube_size + info->game_dims.cube_size;
-	if (info->ray[ray_index].angle > 0.0 && info->ray[ray_index].angle < 90.0)
-		northeast_sector(p_y, &intersect_point, info);
-	else if (info->ray[ray_index].angle > 90.0 && info->ray[ray_index].angle < 180.0)
-		northwest_sector(p_y, &intersect_point, info);
-	else if (info->ray[ray_index].angle > 180.0 && info->ray[ray_index].angle < 270.0)
-		southwest_sector(p_y, &intersect_point, info);
-	else
-		southeast_sector(p_y, &intersect_point, info);
+		xy_southeast_calc(ray, &p, &intersect_point, info);
 	while (!is_wall(&intersect_point, info))
 		;
 }
@@ -45,12 +45,6 @@ bool	is_wall(t_coords *intersect_point, t_cub3d *info)
 	x = pixel_to_grid(intersect_point->x, info->game_dims.cube_size);
 	y = pixel_to_grid(intersect_point->y, info->game_dims.cube_size);
 	return (info->map.map[y][x] == '1');
-}
-
-/* Checks if the ray is facing upward */
-bool	is_ray_facing_up(t_ray *ray)
-{
-	return (ray->angle >= 0.0 && ray->angle <= 180.0);
 }
 
 /* Sets the initial ray angle by adjusting the viewing angle to
@@ -73,5 +67,5 @@ void	check_horizontal_intersect(t_cub3d *info)
 	set_initial_ray_angle(info);
 	i = -1;
 	while (++i < info->plane.width)
-		cast_ray(i, info);
+		cast_ray(&info->ray[i], info);
 }

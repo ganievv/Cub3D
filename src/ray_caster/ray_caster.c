@@ -12,6 +12,12 @@
 
 #include "../../include/cub3d.h"
 
+//if (ray->angle == 0.0)
+//{
+//	intersec->y = p->y;
+//	intersec->x = p->x + (info->game_dims.cube_size / 2);
+//}
+
 void	cast_rays_preparation(t_cub3d *info)
 {
 	ray_caster_init(info);

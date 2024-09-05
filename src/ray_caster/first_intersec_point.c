@@ -12,52 +12,71 @@
 
 #include "../../include/cub3d.h"
 
-/* Calculates the x-coordinate of the first ray intersection
-*  in the northeast sector (0 to 90 degrees). */
-void	northeast_sector(int p_y, t_coords *point, t_cub3d *info)
+/* Calculates x and y coordinates of the first ray intersection
+*  in the northeast sector (0 to 90 degrees).
+*
+*  'intersec' - variable to store the x and y
+*				coordinates of the intersection.
+*		  'p' - player's pixel coordinates.	 */
+void	xy_northeast_calc(t_ray *ray, t_coords *p,
+	t_coords *intersec, t_cub3d *info)
 {
-	int	p_x;
+	intersec->y = floor(p->y / info->game_dims.cube_size)
+		* info->game_dims.cube_size;
+	if (intersec->y > 0)
+		intersec->y--;
 
-	p_x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	point->x = p_x + ((p_y - point->y)
-		/ tan(degrees_to_radians(info->player.viewing_angle)));
+	intersec->x = p->x + ((p->y - intersec->y)
+		/ tan(degrees_to_radians(ray->angle)));
 }
 
-/* Calculates the x-coordinate of the first ray intersection
+/* Calculates x and y coordinates of the first ray intersection
 *  in the northwest sector (90 to 180 degrees). */
-void	northwest_sector(int p_y, t_coords *point, t_cub3d *info)
+void	xy_northwest_calc(t_ray *ray, t_coords *p,
+	t_coords *intersec, t_cub3d *info)
 {
 	double	new_angle;
-	int		p_x;
 
-	new_angle = 180.0 - info->player.viewing_angle;
-	p_x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	point->x = p_x - ((p_y - point->y)
+	intersec->y = floor(p->y / info->game_dims.cube_size)
+		* info->game_dims.cube_size;
+	if (intersec->y > 0)
+		intersec->y--;
+
+	new_angle = 180.0 - ray->angle;
+	intersec->x = p->x - ((p->y - intersec->y)
 		/ tan(degrees_to_radians(new_angle)));
 }
 
-/* Calculates the x-coordinate of the first ray intersection
+/* Calculates x and y coordinates of the first ray intersection
 *  in the southwest sector (180 to 270 degrees). */
-void	southwest_sector(int p_y, t_coords *point, t_cub3d *info)
+void	xy_southwest_calc(t_ray *ray, t_coords *p,
+	t_coords *intersec, t_cub3d *info)
 {
 	double	new_angle;
-	int		p_x;
 
-	new_angle = info->player.viewing_angle - 180.0;
-	p_x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	point->x = p_x - ((point->y - p_y)
+	intersec->y = floor(p->y / info->game_dims.cube_size)
+		* info->game_dims.cube_size + info->game_dims.cube_size;
+	if (intersec->y != info->game_dims.cube_size * (info->player.coords.y + 1))
+		intersec->y++;
+
+	new_angle = ray->angle - 180.0;
+	intersec->x = p->x - ((intersec->y - p->y)
 		/ tan(degrees_to_radians(new_angle)));
 }
 
-/* Calculates the x-coordinate of the first ray intersection
+/* Calculates x and y coordinates of the first ray intersection
 *  in the southeast sector (270 to 360 degrees). */
-void	southeast_sector(int p_y, t_coords *point, t_cub3d *info)
+void	xy_southeast_calc(t_ray *ray, t_coords *p,
+	t_coords *intersec, t_cub3d *info)
 {
 	double	new_angle;
-	int		p_x;
 
-	new_angle = 360.0 - info->player.viewing_angle;
-	p_x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	point->x = p_x + ((point->y - p_y)
+	intersec->y = floor(p->y / info->game_dims.cube_size)
+		* info->game_dims.cube_size + info->game_dims.cube_size;
+	if (intersec->y != info->game_dims.cube_size * (info->player.coords.y + 1))
+		intersec->y++;
+
+	new_angle = 360.0 - ray->angle;
+	intersec->x = p->x + ((intersec->y - p->y)
 		/ tan(degrees_to_radians(new_angle)));
 }
