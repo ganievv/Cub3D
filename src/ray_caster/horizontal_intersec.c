@@ -14,29 +14,26 @@
 
 /* Calculates the ray intersection coordinates.
 *
-*  'intersect_point' - variable to store the x and y
-*   				   coordinates of the intersection.
-*                'p' - player's pixel coordinates.	 */
+*  'p' - player's pixel coordinates. */
 void	cast_ray(t_ray *ray, t_cub3d *info)
 {
-	t_coords	intersect_point;
 	t_coords	p;
 
 	p.x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
 	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
-	check_first_point(ray, &p, &intersect_point, info);
-	while (!is_wall(&intersect_point, info))
-		move_to_new_point(&intersect_point, ray, info);
+	check_first_point(ray, &p, info);
+	while (!is_wall(ray, info))
+		move_to_new_point(ray, info);
 }
 
 /* Checks if the intersection point is a wall */
-bool	is_wall(t_coords *intersect_point, t_cub3d *info)
+bool	is_wall(t_ray *ray, t_cub3d *info)
 {
 	int	x;
 	int	y;
 
-	x = pixel_to_grid(intersect_point->x, info->game_dims.cube_size);
-	y = pixel_to_grid(intersect_point->y, info->game_dims.cube_size);
+	x = pixel_to_grid(ray->intersec.x, info->game_dims.cube_size);
+	y = pixel_to_grid(ray->intersec.y, info->game_dims.cube_size);
 	return (info->map.map[y][x] == '1');
 }
 

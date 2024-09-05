@@ -24,8 +24,8 @@ void	ray_caster_init(t_cub3d *info)
 
 	info->plane.height = PLANE_HEIGHT;
 	info->plane.width = PLANE_WIDTH;
-	info->plane.center_coords.x = info->plane.width / 2;  // 160
-	info->plane.center_coords.y = info->plane.height / 2; // 100
+	info->plane.center.x = info->plane.width / 2;  // 160
+	info->plane.center.y = info->plane.height / 2; // 100
 
 	info->game_dims.len_to_plane_center = calc_len_to_plane_center(info);
 	info->game_dims.ray_angle_step = calc_ray_angle_step(info);

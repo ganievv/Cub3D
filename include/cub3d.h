@@ -108,22 +108,21 @@ typedef struct s_input
 //view_plane is the total range of the view in grades
 typedef struct s_player
 {
-	t_compass_dir	direction;
-	t_coords		coords;
-	double			fov_angle;
-	double			viewing_angle;
-	int				height;
+	t_coords	coords;
+	double		fov_angle;
+	double		viewing_angle;
+	int			height;
 
-	bool			right;
-	bool			left;
-	bool			forward;
-	bool			backward;
-	double			angle;
-	bool			rot_right;
-	bool			rot_left;
-	bool			rot_up;
-	bool			rot_down;
-	float			view_plane;
+	bool		right;
+	bool		left;
+	bool		forward;
+	bool		backward;
+	double		angle;
+	bool		rot_right;
+	bool		rot_left;
+	bool		rot_up;
+	bool		rot_down;
+	float		view_plane;
 }	t_player;
 
 /* projection plane */
@@ -131,7 +130,7 @@ typedef struct s_plane
 {
 	int			height;
 	int			width;
-	t_coords	center_coords;
+	t_coords	center;
 }	t_plane;
 
 /* Required values for the ray_caster */
@@ -151,9 +150,10 @@ typedef struct s_dimensions
 // in the player to not move if the is in the wall
 typedef struct s_ray
 {
-	double	angle;
-	double	dist;
-	bool	is_wall;
+	t_coords	intersec;
+	double		angle;
+	double		dist;
+	bool		is_wall;
 }	t_ray;
 
 //here is the struct that is including all the other structs
@@ -178,7 +178,7 @@ void	set_player_viewing_angle(t_cub3d *info);
 /*----------------------horizontal_intersec-----------------------*/
 void	check_horizontal_intersect(t_cub3d *info);
 void	set_initial_ray_angle(t_cub3d *info);
-bool	is_wall(t_coords *intersect_point, t_cub3d *info);
+bool	is_wall(t_ray *ray, t_cub3d *info);
 void	cast_ray(t_ray *ray, t_cub3d *info);
 /*----------------------------convert-----------------------------*/
 double	degrees_to_radians(double degrees);
@@ -190,16 +190,13 @@ bool	is_northwest_s(t_ray *ray);
 bool	is_southwest_s(t_ray *ray);
 bool	is_southeast_s(t_ray *ray);
 /*----------------------first_intersec_point----------------------*/
-void	check_first_point(t_ray *ray, t_coords *p,
-			t_coords *intersect_point, t_cub3d *info);
-void	xy_northeast_calc(t_ray *ray, t_coords *p,
-			t_coords *intersec, t_cub3d *info);
-void	xy_northwest_calc(t_ray *ray, t_coords *p,
-			t_coords *intersec, t_cub3d *info);
-void	xy_southwest_calc(t_ray *ray, t_coords *p,
-			t_coords *intersec, t_cub3d *info);
-void	xy_southeast_calc(t_ray *ray, t_coords *p,
-			t_coords *intersec, t_cub3d *info);
+void	check_first_point(t_ray *ray, t_coords *p, t_cub3d *info);
+void	xy_northeast_calc(t_ray *ray, t_coords *p, t_cub3d *info);
+void	xy_northwest_calc(t_ray *ray, t_coords *p, t_cub3d *info);
+void	xy_southwest_calc(t_ray *ray, t_coords *p, t_cub3d *info);
+void	xy_southeast_calc(t_ray *ray, t_coords *p, t_cub3d *info);
+/*--------------------other_horizontal_points---------------------*/
+void	move_to_new_point(t_ray *ray, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);
