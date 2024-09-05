@@ -31,16 +31,6 @@ void	ray_caster_init(t_cub3d *info)
 	info->game_dims.ray_angle_step = calc_ray_angle_step(info);
 }
 
-/* Converts degrees to radians
-*  Formula: radians = degrees * (π / 180) */
-double	degrees_to_radians(double degrees)
-{
-	double	rad;
-
-	rad = degrees * (M_PI / 180.0);
-	return (rad);
-}
-
 /* Calculates the distance from the player to the center of 
 *  the projection plane.								 */
 static double	calc_len_to_plane_center(t_cub3d *info)

@@ -168,13 +168,24 @@ typedef struct s_cub3d
 	t_dimensions	game_dims;
 }	t_cub3d;
 
-/*-----------------------ray_caster------------------------*/
+/*==========================RAY_CASTER==========================*/
 void	cast_rays_preparation(t_cub3d *info);
+/*-----------------------ray_caster_init------------------------*/
 void	ray_caster_init(t_cub3d *info);
+/*----------------------player_orientation----------------------*/
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
+/*----------------------grid_intersections----------------------*/
 void	check_horizontal_intersect(t_cub3d *info);
+/*---------------------------convert----------------------------*/
 double	degrees_to_radians(double degrees);
+int		grid_to_pixel(int grid, int cube_size);
+int		pixel_to_grid(int pixel, int cube_size);
+/*---------------------first_intersec_point---------------------*/
+void	northeast_sector(int p_y, t_coords *point, t_cub3d *info);
+void	northwest_sector(int p_y, t_coords *point, t_cub3d *info);
+void	southwest_sector(int p_y, t_coords *point, t_cub3d *info);
+void	southeast_sector(int p_y, t_coords *point, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

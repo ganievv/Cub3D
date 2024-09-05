@@ -27,7 +27,7 @@ SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
 				   p_cub_file_utils.c
 
 #SRC_RAY_CASTER	:= ray_caster.c ray_caster_init.c player_orientation.c \
-#				   grid_intersections.c \
+#				   horizontal_intersec.c convert.c first_intersec_point.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 

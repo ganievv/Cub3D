@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid_intersections.c                               :+:      :+:    :+:   */
+/*   horizontal_intersec.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-02 21:24:35 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-02 21:24:35 by sganiev          ###   ########.fr       */
+/*   Created: 2024-09-05 13:51:49 by sganiev           #+#    #+#             */
+/*   Updated: 2024-09-05 13:51:49 by sganiev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,35 @@ void	cast_ray(int ray_index, t_cub3d *info)
 {
 	t_coords	intersect_point;
 	int			p_y;
-	int			p_x;
 
-	p_y = convert_grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
+	p_y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
 	if (is_ray_facing_up(&info->ray[ray_index]))
 		intersect_point.y = floor(p_y / info->game_dims.cube_size)
 			* info->game_dims.cube_size - 1;
 	else
 		intersect_point.y = floor(p_y / info->game_dims.cube_size)
 			* info->game_dims.cube_size + info->game_dims.cube_size;
-	p_x = convert_grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	intersect_point.x = p_x + (p_y - intersect_point.y)
-		/ tan(degrees_to_radians(info->player.viewing_angle));
+	if (info->ray[ray_index].angle > 0.0 && info->ray[ray_index].angle < 90.0)
+		northeast_sector(p_y, &intersect_point, info);
+	else if (info->ray[ray_index].angle > 90.0 && info->ray[ray_index].angle < 180.0)
+		northwest_sector(p_y, &intersect_point, info);
+	else if (info->ray[ray_index].angle > 180.0 && info->ray[ray_index].angle < 270.0)
+		southwest_sector(p_y, &intersect_point, info);
+	else
+		southeast_sector(p_y, &intersect_point, info);
+	while (!is_wall(&intersect_point, info))
+		;
 }
 
-/* Converts grid coordinates to pixel coordinates
-*  based on the cube size. */
-int	convert_grid_to_pixel(int point, int cube_size)
+/* Checks if the intersection point is a wall */
+bool	is_wall(t_coords *intersect_point, t_cub3d *info)
 {
-	return (point * cube_size + (cube_size / 2));
+	int	x;
+	int	y;
+
+	x = pixel_to_grid(intersect_point->x, info->game_dims.cube_size);
+	y = pixel_to_grid(intersect_point->y, info->game_dims.cube_size);
+	return (info->map.map[y][x] == '1');
 }
 
 /* Checks if the ray is facing upward */
