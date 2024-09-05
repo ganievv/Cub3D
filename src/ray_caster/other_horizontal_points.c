@@ -12,6 +12,8 @@
 
 #include "../../include/cub3d.h"
 
+/* Moves the ray's intersection point to the next grid
+*  line, to calculate the next intersection. */
 void	move_to_new_point(t_ray *ray, t_cub3d *info)
 {
 	int	y_a;

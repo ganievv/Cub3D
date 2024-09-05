@@ -12,14 +12,36 @@
 
 #include "../../include/cub3d.h"
 
-//if (ray->angle == 0.0)
-//{
-//	intersec->y = p->y;
-//	intersec->x = p->x + (info->game_dims.cube_size / 2);
-//}
+/*--Used_coordinate_systems---*/
+/*  1.:                       */
+/*         90°                */
+/*          N                 */
+/*          |                 */
+/* 180°     |                 */
+/*  W ------+----------- E 0° */
+/*          |                 */
+/*          |                 */
+/*         270°               */
+/*          S                 */
+/*  2.                        */
+/*          Y                 */
+/*          ^                 */
+/*          |                 */
+/* (0,0) ---+----------> X    */
+/*          |                 */
+/*          |                 */
+/*          v                 */
+/*     Y increases            */
+/*----------------------------*/
 
 void	cast_rays_preparation(t_cub3d *info)
 {
 	ray_caster_init(info);
 	check_horizontal_intersect(info);
 }
+
+//if (ray->angle == 0.0)
+//{
+//	intersec->y = p->y;
+//	intersec->x = p->x + (info->game_dims.cube_size / 2);
+//}
