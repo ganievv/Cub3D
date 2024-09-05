@@ -80,3 +80,16 @@ void	xy_southeast_calc(t_ray *ray, t_coords *p,
 	intersec->x = p->x + ((intersec->y - p->y)
 		/ tan(degrees_to_radians(new_angle)));
 }
+
+void	check_first_point(t_ray *ray, t_coords *p,
+	t_coords *intersect_point, t_cub3d *info)
+{
+	if (is_northeast_s(ray))
+		xy_northeast_calc(ray, p, intersect_point, info);
+	else if (is_northwest_s(ray))
+		xy_northwest_calc(ray, p, intersect_point, info);
+	else if (is_southwest_s(ray))
+		xy_southwest_calc(ray, p, intersect_point, info);
+	else
+		xy_southeast_calc(ray, p, intersect_point, info);
+}

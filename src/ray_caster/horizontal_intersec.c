@@ -24,16 +24,9 @@ void	cast_ray(t_ray *ray, t_cub3d *info)
 
 	p.x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
 	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
-	if (is_northeast_s(ray))
-		xy_northeast_calc(ray, &p, &intersect_point, info);
-	else if (is_northwest_s(ray))
-		xy_northwest_calc(ray, &p, &intersect_point, info);
-	else if (is_southwest_s(ray))
-		xy_southwest_calc(ray, &p, &intersect_point, info);
-	else
-		xy_southeast_calc(ray, &p, &intersect_point, info);
+	check_first_point(ray, &p, &intersect_point, info);
 	while (!is_wall(&intersect_point, info))
-		;
+		move_to_new_point(&intersect_point, ray, info);
 }
 
 /* Checks if the intersection point is a wall */

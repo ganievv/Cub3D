@@ -190,6 +190,8 @@ bool	is_northwest_s(t_ray *ray);
 bool	is_southwest_s(t_ray *ray);
 bool	is_southeast_s(t_ray *ray);
 /*----------------------first_intersec_point----------------------*/
+void	check_first_point(t_ray *ray, t_coords *p,
+			t_coords *intersect_point, t_cub3d *info);
 void	xy_northeast_calc(t_ray *ray, t_coords *p,
 			t_coords *intersec, t_cub3d *info);
 void	xy_northwest_calc(t_ray *ray, t_coords *p,
