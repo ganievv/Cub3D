@@ -170,6 +170,7 @@ typedef struct s_cub3d
 
 /*===========================RAY_CASTER===========================*/
 void	cast_rays(t_cub3d *info);
+void	set_ray_angle(int i, t_cub3d *info);
 /*------------------------ray_caster_init-------------------------*/
 void	ray_caster_init(t_cub3d *info);
 double	calc_len_to_plane_center(t_cub3d *info);
@@ -178,10 +179,8 @@ double	calc_ray_angle_step(t_cub3d *info);
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
 /*----------------------horizontal_intersec-----------------------*/
-void	check_horizontal_intersect(t_cub3d *info);
-void	set_initial_ray_angle(t_cub3d *info);
 bool	is_wall(t_ray *ray, t_cub3d *info);
-void	cast_horizontal_ray(t_ray *ray, t_cub3d *info);
+void	check_horizontal_points(t_ray *ray, t_cub3d *info);
 /*----------------------------convert-----------------------------*/
 double	degrees_to_radians(double degrees);
 int		grid_to_pixel(int grid, int cube_size);
@@ -196,6 +195,8 @@ void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 /*--------------------other_horizontal_points---------------------*/
 void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info);
 void	move_to_new_point(t_coords *move, t_ray *ray);
+/*-----------------------vertical_intersec------------------------*/
+void	check_vertical_points(t_ray *ray, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

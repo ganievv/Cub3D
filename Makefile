@@ -28,6 +28,7 @@ SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
 #SRC_RAY_CASTER	:= convert.c first_horizontal_point.c horizontal_intersec.c \
 #				   other_horizontal_points.c player_orientation.c \
 #				   ray_caster_init.c ray_caster.c sector_checks.c \
+#				   vertical_intersec.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
