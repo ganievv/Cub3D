@@ -20,15 +20,15 @@ CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
 
 VPATH			:=  ./src/main ./src/parser ./src/ray_caster
 
-#SRC_MAIN		:= main.c
+SRC_MAIN		:= main.c
 
-#SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
-#				   p_cub_file_utils.c
+SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
+				   p_cub_file_utils.c
 
-SRC_RAY_CASTER	:= convert.c horizontal_intersec.c \
-				   move_horizontal_point.c player_orientation.c \
-				   ray_caster_init.c ray_caster.c sector_checks.c \
-				   vertical_intersec.c move_vertical_point.c \
+#SRC_RAY_CASTER	:= convert.c horizontal_intersec.c \
+#				   move_horizontal_point.c player_orientation.c \
+#				   ray_caster_init.c ray_caster.c sector_checks.c \
+#				   vertical_intersec.c move_vertical_point.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
