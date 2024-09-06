@@ -181,9 +181,6 @@ double	calc_ray_angle_step(t_cub3d *info);
 /*-----------------------player_orientation-----------------------*/
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
-/*----------------------horizontal_intersec-----------------------*/
-bool	is_wall(t_ray *ray, t_cub3d *info);
-void	check_horizontal_points(t_ray *ray, t_cub3d *info);
 /*----------------------------convert-----------------------------*/
 double	degrees_to_radians(double degrees);
 int		grid_to_pixel(int grid, int cube_size);
@@ -193,15 +190,23 @@ bool	is_ray_facing_up(t_ray *ray);
 bool	is_ray_facing_down(t_ray *ray);
 bool	is_ray_facing_right(t_ray *ray);
 bool	is_ray_facing_left(t_ray *ray);
-/*----------------first_horizontal_intersec_point-----------------*/
-void	check_first_h_point(t_ray *ray, t_coords *p, t_cub3d *info);
+/*----------------------horizontal_intersec-----------------------*/
+bool	is_wall(t_ray *ray, t_cub3d *info);
+void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info);
+void	check_first_point_h(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-/*--------------------other_horizontal_points---------------------*/
-void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info);
-void	move_to_new_point(t_coords *move, t_ray *ray);
+/*---------------------move_horizontal_point----------------------*/
+void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info);
+void	move_to_new_point_h(t_coords *move, t_ray *ray);
 /*-----------------------vertical_intersec------------------------*/
-void	check_vertical_points(t_ray *ray, t_cub3d *info);
+void	check_points_v(t_ray *ray, t_coords *p, t_cub3d *info);
+void	check_first_point_v(t_ray *ray, t_coords *p, t_cub3d *info);
+void	calc_right_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
+void	calc_left_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
+/*----------------------move_vertical_point-----------------------*/
+void	set_movement_len_v(t_coords *move, t_ray *ray, t_cub3d *info);
+void	move_to_new_point_v(t_coords *move, t_ray *ray);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

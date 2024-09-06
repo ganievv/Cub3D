@@ -12,8 +12,30 @@
 
 #include "../../include/cub3d.h"
 
+void	calc_right_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
+{
+	ray->v_intersec.x = floor(p->x / info->game_dims.cube_size)
+		* info->game_dims.cube_size + info->game_dims.cube_size;
+	if (ray->v_intersec.x != info->game_dims.cube_size * (info->map.width))
+		ray->v_intersec.x++;
+
+	ray->v_intersec.y = p->y + (p->x - ray->v_intersec.x)
+		* tan(degrees_to_radians(ray->angle));
+}
+
+void	calc_left_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
+{
+	ray->v_intersec.x = floor(p->x / info->game_dims.cube_size)
+		* info->game_dims.cube_size;
+	if (ray->v_intersec.x > 0)
+		ray->v_intersec.x--;
+
+	ray->v_intersec.y = p->y + (p->x - ray->v_intersec.x)
+		* tan(degrees_to_radians(ray->angle));
+}
+
 /* Calculates the first vertical intersection point of a ray. */
-void	check_first_v_point(t_ray *ray, t_coords *p, t_cub3d *info)
+void	check_first_point_v(t_ray *ray, t_coords *p, t_cub3d *info)
 {
 	if (is_ray_facing_right(ray))
 		calc_right_intersec(ray, p, info);
@@ -21,6 +43,16 @@ void	check_first_v_point(t_ray *ray, t_coords *p, t_cub3d *info)
 		calc_left_intersec(ray, p, info);
 }
 
-void	check_vertical_points(t_ray *ray, t_cub3d *info)
+/* Calculates the coordinates where the
+*  ray intersects a wall vertically.
+*
+*  'p' - player's pixel coordinates. */
+void	check_points_v(t_ray *ray, t_coords *p, t_cub3d *info)
 {
+	t_coords	move;
+
+	check_first_point_v(ray, p, info);
+	set_movement_len_v(&move, ray, info);
+	while (!is_wall(ray, info))
+		move_to_new_point_v(&move, ray);
 }

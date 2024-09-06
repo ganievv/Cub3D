@@ -52,31 +52,38 @@ void	set_ray_angle(int i, t_cub3d *info)
 		info->ray[i].angle += 360.0;
 }
 
+/* Casts rays and checks both horizontal
+*  and vertical intersections.
+*
+*  'p' - player's pixel coordinates. */
 void	cast_rays(t_cub3d *info)
 {
-	int	i;
+	t_coords	p;
+	int			i;
 
 	i = -1;
+	p.x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
+	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
 	ray_caster_init(info);
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		check_horizontal_points(&info->ray[i], info);
-		check_vertical_points(&info->ray[i], info);
+		check_points_h(&info->ray[i], &p, info);
+		check_points_v(&info->ray[i], &p, info);
 	}
 }
 
-//char	**set_map(void)
-//{
-//	char	**map;
+char	**set_map(void)
+{
+	char	**map;
 
-//	map = (char **)malloc(sizeof(char *) * 4);
-//	map[0] = ft_strdup("1111");
-//	map[1] = ft_strdup("0000");
-//	map[2] = ft_strdup("0000");
-//	map[3] = ft_strdup("0N00");
-//	return (map);
-//}
+	map = (char **)malloc(sizeof(char *) * 4);
+	map[0] = ft_strdup("1111");
+	map[1] = ft_strdup("0000");
+	map[2] = ft_strdup("0000");
+	map[3] = ft_strdup("0N00");
+	return (map);
+}
 
 int	main(void)
 {

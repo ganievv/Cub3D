@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   other_horizontal_points.c                          :+:      :+:    :+:   */
+/*   move_horizontal_point.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-05 16:21:08 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-05 16:21:08 by sganiev          ###   ########.fr       */
+/*   Created: 2024-09-06 20:06:02 by sganiev           #+#    #+#             */
+/*   Updated: 2024-09-06 20:06:02 by sganiev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info)
+/* Sets the movement length (x and y) for the ray 
+*  as it steps through horizontal grid lines */
+void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info)
 {
 	if (is_ray_facing_up(ray))
 		move->y = -info->game_dims.cube_size;
@@ -29,9 +31,9 @@ void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info)
 	}
 }
 
-/* Moves the ray's intersection point to the next grid
-*  line, to calculate the next intersection. */
-void	move_to_new_point(t_coords *move, t_ray *ray)
+/* Moves the ray's current horizontal
+*  intersection to the next grid line */
+void	move_to_new_point_h(t_coords *move, t_ray *ray)
 {
 	ray->h_intersec.x = ray->h_intersec.x + move->x;
 	ray->h_intersec.y = ray->h_intersec.y + move->y;
