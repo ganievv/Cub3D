@@ -148,9 +148,12 @@ typedef struct s_dimensions
 //=========
 // is_wall is a flag that is notifing us if it's a wall
 // in the player to not move if the is in the wall
+/* 'h_intersec' - horizontal intersection with a wall
+*  'v_intersec' - vertical intersection with a wall */
 typedef struct s_ray
 {
-	t_coords	intersec;
+	t_coords	h_intersec;
+	t_coords	v_intersec;
 	double		angle;
 	double		dist;
 	bool		is_wall;
@@ -188,8 +191,10 @@ int		pixel_to_grid(int pixel, int cube_size);
 /*-------------------------sector_checks--------------------------*/
 bool	is_ray_facing_up(t_ray *ray);
 bool	is_ray_facing_down(t_ray *ray);
-/*----------------------first_intersec_point----------------------*/
-void	check_first_point(t_ray *ray, t_coords *p, t_cub3d *info);
+bool	is_ray_facing_right(t_ray *ray);
+bool	is_ray_facing_left(t_ray *ray);
+/*----------------first_horizontal_intersec_point-----------------*/
+void	check_first_h_point(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 /*--------------------other_horizontal_points---------------------*/

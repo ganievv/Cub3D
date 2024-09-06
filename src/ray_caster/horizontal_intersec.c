@@ -25,7 +25,7 @@ void	check_horizontal_points(t_ray *ray, t_cub3d *info)
 	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
 	if (ray->angle != 0.0 && ray->angle != 180.0)
 	{
-		check_first_point(ray, &p, info);
+		check_first_h_point(ray, &p, info);
 		set_movement_len(&move, ray, info);
 		while (!is_wall(ray, info))
 			move_to_new_point(&move, ray);
@@ -38,7 +38,7 @@ bool	is_wall(t_ray *ray, t_cub3d *info)
 	int	x;
 	int	y;
 
-	x = pixel_to_grid(ray->intersec.x, info->game_dims.cube_size);
-	y = pixel_to_grid(ray->intersec.y, info->game_dims.cube_size);
+	x = pixel_to_grid(ray->h_intersec.x, info->game_dims.cube_size);
+	y = pixel_to_grid(ray->h_intersec.y, info->game_dims.cube_size);
 	return (info->map.map[y][x] == '1');
 }

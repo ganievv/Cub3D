@@ -34,20 +34,6 @@
 /*     Y increases              */
 /*------------------------------*/
 
-void	cast_rays(t_cub3d *info)
-{
-	int	i;
-
-	i = -1;
-	ray_caster_init(info);
-	while (++i < info->plane.width)
-	{
-		set_ray_angle(i, info);
-		check_horizontal_points(&info->ray[i], info);
-		check_vertical_points(&info->ray[i], info);
-	}
-}
-
 /* Sets the angle for the i-th ray. For the first ray, 
 *  the angle is based on the player's viewing angle
 *  and FOV. For subsequent rays, the angle is adjusted
@@ -64,6 +50,20 @@ void	set_ray_angle(int i, t_cub3d *info)
 	info->ray[i].angle = fmod(info->ray[i].angle, 360.0);
 	if (info->ray[i].angle < 0.0)
 		info->ray[i].angle += 360.0;
+}
+
+void	cast_rays(t_cub3d *info)
+{
+	int	i;
+
+	i = -1;
+	ray_caster_init(info);
+	while (++i < info->plane.width)
+	{
+		set_ray_angle(i, info);
+		check_horizontal_points(&info->ray[i], info);
+		check_vertical_points(&info->ray[i], info);
+	}
 }
 
 //char	**set_map(void)

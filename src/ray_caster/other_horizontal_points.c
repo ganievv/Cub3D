@@ -33,6 +33,6 @@ void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info)
 *  line, to calculate the next intersection. */
 void	move_to_new_point(t_coords *move, t_ray *ray)
 {
-	ray->intersec.x = ray->intersec.x + move->x;
-	ray->intersec.y = ray->intersec.y + move->y;
+	ray->h_intersec.x = ray->h_intersec.x + move->x;
+	ray->h_intersec.y = ray->h_intersec.y + move->y;
 }
