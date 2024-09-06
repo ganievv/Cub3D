@@ -41,10 +41,10 @@ $(NAME):		$(OBJS) $(LST_OBJS)
 all:			$(NAME)
 
 clean:
-				$(RM) $(OBJS) $(LST_OBJS)
+				@$(RM) $(OBJS) $(LST_OBJS)
 
 fclean:			clean
-				$(RM) $(NAME)
+				@$(RM) $(NAME)
 
 re:				fclean $(NAME)
 

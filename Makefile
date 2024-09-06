@@ -12,12 +12,11 @@
 
 NAME			:= cub3D
 
-INCDIRS			:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR) \
-				   -lft #-fsanitize=address
+LIBFT_DIR 		:= libft
+INCDIRS			:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR)
 
 CC				:= gcc
-CFLAGS			:= -g -lm -Wall -Wextra -Werror $(INCDIRS)
-LIBFT_DIR 		:= libft
+CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
 
 VPATH			:=  ./src/main ./src/parser ./src/ray_caster
 
@@ -26,9 +25,9 @@ SRC_MAIN		:= main.c
 SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
 				   p_cub_file_utils.c
 
-#SRC_RAY_CASTER	:= ray_caster.c ray_caster_init.c player_orientation.c \
-#				   horizontal_intersec.c convert.c first_intersec_point.c \
-#				   sector_checks.c \
+#SRC_RAY_CASTER	:= convert.c first_horizontal_point.c horizontal_intersec.c \
+#				   other_horizontal_points.c player_orientation.c \
+#				   ray_caster_init.c ray_caster.c sector_checks.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
@@ -63,7 +62,7 @@ all: $(BUILDDIR) $(NAME)
 
 $(NAME): $(MLX42LIB) $(OBJ) $(LIBFT)
 	@echo "$(BLUE)Linking $@...$(RESET)"
-	@$(CC) $(CFLAGS) $(MLX42FLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
+	@$(CC) $(OBJ) $(MLX42FLAGS) $(MLX42LIB) $(LIBFT) -lm -o $@
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):

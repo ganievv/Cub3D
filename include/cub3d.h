@@ -169,9 +169,11 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 /*===========================RAY_CASTER===========================*/
-void	cast_rays_preparation(t_cub3d *info);
+void	cast_rays(t_cub3d *info);
 /*------------------------ray_caster_init-------------------------*/
 void	ray_caster_init(t_cub3d *info);
+double	calc_len_to_plane_center(t_cub3d *info);
+double	calc_ray_angle_step(t_cub3d *info);
 /*-----------------------player_orientation-----------------------*/
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
@@ -179,24 +181,21 @@ void	set_player_viewing_angle(t_cub3d *info);
 void	check_horizontal_intersect(t_cub3d *info);
 void	set_initial_ray_angle(t_cub3d *info);
 bool	is_wall(t_ray *ray, t_cub3d *info);
-void	cast_ray(t_ray *ray, t_cub3d *info);
+void	cast_horizontal_ray(t_ray *ray, t_cub3d *info);
 /*----------------------------convert-----------------------------*/
 double	degrees_to_radians(double degrees);
 int		grid_to_pixel(int grid, int cube_size);
 int		pixel_to_grid(int pixel, int cube_size);
 /*-------------------------sector_checks--------------------------*/
-bool	is_northeast_s(t_ray *ray);
-bool	is_northwest_s(t_ray *ray);
-bool	is_southwest_s(t_ray *ray);
-bool	is_southeast_s(t_ray *ray);
+bool	is_ray_facing_up(t_ray *ray);
+bool	is_ray_facing_down(t_ray *ray);
 /*----------------------first_intersec_point----------------------*/
 void	check_first_point(t_ray *ray, t_coords *p, t_cub3d *info);
-void	xy_northeast_calc(t_ray *ray, t_coords *p, t_cub3d *info);
-void	xy_northwest_calc(t_ray *ray, t_coords *p, t_cub3d *info);
-void	xy_southwest_calc(t_ray *ray, t_coords *p, t_cub3d *info);
-void	xy_southeast_calc(t_ray *ray, t_coords *p, t_cub3d *info);
+void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
+void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 /*--------------------other_horizontal_points---------------------*/
-void	move_to_new_point(t_ray *ray, t_cub3d *info);
+void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info);
+void	move_to_new_point(t_coords *move, t_ray *ray);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

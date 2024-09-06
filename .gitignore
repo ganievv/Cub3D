@@ -6,3 +6,5 @@ testing
 *.o
 *.d
 .vscode/
+Dockerfile
+start.sh

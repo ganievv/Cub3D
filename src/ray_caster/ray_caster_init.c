@@ -33,7 +33,7 @@ void	ray_caster_init(t_cub3d *info)
 
 /* Calculates the distance from the player to the center of 
 *  the projection plane.								 */
-static double	calc_len_to_plane_center(t_cub3d *info)
+double	calc_len_to_plane_center(t_cub3d *info)
 {
 	double	res;
 
@@ -45,7 +45,7 @@ static double	calc_len_to_plane_center(t_cub3d *info)
 /* Calculates the angle between each ray in the player's field
 *  of view (FOV) based on the width of the projection plane. This
 *  determines how much the angle changes from one ray to the next. */
-static double	calc_ray_angle_step(t_cub3d *info)
+double	calc_ray_angle_step(t_cub3d *info)
 {
 	return (info->player.fov_angle / (double)info->plane.width);
 }

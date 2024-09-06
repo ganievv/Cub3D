@@ -12,20 +12,27 @@
 
 #include "../../include/cub3d.h"
 
+void	set_movement_len(t_coords *move, t_ray *ray, t_cub3d *info)
+{
+	if (is_ray_facing_up(ray))
+		move->y = -info->game_dims.cube_size;
+	else if (is_ray_facing_down(ray))
+		move->y = info->game_dims.cube_size;
+
+	if (ray->angle == 90.0 || ray->angle == 270.0)
+		move->x = 0;
+	else
+	{
+		move->x = info->game_dims.cube_size / tan(degrees_to_radians(ray->angle));
+		if (is_ray_facing_down(ray))
+			move->x *= -1;
+	}
+}
+
 /* Moves the ray's intersection point to the next grid
 *  line, to calculate the next intersection. */
-void	move_to_new_point(t_ray *ray, t_cub3d *info)
+void	move_to_new_point(t_coords *move, t_ray *ray)
 {
-	int	y_a;
-	int	x_a;
-
-	if (is_northeast_s(ray) || is_northwest_s(ray))
-		y_a = -info->game_dims.cube_size;
-	else if (is_southwest_s(ray) || is_southeast_s(ray))
-		y_a = info->game_dims.cube_size;
-	else
-		x_a = y_a / tan(degrees_to_radians(ray->angle));
-
-	ray->intersec.x = ray->intersec.x + x_a;
-	ray->intersec.y = ray->intersec.y + y_a;
+	ray->intersec.x = ray->intersec.x + move->x;
+	ray->intersec.y = ray->intersec.y + move->y;
 }

@@ -12,26 +12,14 @@
 
 #include "../../include/cub3d.h"
 
-/* Checks if the ray is in the northeast sector */
-bool	is_northeast_s(t_ray *ray)
+/* Checks if the ray is facing up */
+bool	is_ray_facing_up(t_ray *ray)
 {
-	return (ray->angle > 0.0 && ray->angle < 90.0);
+	return (ray->angle > 0.0 && ray->angle < 180.0);
 }
 
-/* Checks if the ray is in the northwest sector */
-bool	is_northwest_s(t_ray *ray)
+/* Checks if the ray is facing down */
+bool	is_ray_facing_down(t_ray *ray)
 {
-	return (ray->angle > 90.0 && ray->angle < 180.0);
-}
-
-/* Checks if the ray is in the southwest sector */
-bool	is_southwest_s(t_ray *ray)
-{
-	return (ray->angle > 180.0 && ray->angle < 270.0);
-}
-
-/* Checks if the ray is in the southeast sector */
-bool	is_southeast_s(t_ray *ray)
-{
-	return (ray->angle > 270.0);
+	return (ray->angle > 180.0 && ray->angle < 360.0);
 }
