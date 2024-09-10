@@ -112,7 +112,6 @@ typedef struct s_input
 typedef struct s_player
 {
 	t_coords	grid;
-	t_coords	pixel;
 	double		fov_angle;
 	double		viewing_angle;
 	int			height;
@@ -209,6 +208,8 @@ void	calc_left_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info);
 void	set_movement_len_v(t_coords *move, t_ray *ray, t_cub3d *info);
 void	move_to_new_point(t_coords *move, t_ray *ray);
+
+bool	is_out_of_map(t_coords *point);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

@@ -49,7 +49,7 @@ void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
 }
 
 /* Determines if the current horizontal
-*  intersection is with a wall. */
+*  intersection is a wall. */
 bool	is_wall(t_ray *ray, t_cub3d *info)
 {
 	int	x;
@@ -58,6 +58,11 @@ bool	is_wall(t_ray *ray, t_cub3d *info)
 	x = pixel_to_grid(ray->h_intersec.x, info->game_dims.cube_size);
 	y = pixel_to_grid(ray->h_intersec.y, info->game_dims.cube_size);
 	return (info->map.map[y][x] == '1');
+}
+
+bool	is_out_of_map(t_coords *point)
+{
+	return (point->x < 0 || point->y < 0);
 }
 
 /* Determines the first horizontal intersection point.
@@ -83,7 +88,7 @@ void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info)
 	{
 		check_first_point_h(ray, p, info);
 		set_movement_len_h(&move, ray, info);
-		while (!is_wall(ray, info))
+		while (!is_out_of_map(&ray->h_intersec) && !is_wall(ray, info))
 			move_to_new_point(&move, ray);
 	}
 }

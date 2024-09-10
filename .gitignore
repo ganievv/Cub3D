@@ -6,5 +6,6 @@ testing
 *.o
 *.d
 .vscode/
+intersec_points_test.txt
 Dockerfile
 start.sh

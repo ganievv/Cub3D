@@ -45,7 +45,7 @@ DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 #****************************************************************************#
 MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLX42FLAGS		:= -lglfw #-framework Cocoa -framework OpenGL -framework IOKit
 
 #****************************************************************************#
 #                                   COLORS                                   #

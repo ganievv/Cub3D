@@ -28,7 +28,7 @@ bool	is_ray_facing_down(t_ray *ray)
 bool	is_ray_facing_right(t_ray *ray)
 {
 	return ((ray->angle >= 0.0 && ray->angle < 90.0)
-		|| ray->angle > 270.0 && ray->angle < 360.0);
+		|| (ray->angle > 270.0 && ray->angle < 360.0));
 }
 
 /* Checks if the ray is facing left */

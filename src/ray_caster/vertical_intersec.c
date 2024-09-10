@@ -60,7 +60,7 @@ void	check_points_v(t_ray *ray, t_coords *p, t_cub3d *info)
 	{
 		check_first_point_v(ray, p, info);
 		set_movement_len_v(&move, ray, info);
-		while (!is_wall(ray, info))
-			move_to_new_point_v(&move, ray);
+		while (!is_out_of_map(&ray->v_intersec) && !is_wall(ray, info))
+			move_to_new_point(&move, ray);
 	}
 }
