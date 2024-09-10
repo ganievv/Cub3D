@@ -57,10 +57,10 @@ typedef struct s_color
 	uint8_t		blue;
 }	t_color;
 
-//====
-//orientation and texture path if is existing or color if is existing
-//or: NO or N, SO or S, WE or W, EA or E
-//path: path for texture
+/* ====
+*  orientation and texture path if is existing or color if is existing
+*  or: NO or N, SO or S, WE or W, EA or E
+*  path: path for texture */
 typedef struct s_texture
 {
 	t_compass_dir			dir;
@@ -71,8 +71,8 @@ typedef struct s_texture
 	struct t_texture		*next;
 }	t_texture;
 
-// here is the struct for the map
-// not necessayry to keep it as it is
+/* here is the struct for the map
+*  not necessayry to keep it as it is */
 typedef struct s_map
 {
 	char			**map;
@@ -96,19 +96,23 @@ typedef struct s_input
 	t_map		map;
 }	t_input;
 
-// here is a struct for the player
-// x, y are the coordinates
-// right left forword right are the flags that they will 
-// help us in the keyhooks to move the player
-//====
-// the current angle that the view of our player it is
-// rot_right rot_left rot_up rot_down are flags for 
-// the rotation of the plane_view
-//====
-//view_plane is the total range of the view in grades
+/* here is a struct for the player
+*  x, y are the coordinates
+*  right left forword right are the flags that they will 
+*  help us in the keyhooks to move the player
+*  ====
+*  the current angle that the view of our player it is
+*  rot_right rot_left rot_up rot_down are flags for 
+*  the rotation of the plane_view
+*  ====
+*  view_plane is the total range of the view in grades
+*  ====
+*  'grid' represents the player's coordinates in the grid system
+*  'pixel' represents the player's coordinates in the pixel system */
 typedef struct s_player
 {
-	t_coords	coords;
+	t_coords	grid;
+	t_coords	pixel;
 	double		fov_angle;
 	double		viewing_angle;
 	int			height;
@@ -196,17 +200,15 @@ void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info);
 void	check_first_point_h(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-/*---------------------move_horizontal_point----------------------*/
-void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info);
-void	move_to_new_point_h(t_coords *move, t_ray *ray);
 /*-----------------------vertical_intersec------------------------*/
 void	check_points_v(t_ray *ray, t_coords *p, t_cub3d *info);
 void	check_first_point_v(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_right_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
 void	calc_left_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-/*----------------------move_vertical_point-----------------------*/
+/*----------------------move_intersec_point-----------------------*/
+void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info);
 void	set_movement_len_v(t_coords *move, t_ray *ray, t_cub3d *info);
-void	move_to_new_point_v(t_coords *move, t_ray *ray);
+void	move_to_new_point(t_coords *move, t_ray *ray);
 
 //===============PARSING_CUBE3D_FILE=========================
 void		print_double_str_array(char	**array);

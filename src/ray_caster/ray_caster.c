@@ -53,23 +53,22 @@ void	set_ray_angle(int i, t_cub3d *info)
 }
 
 /* Casts rays and checks both horizontal
-*  and vertical intersections.
-*
-*  'p' - player's pixel coordinates. */
+*  and vertical intersections. */
 void	cast_rays(t_cub3d *info)
 {
-	t_coords	p;
-	int			i;
+	int	i;
 
 	i = -1;
-	p.x = grid_to_pixel(info->player.coords.x, info->game_dims.cube_size);
-	p.y = grid_to_pixel(info->player.coords.y, info->game_dims.cube_size);
+	info->player.pixel.x = grid_to_pixel(info->player.grid.x,
+		info->game_dims.cube_size);
+	info->player.pixel.y = grid_to_pixel(info->player.grid.y,
+		info->game_dims.cube_size);
 	ray_caster_init(info);
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		check_points_h(&info->ray[i], &p, info);
-		check_points_v(&info->ray[i], &p, info);
+		check_points_h(&info->ray[i], &info->player.pixel, info);
+		check_points_v(&info->ray[i], &info->player.pixel, info);
 	}
 }
 
@@ -87,20 +86,13 @@ char	**set_map(void)
 
 int	main(void)
 {
-	t_cub3d info;
+	t_cub3d	info;
 
 	info.map.map = set_map();
 	info.map.height = 4;
 	info.map.width = 6;
 	cast_rays(&info);
 }
-
-//if (ray->angle == 0.0)
-//{
-//	intersec->y = p->y;
-//	intersec->x = p->x + (info->game_dims.cube_size / 2);
-//}
-
 
 /* apt-get update
 *  apt-get install cmake

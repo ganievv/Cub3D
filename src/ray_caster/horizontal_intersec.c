@@ -20,14 +20,13 @@ void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size;
-	if (ray->h_intersec.y > 0)
-		ray->h_intersec.y--;
+	ray->h_intersec.y--;
 
 	if (ray->angle == 90.0)
 		ray->h_intersec.x = p->x;
 	else
 		ray->h_intersec.x = p->x + ((p->y - ray->h_intersec.y)
-			/ tan(degrees_to_radians(ray->angle)));
+				/ tan(degrees_to_radians(ray->angle)));
 }
 
 /* Calculates the first intersection coordinates (x and y) 
@@ -38,15 +37,14 @@ void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size + info->game_dims.cube_size;
-	if (ray->h_intersec.y != info->game_dims.cube_size * (info->map.height))
-		ray->h_intersec.y++;
+	ray->h_intersec.y++;
 
 	if (ray->angle == 270.0)
 		ray->h_intersec.x = p->x;
 	else
 	{
 		ray->h_intersec.x = p->x + ((p->y - ray->h_intersec.y)
-			/ tan(degrees_to_radians(ray->angle)));
+				/ tan(degrees_to_radians(ray->angle)));
 	}
 }
 
@@ -86,6 +84,6 @@ void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info)
 		check_first_point_h(ray, p, info);
 		set_movement_len_h(&move, ray, info);
 		while (!is_wall(ray, info))
-			move_to_new_point_h(&move, ray);
+			move_to_new_point(&move, ray);
 	}
 }
