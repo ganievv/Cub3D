@@ -49,6 +49,14 @@ typedef struct s_coords
 	int			y;
 }	t_coords;
 
+/* Represents a 2D point (double type)
+*  with x and y coordinates. (for intersec calc) */
+typedef struct s_coords_d
+{
+	double		x;
+	double		y;
+}	t_coords_d;
+
 typedef struct s_color
 {
 	uint8_t		red;
@@ -154,8 +162,8 @@ typedef struct s_dimensions
 *  'v_intersec' - vertical intersection with a wall */
 typedef struct s_ray
 {
-	t_coords	h_intersec;
-	t_coords	v_intersec;
+	t_coords_d	h_intersec;
+	t_coords_d	v_intersec;
 	double		angle;
 	double		dist;
 	bool		is_wall;
@@ -173,42 +181,45 @@ typedef struct s_cub3d
 	t_dimensions	game_dims;
 }	t_cub3d;
 
-/*===========================RAY_CASTER===========================*/
+/*==============================RAY_CASTER===============================*/
 void	cast_rays(t_cub3d *info);
 void	set_ray_angle(int i, t_cub3d *info);
-/*------------------------ray_caster_init-------------------------*/
+/*----------------------------ray_caster_init----------------------------*/
 void	ray_caster_init(t_cub3d *info);
 double	calc_len_to_plane_center(t_cub3d *info);
 double	calc_ray_angle_step(t_cub3d *info);
-/*-----------------------player_orientation-----------------------*/
+/*--------------------------player_orientation---------------------------*/
 void	set_player_coordinates(t_cub3d *info);
 void	set_player_viewing_angle(t_cub3d *info);
-/*----------------------------convert-----------------------------*/
+/*--------------------------------convert--------------------------------*/
 double	degrees_to_radians(double degrees);
-int		grid_to_pixel(int grid, int cube_size);
-int		pixel_to_grid(int pixel, int cube_size);
-/*-------------------------sector_checks--------------------------*/
-bool	is_ray_facing_up(t_ray *ray);
-bool	is_ray_facing_down(t_ray *ray);
-bool	is_ray_facing_right(t_ray *ray);
-bool	is_ray_facing_left(t_ray *ray);
-/*----------------------horizontal_intersec-----------------------*/
-bool	is_wall(t_ray *ray, t_cub3d *info);
-void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info);
-void	check_first_point_h(t_ray *ray, t_coords *p, t_cub3d *info);
-void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-/*-----------------------vertical_intersec------------------------*/
-void	check_points_v(t_ray *ray, t_coords *p, t_cub3d *info);
-void	check_first_point_v(t_ray *ray, t_coords *p, t_cub3d *info);
-void	calc_right_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-void	calc_left_intersec(t_ray *ray, t_coords *p, t_cub3d *info);
-/*----------------------move_intersec_point-----------------------*/
-void	set_movement_len_h(t_coords *move, t_ray *ray, t_cub3d *info);
-void	set_movement_len_v(t_coords *move, t_ray *ray, t_cub3d *info);
-void	move_to_new_point(t_coords *move, t_ray *ray);
-
-bool	is_out_of_map(t_coords *point);
+double	grid_to_pixel(int grid, int cube_size);
+int		pixel_to_grid(double pixel, int cube_size);
+/*-----------------------------sector_checks-----------------------------*/
+bool	is_ray_northeast(t_ray *ray);
+bool	is_ray_northwest(t_ray *ray);
+bool	is_ray_southwest(t_ray *ray);
+bool	is_ray_southeast(t_ray *ray);
+/*--------------------------horizontal_intersec--------------------------*/
+void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+/*---------------------------vertical_intersec---------------------------*/
+void	check_points_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+/*--------------------------move_intersec_point--------------------------*/
+void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info);
+void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
+void	move_to_new_point(t_coords_d *move, t_coords_d *intersec);
+/*----------------------------step_inside_grid---------------------------*/
+void	step_inside_grid(t_coords_d *intersec, t_ray *ray);
+/*---------------------------boundary_checks.c---------------------------*/
+bool	is_wall(t_coords *i, t_cub3d *info);
+bool	is_out_of_map(t_coords *i, t_cub3d *info);
+bool	is_whitespace(t_coords *i, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

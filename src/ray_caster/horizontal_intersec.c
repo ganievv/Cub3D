@@ -16,11 +16,10 @@
 *  for a ray facing upward (0 to 180 degrees).
 *
 *  'p' - player's pixel coordinates. */
-void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
+void	calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size;
-	ray->h_intersec.y--;
 
 	if (ray->angle == 90.0)
 		ray->h_intersec.x = p->x;
@@ -33,46 +32,27 @@ void	calc_up_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
 *  for a ray facing downward (180 to 360 degrees).
 *
 *  'p' - player's pixel coordinates. */
-void	calc_down_intersec(t_ray *ray, t_coords *p, t_cub3d *info)
+void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size + info->game_dims.cube_size;
-	ray->h_intersec.y++;
 
 	if (ray->angle == 270.0)
 		ray->h_intersec.x = p->x;
 	else
-	{
 		ray->h_intersec.x = p->x + ((p->y - ray->h_intersec.y)
 				/ tan(degrees_to_radians(ray->angle)));
-	}
-}
-
-/* Determines if the current horizontal
-*  intersection is a wall. */
-bool	is_wall(t_ray *ray, t_cub3d *info)
-{
-	int	x;
-	int	y;
-
-	x = pixel_to_grid(ray->h_intersec.x, info->game_dims.cube_size);
-	y = pixel_to_grid(ray->h_intersec.y, info->game_dims.cube_size);
-	return (info->map.map[y][x] == '1');
-}
-
-bool	is_out_of_map(t_coords *point)
-{
-	return (point->x < 0 || point->y < 0);
 }
 
 /* Determines the first horizontal intersection point.
 *
 *  'p' - player's pixel coordinates. */
-void	check_first_point_h(t_ray *ray, t_coords *p, t_cub3d *info)
+void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
-	if (is_ray_facing_up(ray))
+	if (is_ray_northeast(ray) || is_ray_northwest(ray) || ray->angle == 90.0)
 		calc_up_intersec(ray, p, info);
-	else if (is_ray_facing_down(ray))
+	else if (is_ray_southwest(ray) || is_ray_southeast(ray)
+		|| ray->angle == 270.0)
 		calc_down_intersec(ray, p, info);
 }
 
@@ -80,15 +60,29 @@ void	check_first_point_h(t_ray *ray, t_coords *p, t_cub3d *info)
 *  to find where the ray hits a wall.
 *
 * 'p' - player's pixel coordinates. */
-void	check_points_h(t_ray *ray, t_coords *p, t_cub3d *info)
+void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
-	t_coords	move;
+	t_coords_d	move;
+	t_coords	grid;
 
-	if (ray->angle != 0.0 && ray->angle != 180.0)
+	if (ray->angle == 0.0 && ray->angle == 180.0)
 	{
-		check_first_point_h(ray, p, info);
-		set_movement_len_h(&move, ray, info);
-		while (!is_out_of_map(&ray->h_intersec) && !is_wall(ray, info))
-			move_to_new_point(&move, ray);
+		ray->h_intersec.x = -1;
+		ray->h_intersec.y = -1;
+		return ;
+	}
+	check_first_point_h(ray, p, info);
+	step_inside_grid(&ray->h_intersec, ray);
+	set_movement_len_h(&move, ray, info);
+	while (true)
+	{
+		grid.x = pixel_to_grid(ray->h_intersec.x,
+				info->game_dims.cube_size);
+		grid.y = pixel_to_grid(ray->h_intersec.y,
+				info->game_dims.cube_size);
+		if (is_out_of_map(&grid, info) || is_wall(&grid, info)
+			|| is_whitespace(&grid, info))
+			break ;
+		move_to_new_point(&move, &ray->h_intersec);
 	}
 }

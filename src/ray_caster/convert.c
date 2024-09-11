@@ -22,16 +22,14 @@ double	degrees_to_radians(double degrees)
 	return (rad);
 }
 
-/* Converts grid coordinates to pixel coordinates
-*  based on the cube size. */
-int	grid_to_pixel(int grid, int cube_size)
+/* Converts grid coordinates to pixel coordinates */
+double	grid_to_pixel(int grid, int cube_size)
 {
 	return (grid * cube_size + (cube_size / 2));
 }
 
-/* Converts pixel coordinates to grid coordinates
-*  based on the cube size. */
-int	pixel_to_grid(int pixel, int cube_size)
+/* Converts pixel coordinates to grid coordinates */
+int	pixel_to_grid(double pixel, int cube_size)
 {
 	return (pixel / cube_size);
 }

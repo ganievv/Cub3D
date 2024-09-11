@@ -26,10 +26,10 @@ SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
 				   p_cub_file_utils.c p_texture.c \
 					p_texture_utils_one.c p_texture_utils_two.c \
 
-#SRC_RAY_CASTER	:= convert.c horizontal_intersec.c \
+#SRC_RAY_CASTER	:= boundary_checks.c convert.c horizontal_intersec.c \
 #				   move_intersec_point.c player_orientation.c \
 #				   ray_caster_init.c ray_caster.c sector_checks.c \
-#				   vertical_intersec.c \
+#				   step_inside_grid.c vertical_intersec.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
 
@@ -46,7 +46,7 @@ DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 #****************************************************************************#
 MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS		:= -lglfw #-framework Cocoa -framework OpenGL -framework IOKit
+MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 
 #****************************************************************************#
 #                                   COLORS                                   #

@@ -37,8 +37,8 @@ double	calc_len_to_plane_center(t_cub3d *info)
 {
 	double	res;
 
-	res = ((double)info->plane.width / 2) /
-		tan(degrees_to_radians(info->player.fov_angle / 2));
+	res = ((double)info->plane.width / 2)
+		/ tan(degrees_to_radians(info->player.fov_angle / 2));
 	return (res);
 }
 

@@ -58,7 +58,7 @@ void	set_ray_angle(int i, t_cub3d *info)
 * 'p' - player's pixel coordinates. */
 void	cast_rays(t_cub3d *info)
 {
-	t_coords	p;
+	t_coords_d	p;
 	int			i;
 
 	i = -1;
@@ -69,7 +69,7 @@ void	cast_rays(t_cub3d *info)
 	{
 		set_ray_angle(i, info);
 		//if (i == 0)
-		//	info->ray[i].angle = 95.0;
+		//	info->ray[i].angle = 84.0;
 		check_points_h(&info->ray[i], &p, info);
 		check_points_v(&info->ray[i], &p, info);
 	}
@@ -109,17 +109,19 @@ void	print_intersec_points(t_cub3d *info)
 	i = -1;
 	while (++i < info->plane.width)
 	{
-		printf("%3d-ray (angle: %6.1f): h_pixel.x: %4d, h_pixel.y: %4d"
+		printf("%3d-ray (angle: %6.1f): h_pixel.x: %4f, h_pixel.y: %4f"
 			"\th_grid.x:  %4d, h_grid.y:  %4d", i, info->ray[i].angle,
 			info->ray[i].h_intersec.x, info->ray[i].h_intersec.y,
 			pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
-			pixel_to_grid(info->ray[i].h_intersec.y, info->game_dims.cube_size));
+			pixel_to_grid(info->ray[i].h_intersec.y,
+				info->game_dims.cube_size));
 		printf("\n\t\t\t\t\t\t ");
-		printf("v_pixel.x: %4d, v_pixel.y: %4d"
+		printf("v_pixel.x: %4f, v_pixel.y: %4f"
 			"\tv_grid.x:  %4d, v_grid.y:  %4d\n\n",
 			info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
 			pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
-			pixel_to_grid(info->ray[i].v_intersec.y, info->game_dims.cube_size));
+			pixel_to_grid(info->ray[i].v_intersec.y,
+				info->game_dims.cube_size));
 	}
 }
 

@@ -12,27 +12,22 @@
 
 #include "../../include/cub3d.h"
 
-/* Checks if the ray is facing up */
-bool	is_ray_facing_up(t_ray *ray)
+bool	is_ray_northeast(t_ray *ray)
 {
-	return (ray->angle > 0.0 && ray->angle < 180.0);
+	return (ray->angle > 0.0 && ray->angle < 90.0);
 }
 
-/* Checks if the ray is facing down */
-bool	is_ray_facing_down(t_ray *ray)
+bool	is_ray_northwest(t_ray *ray)
 {
-	return (ray->angle > 180.0 && ray->angle < 360.0);
+	return (ray->angle > 90.0 && ray->angle < 180.0);
 }
 
-/* Checks if the ray is facing right */
-bool	is_ray_facing_right(t_ray *ray)
+bool	is_ray_southwest(t_ray *ray)
 {
-	return ((ray->angle >= 0.0 && ray->angle < 90.0)
-		|| (ray->angle > 270.0 && ray->angle < 360.0));
+	return (ray->angle > 180.0 && ray->angle < 270.0);
 }
 
-/* Checks if the ray is facing left */
-bool	is_ray_facing_left(t_ray *ray)
+bool	is_ray_southeast(t_ray *ray)
 {
-	return (ray->angle > 90.0 && ray->angle < 270.0);
+	return (ray->angle > 270.0 && ray->angle < 360.0);
 }
