@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/03 16:21:25 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/11 16:07:55 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 /* Compass directions */
 typedef enum e_compass_dir
 {
-	SPACE,
 	EAST,
 	NORTH,
 	WEST,
@@ -63,12 +62,12 @@ typedef struct s_color
 *  path: path for texture */
 typedef struct s_texture
 {
+	bool					defined;
 	t_compass_dir			dir;
 	bool					is_path;
 	char					*path;
 	bool					is_color;
 	t_color					color;
-	struct t_texture		*next;
 }	t_texture;
 
 /* here is the struct for the map
@@ -212,13 +211,18 @@ void	move_to_new_point(t_coords *move, t_ray *ray);
 bool	is_out_of_map(t_coords *point);
 
 //===============PARSING_CUBE3D_FILE=========================
+//--------------Parsing_cub_file_unfiltered------------------
 void		print_double_str_array(char	**array);
+void		print_splited_str(char	**array);
 void		free_double_array(char **str);
 char		**arr_strdup(char **arr, int size);
 char		**open_and_get_all_lines(char	*path_to_the_file);
 //--------------Parsing_texture------------------------------
-t_texture	*texture_node_create(t_compass_dir dir, char *str);
+void		set_color(t_color *c, char	**splited);
+void		set_path(char **path, char *str);
+void		texture_node_update(t_texture *t, char *str);
 //--------------Parsing_texture_utils_one--------------------
+bool		is_path(char *str);
 bool		is_valid_path(char *str);
 bool		is_color(char *str);
 char		**splited_by_comma(char *str);
@@ -226,5 +230,7 @@ char		**splited_by_comma(char *str);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
 bool		is_valid_splited_color_arg( char **splited);
+void		skip_spaces(char	*str, int *j);
+void		skip_spaces_and_empty_lines(char	**arr, int *i, int *j);
 
 #endif

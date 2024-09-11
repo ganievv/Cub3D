@@ -6,21 +6,31 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:33:24 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/03 16:17:43 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/03 18:47:34 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+bool	is_path(char *str)
+{
+	return (!ft_strncmp(str, "./", 2) || !ft_strncmp(str, "/", 1)
+		|| (!ft_strchr(str, ',') && ft_strchr(str, '.')));
+}
+
 bool	is_valid_path(char *str)
 {
-	return ((!ft_strncmp(str, "./", 2) || !ft_strncmp(str, "/", 1))
-		&& open(str, O_RDONLY) >= 0);
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd >= 0)
+		close(fd);
+	return (fd >= 0);
 }
 
 bool	is_color(char *str)
 {
-	return (ft_strchr(str, ",") != NULL);
+	return (ft_strchr(str, ',') != NULL);
 }
 // and save in a two dimentional array the whole input
 // making a link list that is creating nodes by \n or \0

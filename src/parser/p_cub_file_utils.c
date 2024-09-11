@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/03 13:34:10 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/03 18:21:24 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ void	print_double_str_array(char	**array)
 	i = -1;
 	while (array && array[++i])
 		printf("%s", array[i]);
+}
+
+void	print_splited_str(char	**array)
+{
+	int	i;
+
+	i = -1;
+	while (array && array[++i])
+		printf("[%s]\n", array[i]);
 }
 
 // I will use the open and read with get_next_line
