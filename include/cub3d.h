@@ -216,10 +216,13 @@ void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
 void	move_to_new_point(t_coords_d *move, t_coords_d *intersec);
 /*----------------------------step_inside_grid---------------------------*/
 void	step_inside_grid(t_coords_d *intersec, t_ray *ray);
-/*---------------------------boundary_checks.c---------------------------*/
+/*----------------------------boundary_checks----------------------------*/
 bool	is_wall(t_coords *i, t_cub3d *info);
 bool	is_out_of_map(t_coords *i, t_cub3d *info);
 bool	is_whitespace(t_coords *i, t_cub3d *info);
+/*--------------------------------ray_len--------------------------------*/
+void	find_ray_len(t_ray *ray, t_coords_d *p);
+void	remove_distortion(t_ray *ray, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

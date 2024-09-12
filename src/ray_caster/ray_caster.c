@@ -62,7 +62,6 @@ void	cast_rays(t_cub3d *info)
 	int			i;
 
 	i = -1;
-	ray_caster_init(info);
 	p.x = grid_to_pixel(info->player.grid.x, info->game_dims.cube_size);
 	p.y = grid_to_pixel(info->player.grid.y, info->game_dims.cube_size);
 	while (++i < info->plane.width)
@@ -72,6 +71,8 @@ void	cast_rays(t_cub3d *info)
 		//	info->ray[i].angle = 84.0;
 		check_points_h(&info->ray[i], &p, info);
 		check_points_v(&info->ray[i], &p, info);
+		find_ray_len(&info->ray[i], &p);
+		remove_distortion(&info->ray[i], info);
 	}
 }
 
@@ -117,11 +118,13 @@ void	print_intersec_points(t_cub3d *info)
 				info->game_dims.cube_size));
 		printf("\n\t\t\t\t\t\t ");
 		printf("v_pixel.x: %4f, v_pixel.y: %4f"
-			"\tv_grid.x:  %4d, v_grid.y:  %4d\n\n",
+			"\tv_grid.x:  %4d, v_grid.y:  %4d",
 			info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
 			pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].v_intersec.y,
 				info->game_dims.cube_size));
+		printf("\n\t\t\t\t\t\t ");
+		printf("dist: %4f\n\n", info->ray[i].dist);
 	}
 }
 
@@ -132,6 +135,7 @@ int	main(void)
 	info.map.map = set_map();
 	info.map.height = 5;
 	info.map.width = 6;
+	ray_caster_init(&info);
 	cast_rays(&info);
 	print_intersec_points(&info);
 	free_map(&info.map.map);
