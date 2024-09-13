@@ -64,11 +64,10 @@ void	cast_rays(t_cub3d *info)
 	i = -1;
 	p.x = grid_to_pixel(info->player.grid.x, info->game_dims.cube_size);
 	p.y = grid_to_pixel(info->player.grid.y, info->game_dims.cube_size);
+	//info->player.viewing_angle = 135.0;
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		//if (i == 0)
-		//	info->ray[i].angle = 84.0;
 		check_points_h(&info->ray[i], &p, info);
 		check_points_v(&info->ray[i], &p, info);
 		find_ray_len(&info->ray[i], &p);
@@ -83,11 +82,11 @@ char	**set_map(void)
 	map = (char **)malloc(sizeof(char *) * 6);
 	if (!map)
 		exit(1);
-	map[0] = ft_strdup("111111");
-	map[1] = ft_strdup("100001");
-	map[2] = ft_strdup("100001");
-	map[3] = ft_strdup("10N001");
-	map[4] = ft_strdup("111111");
+	map[0] = ft_strdup("01111");
+	map[1] = ft_strdup("10001");
+	map[2] = ft_strdup("10001");
+	map[3] = ft_strdup("100N1");
+	map[4] = ft_strdup("11111");
 	map[5] = NULL;
 	return (map);
 }
@@ -134,13 +133,16 @@ int	main(void)
 
 	info.map.map = set_map();
 	info.map.height = 5;
-	info.map.width = 6;
+	info.map.width = 5;
 	ray_caster_init(&info);
 	cast_rays(&info);
-	print_intersec_points(&info);
+	//print_intersec_points(&info);
+	rendering(&info);
 	free_map(&info.map.map);
 	return (0);
 }
+
+/*-0.9999  ??? */
 
 /* apt-get update
 *  apt-get install cmake

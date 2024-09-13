@@ -18,20 +18,22 @@ INCDIRS			:= -I./include/ -I./mlx42/include -I$(LIBFT_DIR)
 CC				:= gcc
 CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
 
-VPATH			:=  ./src/main ./src/parser ./src/ray_caster
+VPATH			:=  ./src/main ./src/parser ./src/ray_caster ./src/renderer
 
-#SRC_MAIN		:= main.c
+SRC_MAIN		:= main.c
 
-#SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
-#				   p_cub_file_utils.c p_texture.c \
-#					p_texture_utils_one.c p_texture_utils_two.c \
+SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
+				   p_cub_file_utils.c p_texture.c \
+					p_texture_utils_one.c p_texture_utils_two.c \
 
-SRC_RAY_CASTER	:= boundary_checks.c convert.c horizontal_intersec.c \
-				   move_intersec_point.c player_orientation.c \
-				   ray_caster_init.c ray_caster.c ray_len.c sector_checks.c \
-				   step_inside_grid.c vertical_intersec.c \
+#SRC_RAY_CASTER	:= boundary_checks.c convert.c horizontal_intersec.c \
+#				   move_intersec_point.c player_orientation.c \
+#				   ray_caster_init.c ray_caster.c ray_len.c sector_checks.c \
+#				   step_inside_grid.c vertical_intersec.c \
 
-SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER)
+#SRC_RENDERER	:= renderer.c \
+
+SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER) $(SRC_RENDERER)
 
 BUILDDIR		:= ./build
 ODIR			:= $(BUILDDIR)/obj
@@ -46,7 +48,7 @@ DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 #****************************************************************************#
 MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLX42FLAGS		:= -lglfw #-framework Cocoa -framework OpenGL -framework IOKit
 
 #****************************************************************************#
 #                                   COLORS                                   #

@@ -22,8 +22,8 @@
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define PLANE_WIDTH 320
-# define PLANE_HEIGHT 200
+# define PLANE_WIDTH 800
+# define PLANE_HEIGHT 500
 # define FOV_ANGLE 60.0
 # define CUBE_SIZE 64
 # define ROTATION_SPEED 0.015
@@ -166,19 +166,20 @@ typedef struct s_ray
 	t_coords_d	v_intersec;
 	double		angle;
 	double		dist;
+	double		proj_slice_len;
 	bool		is_wall;
 }	t_ray;
 
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
 {
-	mlx_image_t		*img;
-	mlx_t			*mlx_p;
 	t_ray			ray[PLANE_WIDTH];
 	t_map			map;
 	t_player		player;
 	t_plane			plane;
 	t_dimensions	game_dims;
+	mlx_t			*handle;
+	mlx_image_t		*img;
 }	t_cub3d;
 
 /*==============================RAY_CASTER===============================*/
@@ -223,6 +224,9 @@ bool	is_whitespace(t_coords *i, t_cub3d *info);
 /*--------------------------------ray_len--------------------------------*/
 void	find_ray_len(t_ray *ray, t_coords_d *p);
 void	remove_distortion(t_ray *ray, t_cub3d *info);
+/*===============================RENDERER================================*/
+void	rendering(t_cub3d *info);
+void	calc_proj_slice_len(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------
