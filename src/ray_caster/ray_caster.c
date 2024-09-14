@@ -82,7 +82,7 @@ char	**set_map(void)
 	map = (char **)malloc(sizeof(char *) * 6);
 	if (!map)
 		exit(1);
-	map[0] = ft_strdup("01111");
+	map[0] = ft_strdup("11111");
 	map[1] = ft_strdup("10001");
 	map[2] = ft_strdup("10001");
 	map[3] = ft_strdup("100N1");
@@ -102,10 +102,11 @@ void	free_map(char ***map)
 	*map = NULL;
 }
 
+/* print function for debugging */
 void	print_intersec_points(t_cub3d *info)
 {
-	int		i;
 	FILE	*fp;
+	int		i;
 
 	i = -1;
 	fp = fopen("intersec_points_test.txt", "w");
@@ -119,8 +120,7 @@ void	print_intersec_points(t_cub3d *info)
 			pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].h_intersec.y,
 				info->game_dims.cube_size));
-		fprintf(fp, "\n\t\t\t\t\t\t ");
-		fprintf(fp, "v_pixel.x: %4f, v_pixel.y: %4f"
+		fprintf(fp, "\n\t\t\t\t\t\t v_pixel.x: %4f, v_pixel.y: %4f"
 			"\tv_grid.x:  %4d, v_grid.y:  %4d",
 			info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
 			pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
@@ -141,7 +141,7 @@ int	main(void)
 	info.map.width = 5;
 	ray_caster_init(&info);
 	cast_rays(&info);
-	//print_intersec_points(&info);
+	print_intersec_points(&info);
 	rendering(&info);
 	free_map(&info.map.map);
 	return (0);
@@ -151,5 +151,4 @@ int	main(void)
 
 /* apt-get update
 *  apt-get install cmake
-*  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
-*  MLX42FLAGS		:= -lglfw #-framework Cocoa -framework OpenGL -framework IOKit */
+*  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev */

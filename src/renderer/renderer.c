@@ -22,6 +22,8 @@ void	calc_proj_slice_len(t_cub3d *info)
 	{
 		info->ray[i].proj_slice_len = (info->game_dims.cube_size
 			/ info->ray[i].dist) * info->game_dims.len_to_plane_center;
+		if (info->ray[i].proj_slice_len > info->plane.height)
+			info->ray[i].proj_slice_len = info->plane.height;
 	}
 }
 
@@ -39,6 +41,7 @@ void	calc_top_wall_y(t_cub3d *info)
 	}
 }
 
+/* print function for debugging */
 void	print_p_wall_len_and_top_wall_y(t_cub3d *info)
 {
 	int		i;
@@ -56,13 +59,29 @@ void	print_p_wall_len_and_top_wall_y(t_cub3d *info)
 	fclose(fp);
 }
 
-void	rendering(t_cub3d *info)
+/* Renders vertical wall slices on the projection plane */
+void	render_wall_slices(t_cub3d *info)
 {
 	int	i;
 
+	i = 0;
+	while (++i < info->plane.width)
+	{
+		while (info->ray[i].proj_slice_len)
+		{
+			mlx_put_pixel(info->img, i,
+				info->ray[i].top_wall_y, 0xE0E0E0E0);
+			info->ray[i].top_wall_y++;
+			info->ray[i].proj_slice_len--;
+		}
+	}
+}
+
+void	rendering(t_cub3d *info)
+{
 	calc_proj_slice_len(info);
 	calc_top_wall_y(info);
-	//print_p_wall_len_and_top_wall_y(info);
+	print_p_wall_len_and_top_wall_y(info);
 
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	info->handle = mlx_init(PLANE_WIDTH, PLANE_HEIGHT, "cub3d", true);
@@ -73,17 +92,8 @@ void	rendering(t_cub3d *info)
 	if (!info->img || (mlx_image_to_window(info->handle, info->img, 0, 0) < 0))
 		exit(1);
 
-	i = 0;
-	while (++i < 660)
-	{
-		while (info->ray[i].proj_slice_len)
-		{
-			mlx_put_pixel(info->img, i,
-				info->ray[i].top_wall_y, 0xFF0000FF);
-			info->ray[i].top_wall_y++;
-			info->ray[i].proj_slice_len--;
-		}
-	}
+	render_wall_slices(info);
+
 	mlx_loop(info->handle);
 	mlx_delete_image(info->handle, info->img);
 	mlx_terminate(info->handle);
