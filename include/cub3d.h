@@ -166,7 +166,8 @@ typedef struct s_ray
 	t_coords_d	v_intersec;
 	double		angle;
 	double		dist;
-	double		proj_slice_len;
+	int			proj_slice_len;
+	int			top_wall_y;
 	bool		is_wall;
 }	t_ray;
 
@@ -227,6 +228,7 @@ void	remove_distortion(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
 void	rendering(t_cub3d *info);
 void	calc_proj_slice_len(t_cub3d *info);
+void	calc_top_wall_y(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

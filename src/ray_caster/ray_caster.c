@@ -104,27 +104,32 @@ void	free_map(char ***map)
 
 void	print_intersec_points(t_cub3d *info)
 {
-	int	i;
+	int		i;
+	FILE	*fp;
 
 	i = -1;
+	fp = fopen("intersec_points_test.txt", "w");
+	if (!fp)
+		return (perror("Error opening file for writing"));
 	while (++i < info->plane.width)
 	{
-		printf("%3d-ray (angle: %6.1f): h_pixel.x: %4f, h_pixel.y: %4f"
+		fprintf(fp, "%3d-ray (angle: %6.1f): h_pixel.x: %4f, h_pixel.y: %4f"
 			"\th_grid.x:  %4d, h_grid.y:  %4d", i, info->ray[i].angle,
 			info->ray[i].h_intersec.x, info->ray[i].h_intersec.y,
 			pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].h_intersec.y,
 				info->game_dims.cube_size));
-		printf("\n\t\t\t\t\t\t ");
-		printf("v_pixel.x: %4f, v_pixel.y: %4f"
+		fprintf(fp, "\n\t\t\t\t\t\t ");
+		fprintf(fp, "v_pixel.x: %4f, v_pixel.y: %4f"
 			"\tv_grid.x:  %4d, v_grid.y:  %4d",
 			info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
 			pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].v_intersec.y,
 				info->game_dims.cube_size));
-		printf("\n\t\t\t\t\t\t ");
-		printf("dist: %4f\n\n", info->ray[i].dist);
+		fprintf(fp, "\n\t\t\t\t\t\t ");
+		fprintf(fp, "dist: %4f\n\n", info->ray[i].dist);
 	}
+	fclose(fp);
 }
 
 int	main(void)

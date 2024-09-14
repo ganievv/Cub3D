@@ -24,7 +24,7 @@ SRC_MAIN		:= main.c
 
 SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
 				   p_cub_file_utils.c p_texture.c \
-					p_texture_utils_one.c p_texture_utils_two.c \
+				   p_texture_utils_one.c p_texture_utils_two.c \
 
 #SRC_RAY_CASTER	:= boundary_checks.c convert.c horizontal_intersec.c \
 #				   move_intersec_point.c player_orientation.c \
@@ -48,7 +48,9 @@ DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 #****************************************************************************#
 MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS		:= -lglfw #-framework Cocoa -framework OpenGL -framework IOKit
+MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+#for Ubuntu: #
+#MLX42FLAGS		:= -lglfw -ldl -lGL
 
 #****************************************************************************#
 #                                   COLORS                                   #
@@ -66,7 +68,7 @@ all: $(BUILDDIR) $(NAME)
 
 $(NAME): $(MLX42LIB) $(OBJ) $(LIBFT)
 	@echo "$(BLUE)Linking $@...$(RESET)"
-	@$(CC) $(OBJ) $(MLX42FLAGS) $(MLX42LIB) $(LIBFT) -lm -o $@
+	@$(CC) $(OBJ) $(LIBFT) $(MLX42LIB) $(MLX42FLAGS) -lm -o $@
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):
