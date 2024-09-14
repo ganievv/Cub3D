@@ -21,6 +21,10 @@ void	ray_caster_init(t_cub3d *info)
 	info->player.height = info->game_dims.cube_size / 2;
 	set_player_coordinates(info);
 	set_player_viewing_angle(info);
+	info->player.pixel.x = grid_to_pixel(info->player.coords.x,
+		info->game_dims.cube_size);
+	info->player.pixel.y = grid_to_pixel(info->player.coords.y,
+		info->game_dims.cube_size);
 
 	info->plane.height = PLANE_HEIGHT;
 	info->plane.width = PLANE_WIDTH;

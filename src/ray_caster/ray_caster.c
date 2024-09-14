@@ -58,20 +58,19 @@ void	set_ray_angle(int i, t_cub3d *info)
 * 'p' - player's pixel coordinates. */
 void	cast_rays(t_cub3d *info)
 {
-	t_coords_d	p;
-	int			i;
+	int	i;
 
 	i = -1;
-	p.x = grid_to_pixel(info->player.grid.x, info->game_dims.cube_size);
-	p.y = grid_to_pixel(info->player.grid.y, info->game_dims.cube_size);
 	//info->player.viewing_angle = 135.0;
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		check_points_h(&info->ray[i], &p, info);
-		check_points_v(&info->ray[i], &p, info);
-		find_ray_len(&info->ray[i], &p);
+		check_points_h(&info->ray[i], &info->player.pixel, info);
+		check_points_v(&info->ray[i], &info->player.pixel, info);
+		find_ray_len(&info->ray[i], &info->player.pixel);
 		remove_distortion(&info->ray[i], info);
+		calc_proj_slice_len(&info->ray[i], info);
+		calc_top_wall_y(&info->ray[i], info);
 	}
 }
 
@@ -102,32 +101,33 @@ void	free_map(char ***map)
 	*map = NULL;
 }
 
-/* print function for debugging */
-void	print_intersec_points(t_cub3d *info)
+/* function for debugging */
+void	save_calculated_data(t_cub3d *info)
 {
 	FILE	*fp;
 	int		i;
 
 	i = -1;
-	fp = fopen("intersec_points_test.txt", "w");
+	fp = fopen("calc_data.txt", "w");
 	if (!fp)
 		return (perror("Error opening file for writing"));
 	while (++i < info->plane.width)
 	{
-		fprintf(fp, "%3d-ray (angle: %6.1f): h_pixel.x: %4f, h_pixel.y: %4f"
-			"\th_grid.x:  %4d, h_grid.y:  %4d", i, info->ray[i].angle,
+		fprintf(fp, "%3d-ray (angle: %6.1f): h_pixel.x: %4.1f, h_pixel.y: %4.1f"
+			"\th_grid.x: %d, h_grid.y: %d", i, info->ray[i].angle,
 			info->ray[i].h_intersec.x, info->ray[i].h_intersec.y,
 			pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].h_intersec.y,
 				info->game_dims.cube_size));
-		fprintf(fp, "\n\t\t\t\t\t\t v_pixel.x: %4f, v_pixel.y: %4f"
-			"\tv_grid.x:  %4d, v_grid.y:  %4d",
+		fprintf(fp, "\n\t\t\t\t\t\t v_pixel.x: %4.1f, v_pixel.y: %4.1f"
+			"\tv_grid.x: %d, v_grid.y: %d",
 			info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
 			pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
 			pixel_to_grid(info->ray[i].v_intersec.y,
 				info->game_dims.cube_size));
-		fprintf(fp, "\n\t\t\t\t\t\t ");
-		fprintf(fp, "dist: %4f\n\n", info->ray[i].dist);
+		fprintf(fp, "\n\t\t\t\t\t\t ray_dist:       %4.1f", info->ray[i].dist);
+		fprintf(fp, "\n\t\t\t\t\t\t proj_slice_len:%4d\n\n",
+			info->ray[i].proj_slice_len);
 	}
 	fclose(fp);
 }
@@ -141,7 +141,7 @@ int	main(void)
 	info.map.width = 5;
 	ray_caster_init(&info);
 	cast_rays(&info);
-	print_intersec_points(&info);
+	save_calculated_data(&info);
 	rendering(&info);
 	free_map(&info.map.map);
 	return (0);

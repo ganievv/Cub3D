@@ -27,8 +27,7 @@
 # define FOV_ANGLE 60.0
 # define CUBE_SIZE 64
 # define ROTATION_SPEED 0.015
-# define MOVE_SPEED 2
-# define VIEW_PLANE 60
+# define MOVE_SPEED 10
 
 /* Compass directions */
 typedef enum e_compass_dir
@@ -114,11 +113,12 @@ typedef struct s_input
 *  ====
 *  view_plane is the total range of the view in grades
 *  ====
-*  'grid' represents the player's coordinates in the grid system
+*  'coords' represents the player's coordinates in the grid system
 *  'pixel' represents the player's coordinates in the pixel system */
 typedef struct s_player
 {
-	t_coords	grid;
+	t_coords	coords;
+	t_coords_d	pixel;
 	double		fov_angle;
 	double		viewing_angle;
 	int			height;
@@ -225,10 +225,15 @@ bool	is_whitespace(t_coords *i, t_cub3d *info);
 /*--------------------------------ray_len--------------------------------*/
 void	find_ray_len(t_ray *ray, t_coords_d *p);
 void	remove_distortion(t_ray *ray, t_cub3d *info);
+/*----------------------------wall_projection----------------------------*/
+void	calc_proj_slice_len(t_ray *ray, t_cub3d *info);
+void	calc_top_wall_y(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
 void	rendering(t_cub3d *info);
-void	calc_proj_slice_len(t_cub3d *info);
-void	calc_top_wall_y(t_cub3d *info);
+void	render_wall_slices(t_cub3d *info);
+/*--------------------------------events---------------------------------*/
+void	close_window(void *param);
+void	handle_keys(mlx_key_data_t keydata, void *param);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

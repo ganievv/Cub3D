@@ -6,7 +6,6 @@ testing
 *.o
 *.d
 .vscode/
-intersec_points_test.txt
-proj_wall_len_test.txt
+calc_data.txt
 Dockerfile
 start.sh
