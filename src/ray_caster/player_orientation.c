@@ -51,4 +51,5 @@ void	set_player_viewing_angle(t_cub3d *info)
 		info->player.viewing_angle = 180.0;
 	else
 		info->player.viewing_angle = 270.0;
+	info->map.map[y][x] = '0';
 }

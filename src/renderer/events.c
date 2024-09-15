@@ -19,6 +19,7 @@ void	close_window(void *param)
 	t_cub3d	*info;
 
 	info = (t_cub3d *)param;
+	(void)info;
 	/*clean_up_functions*/
 	exit(0);
 }
@@ -50,7 +51,9 @@ void	handle_keys(mlx_key_data_t keydata, void *param)
 	if (new_p.x > 0 && new_p.y > 0
 		&& new_p.x < info->plane.width && new_p.y < info->plane.height)
 	{
+		printf("old: player.x: %f, player.y: %f\n", info->player.pixel.x, info->player.pixel.y);
 		info->player.pixel = new_p;
+		printf("new: player.x: %f, player.y: %f\n\n", info->player.pixel.x, info->player.pixel.y);
 		cast_rays(info);
 		render_wall_slices(info);
 		if (mlx_image_to_window(info->handle, info->img, 0, 0) < 0)

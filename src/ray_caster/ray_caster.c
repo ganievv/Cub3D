@@ -84,7 +84,7 @@ char	**set_map(void)
 	map[0] = ft_strdup("11111");
 	map[1] = ft_strdup("10001");
 	map[2] = ft_strdup("10001");
-	map[3] = ft_strdup("100N1");
+	map[3] = ft_strdup("10N01");
 	map[4] = ft_strdup("11111");
 	map[5] = NULL;
 	return (map);
@@ -152,3 +152,5 @@ int	main(void)
 /* apt-get update
 *  apt-get install cmake
 *  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev */
+
+/*-y*/

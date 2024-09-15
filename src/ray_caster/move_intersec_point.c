@@ -49,7 +49,7 @@ void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info)
 	{
 		move->y = info->game_dims.cube_size
 			* tan(degrees_to_radians(ray->angle));
-		if (is_ray_southeast(ray))
+		if (is_ray_southeast(ray) || is_ray_northeast(ray))
 			move->y *= -1;
 	}
 }
