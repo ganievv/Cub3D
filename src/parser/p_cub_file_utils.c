@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:33 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 23:57:56 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_empty_or_not(char	**res)
 
 	i = 0;
 	printf("//===========================\n");
-	while(res && res[i])
+	while (res && res[i])
 	{
 		printf("is empty line: %d\n", is_empty_line(res[i]));
 		i++;

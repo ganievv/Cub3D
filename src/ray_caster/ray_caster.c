@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:08:05 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/02 21:43:03 by sganiev          ###   ########.fr       */
+/*   Updated: 2024/09/16 22:44:07 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	cast_rays(t_cub3d *info)
 		calc_top_wall_y(&info->ray[i], info);
 	}
 }
-
+// If I change this one will continue t
 char	**set_map(void)
 {
 	char	**map;
@@ -143,21 +143,20 @@ void	save_calculated_data(t_cub3d *info)
 	fclose(fp);
 }
 
-int	main(void)
-{
-	t_cub3d	info;
+// int	main(void)
+// {
+// 	t_cub3d	info;
 
-	info.map.map = set_map();
-	info.map.height = 5;
-	info.map.width = 5;
-	ray_caster_init(&info);
-	cast_rays(&info);
-	save_calculated_data(&info);
-	rendering(&info);
-	free_map(&info.map.map);
-	return (0);
-}
-
+// 	info.map.map = set_map();
+// 	info.map.height = 5;
+// 	info.map.width = 5;
+// 	ray_caster_init(&info);
+// 	cast_rays(&info);
+// 	save_calculated_data(&info);
+// 	rendering(&info);
+// 	free_map(&info.map.map);
+// 	return (0);
+// }
 /*-0.9999  ??? */
 
 /* apt-get update

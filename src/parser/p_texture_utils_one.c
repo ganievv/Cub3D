@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:33:24 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/16 20:34:34 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 23:58:29 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,29 @@ void	print_node_list(t_node *parse_node)
 	printf("{[NULL], [NULL]}\n");
 }
 
-char *take_out_all_spaces(char *str)
+static void	skip_by_type(t_compass_dir type, char *str, int *i)
 {
-	int start;
+	if (type != NON)
+		while (ft_isspace(str[*i]))
+			(*i)++;
+}
+
+char	*take_out_all_spaces(t_compass_dir type, char *str)
+{
+	int	start;
 	int	end;
 	int	i;
 
 	if (!str)
-		return NULL;
+		return (NULL);
 	start = 0;
 	end = 0;
 	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
+	skip_by_type(type, str, &i);
 	start = i;
+	if (type == NON)
+		while (str[i] && str[i] != '\n')
+			i++;
 	while (str[i] && !ft_isspace(str[i]) && str[i] != '\n')
 		i++;
 	end = i;
@@ -99,7 +108,7 @@ t_node	*node_new(t_compass_dir type, char *path_or_color)
 	if (!new)
 		return (NULL);
 	new->type = type;
-	new->path_or_color = take_out_all_spaces(path_or_color);
+	new->path_or_color = take_out_all_spaces(type, path_or_color);
 	if (!new->path_or_color)
 		return (NULL);
 	new->next = NULL;

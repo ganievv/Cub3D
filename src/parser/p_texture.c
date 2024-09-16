@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:37:32 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/12 19:37:56 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 00:04:12 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,8 @@
 // 	}
 // 	free_double_array(splited);
 // }
+
+bool	is_valid_color_arg(char	*str)
+{
+	return (ft_pos_atol(str) != -1);
+}

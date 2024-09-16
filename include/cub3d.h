@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/16 21:22:19 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 23:27:19 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ char		**open_and_get_all_lines(char	*path_to_the_file);
 // void		texture_node_update(t_texture *t, char *str);
 //--------------Parsing_texture_utils_one--------------------
 void		print_node_list(t_node *parse_node);
+char 		*take_out_all_spaces(t_compass_dir type, char *str);
 t_node		*node_new(t_compass_dir type, char *path_or_color);
 void		node_add_back(t_node **lst, t_node *new);
 // bool		is_path(char *str);
@@ -278,7 +279,8 @@ void		node_add_back(t_node **lst, t_node *new);
 // bool		is_color(char *str);
 // char		**splited_by_comma(char *str);
 //--------------Parsing_texture_utils_two--------------------
-void		array_to_list(char **res, t_node **parse_node, char ***map);
+void		map_list_version(char **res, t_node	**map, int *dir);
+void		array_to_list(char **res, t_node **parse_node, t_node **map);
 void		define_the_type(char *str, t_node **parse_node, int *f);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
