@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:33:24 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/12 19:36:09 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 20:34:34 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,72 @@
 // possitive
 // integer
 // char **unfiltered_str
+void	print_node_list(t_node *parse_node)
+{
+	printf("Prasing Node List:\n");
+	while (parse_node)
+	{
+		printf("{[%d], [%s]}-->", parse_node->type, parse_node->path_or_color);
+		parse_node = parse_node->next;
+	}
+	printf("{[NULL], [NULL]}\n");
+}
+
+char *take_out_all_spaces(char *str)
+{
+	int start;
+	int	end;
+	int	i;
+
+	if (!str)
+		return NULL;
+	start = 0;
+	end = 0;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	start = i;
+	while (str[i] && !ft_isspace(str[i]) && str[i] != '\n')
+		i++;
+	end = i;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] && str[i] != '\n' && str[i] != '\0')
+		return (NULL);
+	if (end - start > 0)
+		return (ft_strndup(str + start, end - start));
+	else
+		return (NULL);
+}
+
+t_node	*node_new(t_compass_dir type, char *path_or_color)
+{
+	t_node	*new;
+
+	new = (t_node *)malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->type = type;
+	new->path_or_color = take_out_all_spaces(path_or_color);
+	if (!new->path_or_color)
+		return (NULL);
+	new->next = NULL;
+	return (new);
+}
+
+void	node_add_back(t_node **lst, t_node *new)
+{
+	t_node	*temp;
+
+	if (!lst || !new)
+		return ;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	temp = *lst;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
+}

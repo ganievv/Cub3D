@@ -6,11 +6,27 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 23:07:21 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/02 23:26:51 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 17:05:22 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int	is_empty_line(char *str)
+{
+	int	is_empty;
+	int	i;
+
+	is_empty = 1;
+	i = 0;
+	while (str[i] && (str[i] != '\0' || str[i] != '\n'))
+	{
+		if (ft_isspace(str[i]) == 0)
+			is_empty = 0;
+		i++;
+	}
+	return (is_empty);
+}
 
 static void	arr_strcpy(char ***dest, char **src, int *i, char **next_line)
 {

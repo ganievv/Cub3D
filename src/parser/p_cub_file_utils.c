@@ -6,11 +6,25 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/03 18:21:24 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 18:02:33 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	print_empty_or_not(char	**res)
+{
+	int	i;
+
+	i = 0;
+	printf("//===========================\n");
+	while(res && res[i])
+	{
+		printf("is empty line: %d\n", is_empty_line(res[i]));
+		i++;
+	}
+	printf("//===========================\n");
+}
 
 void	print_double_str_array(char	**array)
 {

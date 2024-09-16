@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:25:54 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/12 17:47:21 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 21:24:10 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	main(void)
 {
 	char	**res;
-	int		i;
-	// t_input	in;
+	t_node	*parse_node;
+	char	**map;
 
-	i = 0;
 	res = open_and_get_all_lines("./src/parser/input.cub");
-	print_double_str_array(res);
-	skip_spaces(res[5], &i);
-	// define_input(&in, res[5] + i);
+	array_to_list(res, &parse_node, &map);
+	print_node_list(parse_node);
+	print_double_str_array(map);
+	return (0);
 }
 
 // void	define_input_per_line(t_input *in, char *str)

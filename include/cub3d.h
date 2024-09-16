@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/11 19:02:11 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/16 21:22:19 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,30 @@
 /* Compass directions */
 typedef enum e_compass_dir
 {
-	EAST,
 	NORTH,
-	WEST,
 	SOUTH,
+	WEST,
+	EAST,
 	FLOOR,
-	CIELLING
+	CIELLING,
+	NON,
 }	t_compass_dir;
 
 /* Represents a 2D point
 *  with x and y coordinates. */
+/*
+	my though is to create a link list with the type and the path or color
+	-type according to the enum
+	-path or color
+	-connection with the next
+*/
+typedef	struct s_node
+{
+	t_compass_dir	type;
+	char			*path_or_color;
+	struct	s_node	*next;
+}	t_node;
+
 typedef struct s_coords
 {
 	int			x;
@@ -243,25 +257,33 @@ int		rotate_keys(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------
+void		print_empty_or_not(char	**res);
 void		print_double_str_array(char	**array);
 void		print_splited_str(char	**array);
 void		free_double_array(char **str);
 char		**arr_strdup(char **arr, int size);
+//--------------Parsing_cub_file-----------------------------
+int			is_empty_line(char *str);
 char		**open_and_get_all_lines(char	*path_to_the_file);
 //--------------Parsing_texture------------------------------
-void		set_color(t_color *c, char	**splited);
-void		set_path(char **path, char *str);
-void		texture_node_update(t_texture *t, char *str);
+// void		set_color(t_color *c, char	**splited);
+// void		set_path(char **path, char *str);
+// void		texture_node_update(t_texture *t, char *str);
 //--------------Parsing_texture_utils_one--------------------
-bool		is_path(char *str);
-bool		is_valid_path(char *str);
-bool		is_color(char *str);
-char		**splited_by_comma(char *str);
+void		print_node_list(t_node *parse_node);
+t_node		*node_new(t_compass_dir type, char *path_or_color);
+void		node_add_back(t_node **lst, t_node *new);
+// bool		is_path(char *str);
+// bool		is_valid_path(char *str);
+// bool		is_color(char *str);
+// char		**splited_by_comma(char *str);
 //--------------Parsing_texture_utils_two--------------------
+void		array_to_list(char **res, t_node **parse_node, char ***map);
+void		define_the_type(char *str, t_node **parse_node, int *f);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
-bool		is_valid_splited_color_arg( char **splited);
-void		skip_spaces(char	*str, int *j);
-void		skip_spaces_and_empty_lines(char	**arr, int *i, int *j);
+// bool		is_valid_splited_color_arg( char **splited);
+// void		skip_spaces(char	*str, int *j);
+// void		skip_spaces_and_empty_lines(char	**arr, int *i, int *j);
 
 #endif

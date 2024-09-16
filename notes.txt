@@ -62,3 +62,5 @@ PARSING
 //-------------------(Thursday)-------12/9/2024--------------------------------------
 I need to parse the lines with get next line ---- ok (should I make nodes with this??)
 I need to take out all the empty lines ---- ??
+//-------------------(Tuesday)--------16/9/2024--------------------------------------
+Still I need to take out all the empty lines ---- ??
