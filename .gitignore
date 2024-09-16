@@ -9,3 +9,5 @@ testing
 calc_data.txt
 Dockerfile
 start.sh
+*notes*
+*.txt*

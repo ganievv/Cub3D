@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/03 21:03:49 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:38:29 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,38 @@ bool	is_valid_color_arg(char	*str)
 //numeric
 //possitive
 //integers
-bool	is_valid_splited_color_arg( char **splited)
-{
-	bool	is_valid;
-	int		i;
+// bool	is_valid_splited_color_arg( char **splited)
+// {
+// 	bool	is_valid;
+// 	int		i;
 
-	is_valid = true;
-	i = -1;
-	while (splited[++i] && is_valid)
-		is_valid = is_valid_color_arg(splited[i]);
-	return (is_valid && (i == 3));
-}
+// 	is_valid = true;
+// 	i = -1;
+// 	while (splited[++i] && is_valid)
+// 		is_valid = is_valid_color_arg(splited[i]);
+// 	return (is_valid && (i == 3));
+// }
 
-void	skip_spaces(char	*str, int *j)
-{
-	if (!str)
-		return ;
-	*j = *j - 1;
-	while (str && ft_isspace(str[++(*j)]))
-		;
-}
+// void	skip_spaces(char	*str, int *j)
+// {
+// 	if (!str)
+// 		return ;
+// 	*j = *j - 1;
+// 	while (str && ft_isspace(str[++(*j)]))
+// 		;
+// }
 
-void	skip_spaces_and_empty_lines(char	**arr, int *i, int *j)
-{
-	if (!arr || !(*arr))
-		return ;
-	*j = *j - 1;
-	while (arr[*i] && ft_isspace(arr[*i][++(*j)]))
-	{
-		if (arr[*i] && (arr[*i][*j] == '\0' || arr[*i][*j] == '\n'))
-		{
-			(*i)++;
-			(*j) = 0;
-		}
-	}
-}
+// void	skip_spaces_and_empty_lines(char	**arr, int *i, int *j)
+// {
+// 	if (!arr || !(*arr))
+// 		return ;
+// 	*j = *j - 1;
+// 	while (arr[*i] && ft_isspace(arr[*i][++(*j)]))
+// 	{
+// 		if (arr[*i] && (arr[*i][*j] == '\0' || arr[*i][*j] == '\n'))
+// 		{
+// 			(*i)++;
+// 			(*j) = 0;
+// 		}
+// 	}
+// }
