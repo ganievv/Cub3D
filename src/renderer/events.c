@@ -21,42 +21,69 @@ void	close_window(void *param)
 	info = (t_cub3d *)param;
 	(void)info;
 	/*clean_up_functions*/
+	mlx_delete_image(info->handle, info->img);
+	mlx_terminate(info->handle);
 	exit(0);
 }
 
-/* Handles key press events for movement and exit. */
-void	handle_keys(mlx_key_data_t keydata, void *param)
+/* Clears the entire image by setting every pixel to black*/
+void	clear_image(t_cub3d *info)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < info->plane.height)
+	{
+		x = -1;
+		while (++x < info->plane.width)
+			mlx_put_pixel(info->img, x, y, 0x00000000);
+	}
+}
+
+/* Checks if any movement or rotation keys are pressed */
+int	check_keys(t_cub3d *info)
+{
+	if (mlx_is_key_down(info->handle, MLX_KEY_W)
+		|| mlx_is_key_down(info->handle, MLX_KEY_A)
+		|| mlx_is_key_down(info->handle, MLX_KEY_S)
+		|| mlx_is_key_down(info->handle, MLX_KEY_D)
+		|| mlx_is_key_down(info->handle, MLX_KEY_LEFT)
+		|| mlx_is_key_down(info->handle, MLX_KEY_RIGHT))
+		return (1);
+	else
+		return (0);
+}
+
+/* Handles the ESC key press event to terminate
+*  the program and clean up resources */
+void	handle_esc_key(mlx_key_data_t keydata, void *param)
+{
+	t_cub3d	*info;
+
+	info = (t_cub3d *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		mlx_delete_image(info->handle, info->img);
+		mlx_terminate(info->handle);
+		exit(0);
+	}
+}
+
+/* Handles key press events for movements and rotations*/
+void	handle_keys(void *param)
 {
 	t_cub3d		*info;
 	t_coords_d	new_p;
 
 	info = (t_cub3d *)param;
 	new_p = info->player.pixel;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(0);
-	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		new_p.y = info->player.pixel.y - MOVE_SPEED;
-	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		new_p.x = info->player.pixel.x - MOVE_SPEED;
-	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		new_p.y = info->player.pixel.y + MOVE_SPEED;
-	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		new_p.x = info->player.pixel.x + MOVE_SPEED;
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		;
-	else
+	if (!check_keys(info))
 		return ;
-	if (new_p.x > 0 && new_p.y > 0
-		&& new_p.x < info->plane.width && new_p.y < info->plane.height)
-	{
-		printf("old: player.x: %f, player.y: %f\n", info->player.pixel.x, info->player.pixel.y);
-		info->player.pixel = new_p;
-		printf("new: player.x: %f, player.y: %f\n\n", info->player.pixel.x, info->player.pixel.y);
-		cast_rays(info);
-		render_wall_slices(info);
-		if (mlx_image_to_window(info->handle, info->img, 0, 0) < 0)
-			exit(1);
-	}
+	if (move_keys(&new_p, info) == 0)
+		return ;
+	rotate_keys(info);
+	cast_rays(info);
+	clear_image(info);
+	render_wall_slices(info);
 }

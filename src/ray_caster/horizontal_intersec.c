@@ -49,9 +49,9 @@ void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 *  'p' - player's pixel coordinates. */
 void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
-	if (is_ray_northeast(ray) || is_ray_northwest(ray) || ray->angle == 90.0)
+	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle) || ray->angle == 90.0)
 		calc_up_intersec(ray, p, info);
-	else if (is_ray_southwest(ray) || is_ray_southeast(ray)
+	else if (is_ray_southwest(ray->angle) || is_ray_southeast(ray->angle)
 		|| ray->angle == 270.0)
 		calc_down_intersec(ray, p, info);
 }
@@ -60,7 +60,7 @@ void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 *  to find where the ray hits a wall.
 *
 * 'p' - player's pixel coordinates. */
-void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
+void	check_points_h(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info)
 {
 	t_coords_d	move;
 	t_coords	grid;
@@ -72,7 +72,7 @@ void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 		return ;
 	}
 	check_first_point_h(ray, p, info);
-	step_inside_grid(&ray->h_intersec, ray);
+	step_inside_grid(&ray->h_intersec, ray->angle, step);
 	set_movement_len_h(&move, ray, info);
 	while (true)
 	{

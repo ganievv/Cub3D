@@ -34,6 +34,15 @@
 /*     Y increases              */
 /*------------------------------*/
 
+/* Normalizes the angle to be within 0 to 360 degrees */
+double	normalize_angle(double angle)
+{
+	angle = fmod(angle, 360.0);
+	if (angle < 0.0)
+		angle += 360.0;
+	return (angle);
+}
+
 /* Sets the angle for the i-th ray. For the first ray, 
 *  the angle is based on the player's viewing angle
 *  and FOV. For subsequent rays, the angle is adjusted
@@ -47,26 +56,28 @@ void	set_ray_angle(int i, t_cub3d *info)
 	else
 		info->ray[i].angle = info->ray[i - 1].angle
 			- info->game_dims.ray_angle_step;
-	info->ray[i].angle = fmod(info->ray[i].angle, 360.0);
-	if (info->ray[i].angle < 0.0)
-		info->ray[i].angle += 360.0;
+	info->ray[i].angle = normalize_angle(info->ray[i].angle);
 }
 
 /* Casts rays and checks both horizontal
 *  and vertical intersections.
 *
-* 'p' - player's pixel coordinates. */
+* 'step' - var for step_inside_grid() in
+*  check_points_h() and check_points_v() */
 void	cast_rays(t_cub3d *info)
 {
-	int	i;
+	t_coords_d	step;
+	int			i;
 
 	i = -1;
+	step.x = 1;
+	step.y = 1;
 	//info->player.viewing_angle = 135.0;
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		check_points_h(&info->ray[i], &info->player.pixel, info);
-		check_points_v(&info->ray[i], &info->player.pixel, info);
+		check_points_h(&info->ray[i], &info->player.pixel, &step, info);
+		check_points_v(&info->ray[i], &info->player.pixel, &step, info);
 		find_ray_len(&info->ray[i], &info->player.pixel);
 		remove_distortion(&info->ray[i], info);
 		calc_proj_slice_len(&info->ray[i], info);

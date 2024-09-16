@@ -12,22 +12,22 @@
 
 #include "../../include/cub3d.h"
 
-bool	is_ray_northeast(t_ray *ray)
+bool	is_ray_northeast(double angle)
 {
-	return (ray->angle > 0.0 && ray->angle < 90.0);
+	return (angle > 0.0 && angle < 90.0);
 }
 
-bool	is_ray_northwest(t_ray *ray)
+bool	is_ray_northwest(double angle)
 {
-	return (ray->angle > 90.0 && ray->angle < 180.0);
+	return (angle > 90.0 && angle < 180.0);
 }
 
-bool	is_ray_southwest(t_ray *ray)
+bool	is_ray_southwest(double angle)
 {
-	return (ray->angle > 180.0 && ray->angle < 270.0);
+	return (angle > 180.0 && angle < 270.0);
 }
 
-bool	is_ray_southeast(t_ray *ray)
+bool	is_ray_southeast(double angle)
 {
-	return (ray->angle > 270.0 && ray->angle < 360.0);
+	return (angle > 270.0 && angle < 360.0);
 }

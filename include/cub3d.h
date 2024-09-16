@@ -26,8 +26,8 @@
 # define PLANE_HEIGHT 500
 # define FOV_ANGLE 60.0
 # define CUBE_SIZE 64
-# define ROTATION_SPEED 0.015
-# define MOVE_SPEED 10
+# define MOVE_SPEED 4
+# define ROTATION_SPEED 2.0
 
 /* Compass directions */
 typedef enum e_compass_dir
@@ -186,6 +186,7 @@ typedef struct s_cub3d
 /*==============================RAY_CASTER===============================*/
 void	cast_rays(t_cub3d *info);
 void	set_ray_angle(int i, t_cub3d *info);
+double	normalize_angle(double angle);
 /*----------------------------ray_caster_init----------------------------*/
 void	ray_caster_init(t_cub3d *info);
 double	calc_len_to_plane_center(t_cub3d *info);
@@ -198,17 +199,17 @@ double	degrees_to_radians(double degrees);
 double	grid_to_pixel(int grid, int cube_size);
 int		pixel_to_grid(double pixel, int cube_size);
 /*-----------------------------sector_checks-----------------------------*/
-bool	is_ray_northeast(t_ray *ray);
-bool	is_ray_northwest(t_ray *ray);
-bool	is_ray_southwest(t_ray *ray);
-bool	is_ray_southeast(t_ray *ray);
+bool	is_ray_northeast(double angle);
+bool	is_ray_northwest(double angle);
+bool	is_ray_southwest(double angle);
+bool	is_ray_southeast(double angle);
 /*--------------------------horizontal_intersec--------------------------*/
-void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	check_points_h(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info);
 void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void	calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 /*---------------------------vertical_intersec---------------------------*/
-void	check_points_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void	check_points_v(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info);
 void	check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void	calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void	calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
@@ -217,7 +218,7 @@ void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info);
 void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
 void	move_to_new_point(t_coords_d *move, t_coords_d *intersec);
 /*----------------------------step_inside_grid---------------------------*/
-void	step_inside_grid(t_coords_d *intersec, t_ray *ray);
+void	step_inside_grid(t_coords_d *coords, double angle, t_coords_d *step);
 /*----------------------------boundary_checks----------------------------*/
 bool	is_wall(t_coords *i, t_cub3d *info);
 bool	is_out_of_map(t_coords *i, t_cub3d *info);
@@ -233,7 +234,12 @@ void	rendering(t_cub3d *info);
 void	render_wall_slices(t_cub3d *info);
 /*--------------------------------events---------------------------------*/
 void	close_window(void *param);
-void	handle_keys(mlx_key_data_t keydata, void *param);
+void	handle_keys(void *param);
+void	handle_esc_key(mlx_key_data_t keydata, void *param);
+int		check_keys(t_cub3d *info);
+/*-------------------------------move_keys-------------------------------*/
+int		move_keys(t_coords_d *new_p, t_cub3d *info);
+int		rotate_keys(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

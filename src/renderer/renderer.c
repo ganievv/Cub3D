@@ -17,7 +17,7 @@ void	render_wall_slices(t_cub3d *info)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	while (++i < info->plane.width)
 	{
 		while (info->ray[i].proj_slice_len)
@@ -46,8 +46,8 @@ void	rendering(t_cub3d *info)
 		exit(1);
 
 	mlx_close_hook(info->handle, close_window, info);
-	mlx_key_hook(info->handle, handle_keys, info);
+	mlx_loop_hook(info->handle, handle_keys, info);
+	mlx_key_hook(info->handle, handle_esc_key, info);
+
 	mlx_loop(info->handle);
-	mlx_delete_image(info->handle, info->img);
-	mlx_terminate(info->handle);
 }

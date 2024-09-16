@@ -16,9 +16,9 @@
 *  as it steps through horizontal grid lines */
 void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info)
 {
-	if (is_ray_northeast(ray) || is_ray_northwest(ray) || ray->angle == 90.0)
+	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle) || ray->angle == 90.0)
 		move->y = -info->game_dims.cube_size;
-	else if (is_ray_southwest(ray) || is_ray_southeast(ray)
+	else if (is_ray_southwest(ray->angle) || is_ray_southeast(ray->angle)
 		|| ray->angle == 270.0)
 		move->y = info->game_dims.cube_size;
 
@@ -28,7 +28,7 @@ void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info)
 	{
 		move->x = info->game_dims.cube_size
 			/ tan(degrees_to_radians(ray->angle));
-		if (is_ray_southwest(ray) || is_ray_southeast(ray))
+		if (is_ray_southwest(ray->angle) || is_ray_southeast(ray->angle))
 			move->x *= -1;
 	}
 }
@@ -37,9 +37,9 @@ void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info)
 *  as it steps through vertical grid lines */
 void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info)
 {
-	if (is_ray_northeast(ray) || is_ray_southeast(ray) || ray->angle == 0.0)
+	if (is_ray_northeast(ray->angle) || is_ray_southeast(ray->angle) || ray->angle == 0.0)
 		move->x = info->game_dims.cube_size;
-	else if (is_ray_northwest(ray) || is_ray_southwest(ray)
+	else if (is_ray_northwest(ray->angle) || is_ray_southwest(ray->angle)
 		|| ray->angle == 180.0)
 		move->x = -info->game_dims.cube_size;
 
@@ -49,7 +49,7 @@ void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info)
 	{
 		move->y = info->game_dims.cube_size
 			* tan(degrees_to_radians(ray->angle));
-		if (is_ray_southeast(ray) || is_ray_northeast(ray))
+		if (is_ray_southeast(ray->angle) || is_ray_northeast(ray->angle))
 			move->y *= -1;
 	}
 }
