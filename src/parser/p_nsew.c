@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:40:40 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/12 17:48:05 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 00:38:30 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // {
 // 	int				i;
 // 	int				k;
-// 	char			*path_or_color;
+// 	char			*p_or_c;
 // 	t_texture		texture;
 
 // 	k = 0;
@@ -40,8 +40,8 @@
 // 	while (str[i] && !ft_isspace(str[i])
 // 		&& (str[i] != '\n' || str[i] != '\0'))
 // 		i++;
-// 	path_or_color = ft_strndup(str + k, i - k);
-// 	if (!path_or_color)
+// 	p_or_c = ft_strndup(str + k, i - k);
+// 	if (!p_or_c)
 // 	{
 // 		ft_putstr_fd("Error: memory allocation failure", 2);
 // 		return ;
@@ -49,29 +49,29 @@
 // 	skip_spaces(str + i, &i);
 // 	if (str[i] != '\n' || str[i] != '\0')
 // 	{
-// 		free(path_or_color);
+// 		free(p_or_c);
 // 		ft_putstr_fd("Error: Invalid Input", 2);
 // 		return ;
 // 	}
-// 	texture_update_per_direction(in, &texture, path_or_color);
-// 	free(path_or_color);
+// 	texture_update_per_direction(in, &texture, p_or_c);
+// 	free(p_or_c);
 // }
 
 // void	texture_update_per_direction(t_input *in,
-// 	t_texture *texture, char *path_or_color)
+// 	t_texture *texture, char *p_or_c)
 // {
 // 	if (texture->dir == NORTH)
-// 		texture_node_update(&(in->no), path_or_color);
+// 		texture_node_update(&(in->no), p_or_c);
 // 	else if (texture->dir == SOUTH)
-// 		texture_node_update(&(in->so), path_or_color);
+// 		texture_node_update(&(in->so), p_or_c);
 // 	else if (texture->dir == EAST)
-// 		texture_node_update(&(in->ea), path_or_color);
+// 		texture_node_update(&(in->ea), p_or_c);
 // 	else if (texture->dir == WEST)
-// 		texture_node_update(&(in->we), path_or_color);
+// 		texture_node_update(&(in->we), p_or_c);
 // 	else if (texture->dir == FLOOR)
-// 		texture_node_update(&(in->floor), path_or_color);
+// 		texture_node_update(&(in->floor), p_or_c);
 // 	else if (texture->dir == CIELLING)
-// 		texture_node_update(&(in->ceilling), path_or_color);
+// 		texture_node_update(&(in->ceilling), p_or_c);
 // }
 
 // void	set_type(t_texture *texture, char *str, int *i,

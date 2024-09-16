@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/16 23:27:19 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 01:47:21 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ typedef enum e_compass_dir
 	-path or color
 	-connection with the next
 */
-typedef	struct s_node
+typedef struct s_node
 {
 	t_compass_dir	type;
-	char			*path_or_color;
-	struct	s_node	*next;
+	char			*p_or_c;
+	struct s_node	*next;
 }	t_node;
 
 typedef struct s_coords
@@ -198,62 +198,65 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 /*==============================RAY_CASTER===============================*/
-void	cast_rays(t_cub3d *info);
-void	set_ray_angle(int i, t_cub3d *info);
-double	normalize_angle(double angle);
+void		cast_rays(t_cub3d *info);
+void		set_ray_angle(int i, t_cub3d *info);
+double		normalize_angle(double angle);
 /*----------------------------ray_caster_init----------------------------*/
-void	ray_caster_init(t_cub3d *info);
-double	calc_len_to_plane_center(t_cub3d *info);
-double	calc_ray_angle_step(t_cub3d *info);
+void		ray_caster_init(t_cub3d *info);
+double		calc_len_to_plane_center(t_cub3d *info);
+double		calc_ray_angle_step(t_cub3d *info);
 /*--------------------------player_orientation---------------------------*/
-void	set_player_coordinates(t_cub3d *info);
-void	set_player_viewing_angle(t_cub3d *info);
+void		set_player_coordinates(t_cub3d *info);
+void		set_player_viewing_angle(t_cub3d *info);
 /*--------------------------------convert--------------------------------*/
-double	degrees_to_radians(double degrees);
-double	grid_to_pixel(int grid, int cube_size);
-int		pixel_to_grid(double pixel, int cube_size);
+double		degrees_to_radians(double degrees);
+double		grid_to_pixel(int grid, int cube_size);
+int			pixel_to_grid(double pixel, int cube_size);
 /*-----------------------------sector_checks-----------------------------*/
-bool	is_ray_northeast(double angle);
-bool	is_ray_northwest(double angle);
-bool	is_ray_southwest(double angle);
-bool	is_ray_southeast(double angle);
-/*--------------------------horizontal_intersec--------------------------*/
-void	check_points_h(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info);
-void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
-void	calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
-void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+bool		is_ray_northeast(double angle);
+bool		is_ray_northwest(double angle);
+bool		is_ray_southwest(double angle);
+bool		is_ray_southeast(double angle);
+/*-----	---------------------horizontal_intersec--------------------------*/
+void		check_points_h(t_ray *ray, t_coords_d *p,
+				t_coords_d *step, t_cub3d *info);
+void		check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void		calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void		calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 /*---------------------------vertical_intersec---------------------------*/
-void	check_points_v(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info);
-void	check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
-void	calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
-void	calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void		check_points_v(t_ray *ray, t_coords_d *p,
+				t_coords_d *step, t_cub3d *info);
+void		check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void		calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
+void		calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 /*--------------------------move_intersec_point--------------------------*/
-void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info);
-void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
-void	move_to_new_point(t_coords_d *move, t_coords_d *intersec);
+void		set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info);
+void		set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
+void		move_to_new_point(t_coords_d *move, t_coords_d *intersec);
 /*----------------------------step_inside_grid---------------------------*/
-void	step_inside_grid(t_coords_d *coords, double angle, t_coords_d *step);
+void		step_inside_grid(t_coords_d *coords,
+				double angle, t_coords_d *step);
 /*----------------------------boundary_checks----------------------------*/
-bool	is_wall(t_coords *i, t_cub3d *info);
-bool	is_out_of_map(t_coords *i, t_cub3d *info);
-bool	is_whitespace(t_coords *i, t_cub3d *info);
+bool		is_wall(t_coords *i, t_cub3d *info);
+bool		is_out_of_map(t_coords *i, t_cub3d *info);
+bool		is_whitespace(t_coords *i, t_cub3d *info);
 /*--------------------------------ray_len--------------------------------*/
-void	find_ray_len(t_ray *ray, t_coords_d *p);
-void	remove_distortion(t_ray *ray, t_cub3d *info);
+void		find_ray_len(t_ray *ray, t_coords_d *p);
+void		remove_distortion(t_ray *ray, t_cub3d *info);
 /*----------------------------wall_projection----------------------------*/
-void	calc_proj_slice_len(t_ray *ray, t_cub3d *info);
-void	calc_top_wall_y(t_ray *ray, t_cub3d *info);
+void		calc_proj_slice_len(t_ray *ray, t_cub3d *info);
+void		calc_top_wall_y(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
-void	rendering(t_cub3d *info);
-void	render_wall_slices(t_cub3d *info);
+void		rendering(t_cub3d *info);
+void		render_wall_slices(t_cub3d *info);
 /*--------------------------------events---------------------------------*/
-void	close_window(void *param);
-void	handle_keys(void *param);
-void	handle_esc_key(mlx_key_data_t keydata, void *param);
-int		check_keys(t_cub3d *info);
+void		close_window(void *param);
+void		handle_keys(void *param);
+void		handle_esc_key(mlx_key_data_t keydata, void *param);
+int			check_keys(t_cub3d *info);
 /*-------------------------------move_keys-------------------------------*/
-int		move_keys(t_coords_d *new_p, t_cub3d *info);
-int		rotate_keys(t_cub3d *info);
+int			move_keys(t_coords_d *new_p, t_cub3d *info);
+int			rotate_keys(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------
@@ -266,20 +269,20 @@ char		**arr_strdup(char **arr, int size);
 int			is_empty_line(char *str);
 char		**open_and_get_all_lines(char	*path_to_the_file);
 //--------------Parsing_texture------------------------------
-// void		set_color(t_color *c, char	**splited);
-// void		set_path(char **path, char *str);
-// void		texture_node_update(t_texture *t, char *str);
+bool		is_valid_splited_color_arg( char **splited);
+void		set_color(t_color *c, char	**splited);
+long		ft_pos_atol(char *str);
+bool		is_valid_color_arg(char	*str);
 //--------------Parsing_texture_utils_one--------------------
 void		print_node_list(t_node *parse_node);
-char 		*take_out_all_spaces(t_compass_dir type, char *str);
-t_node		*node_new(t_compass_dir type, char *path_or_color);
+char		*take_out_all_spaces(t_compass_dir type, char *str);
+t_node		*node_new(t_compass_dir type, char *p_or_c);
 void		node_add_back(t_node **lst, t_node *new);
 // bool		is_path(char *str);
 // bool		is_valid_path(char *str);
 // bool		is_color(char *str);
 // char		**splited_by_comma(char *str);
 //--------------Parsing_texture_utils_two--------------------
-void		map_list_version(char **res, t_node	**map, int *dir);
 void		array_to_list(char **res, t_node **parse_node, t_node **map);
 void		define_the_type(char *str, t_node **parse_node, int *f);
 long		ft_pos_atol(char *str);
@@ -287,5 +290,9 @@ bool		is_valid_color_arg(char	*str);
 // bool		is_valid_splited_color_arg( char **splited);
 // void		skip_spaces(char	*str, int *j);
 // void		skip_spaces_and_empty_lines(char	**arr, int *i, int *j);
+//--------------Parsing_texture_utils_three-------------------
+int			order_is_valid(t_node *dir);
+int			paths_are_valid(t_node *compass_dir);
+int			colors_are_valid(t_node *compass_dir);
 
 #endif

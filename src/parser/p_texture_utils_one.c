@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:33:24 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/16 23:58:29 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 00:38:30 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_node_list(t_node *parse_node)
 	printf("Prasing Node List:\n");
 	while (parse_node)
 	{
-		printf("{[%d], [%s]}-->", parse_node->type, parse_node->path_or_color);
+		printf("{[%d], [%s]}-->", parse_node->type, parse_node->p_or_c);
 		parse_node = parse_node->next;
 	}
 	printf("{[NULL], [NULL]}\n");
@@ -100,7 +100,7 @@ char	*take_out_all_spaces(t_compass_dir type, char *str)
 		return (NULL);
 }
 
-t_node	*node_new(t_compass_dir type, char *path_or_color)
+t_node	*node_new(t_compass_dir type, char *p_or_c)
 {
 	t_node	*new;
 
@@ -108,8 +108,8 @@ t_node	*node_new(t_compass_dir type, char *path_or_color)
 	if (!new)
 		return (NULL);
 	new->type = type;
-	new->path_or_color = take_out_all_spaces(type, path_or_color);
-	if (!new->path_or_color)
+	new->p_or_c = take_out_all_spaces(type, p_or_c);
+	if (!new->p_or_c)
 		return (NULL);
 	new->next = NULL;
 	return (new);
