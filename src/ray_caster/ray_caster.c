@@ -92,11 +92,12 @@ char	**set_map(void)
 	map = (char **)malloc(sizeof(char *) * 6);
 	if (!map)
 		exit(1);
-	map[0] = ft_strdup("11111");
-	map[1] = ft_strdup("10001");
-	map[2] = ft_strdup("10001");
-	map[3] = ft_strdup("10N01");
-	map[4] = ft_strdup("11111");
+	map[0] = ft_strdup("11111111111");
+	map[1] = ft_strdup("101011000011");
+	map[2] = ft_strdup("1010110000001111111111111");
+	map[3] = ft_strdup("1000110001000000000000111");
+	map[3] = ft_strdup("100000000000000000000N111");
+	map[4] = ft_strdup("1111111111111111111111111");
 	map[5] = NULL;
 	return (map);
 }
@@ -148,8 +149,8 @@ int	main(void)
 	t_cub3d	info;
 
 	info.map.map = set_map();
-	info.map.height = 5;
-	info.map.width = 5;
+	info.map.height = 6;
+	info.map.width = 25;
 	ray_caster_init(&info);
 	cast_rays(&info);
 	save_calculated_data(&info);
@@ -159,8 +160,6 @@ int	main(void)
 }
 /*-0.9999  ??? */
 
-/* apt-get update
-*  apt-get install cmake
-*  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev */
-
-/*-y*/
+/* apt-get update -y
+*  apt-get install cmake -y
+*  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev -y */

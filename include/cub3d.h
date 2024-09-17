@@ -25,8 +25,8 @@
 # define PLANE_WIDTH 800
 # define PLANE_HEIGHT 500
 # define FOV_ANGLE 60.0
-# define CUBE_SIZE 64
-# define MOVE_SPEED 4
+# define CUBE_SIZE 1000
+# define MOVE_SPEED CUBE_SIZE /16
 # define ROTATION_SPEED 2.0
 
 /* Compass directions */
@@ -41,8 +41,6 @@ typedef enum e_compass_dir
 	NON,
 }	t_compass_dir;
 
-/* Represents a 2D point
-*  with x and y coordinates. */
 /*
 	my though is to create a link list with the type and the path or color
 	-type according to the enum
@@ -56,6 +54,8 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
+/* Represents a 2D point
+*  with x and y coordinates. */
 typedef struct s_coords
 {
 	int			x;
@@ -83,6 +83,8 @@ typedef struct s_color
 *  path: path for texture */
 typedef struct s_texture
 {
+	mlx_texture_t			*texture;
+	mlx_image_t				*img;
 	bool					defined;
 	t_compass_dir			dir;
 	bool					is_path;
@@ -164,6 +166,8 @@ typedef struct s_dimensions
 	double			wall_floor_angle;
 	double			len_to_plane_center;
 	double			ray_angle_step;
+	double			min_dist_x;
+	double			min_dist_y;
 }	t_dimensions;
 
 // ahelping struct for the ray not necessayry to keep it until the end
@@ -183,17 +187,19 @@ typedef struct s_ray
 	int			proj_slice_len;
 	int			top_wall_y;
 	bool		is_wall;
+	bool		is_v_intersec;
 }	t_ray;
 
 //here is the struct that is including all the other structs
 typedef struct s_cub3d
 {
+	t_input			input;
 	t_ray			ray[PLANE_WIDTH];
 	t_map			map;
 	t_player		player;
 	t_plane			plane;
 	t_dimensions	game_dims;
-	mlx_t			*handle;
+	mlx_t			*mlx;
 	mlx_image_t		*img;
 }	t_cub3d;
 
@@ -257,6 +263,11 @@ int			check_keys(t_cub3d *info);
 /*-------------------------------move_keys-------------------------------*/
 int			move_keys(t_coords_d *new_p, t_cub3d *info);
 int			rotate_keys(t_cub3d *info);
+/*----------------------------handle_textures----------------------------*/
+void		load_textures(t_cub3d *info);
+void		delete_textures_and_imgs(t_cub3d *info);
+void		textures_to_img(t_cub3d *info);
+void		resize_imgs(t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------
@@ -300,4 +311,5 @@ int			is_compass_dir_letter(char c);
 int			char_not_one(char c);
 void		replace_the_chars_with_s(char ***map, int i, int j);
 int			count_zeros(char **map);
+
 #endif

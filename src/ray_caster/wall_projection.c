@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-/* Calculates the projected wall slice length for each ray. */
+/* Calculates the projected wall slice length for a ray. */
 void	calc_proj_slice_len(t_ray *ray, t_cub3d *info)
 {
 	ray->proj_slice_len = (info->game_dims.cube_size / ray->dist)
@@ -21,8 +21,7 @@ void	calc_proj_slice_len(t_ray *ray, t_cub3d *info)
 		ray->proj_slice_len = info->plane.height;
 }
 
-/* Calculates the top position where
-*  the wall slice should be drawn */
+/* Calculates the top position where the wall slice should be drawn */
 void	calc_top_wall_y(t_ray *ray, t_cub3d *info)
 {
 	ray->top_wall_y = (info->plane.height / 2) - (ray->proj_slice_len / 2);

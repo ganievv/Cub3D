@@ -36,6 +36,10 @@ void	set_player_coordinates(t_cub3d *info)
 	}
 }
 
+/* Sets the player's initial viewing angle
+*  based on their starting position in the map.
+*  Replaces the player's starting position on
+*  the map with an empty space ('0'). */
 void	set_player_viewing_angle(t_cub3d *info)
 {
 	int	x;

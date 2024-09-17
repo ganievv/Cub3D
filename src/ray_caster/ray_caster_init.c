@@ -33,6 +33,8 @@ void	ray_caster_init(t_cub3d *info)
 
 	info->game_dims.len_to_plane_center = calc_len_to_plane_center(info);
 	info->game_dims.ray_angle_step = calc_ray_angle_step(info);
+	info->game_dims.min_dist_x = CUBE_SIZE;
+	info->game_dims.min_dist_y = CUBE_SIZE;
 }
 
 /* Calculates the distance from the player to the center of 

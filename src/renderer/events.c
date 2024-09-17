@@ -21,8 +21,10 @@ void	close_window(void *param)
 	info = (t_cub3d *)param;
 	(void)info;
 	/*clean_up_functions*/
-	mlx_delete_image(info->handle, info->img);
-	mlx_terminate(info->handle);
+	mlx_delete_image(info->mlx, info->img);
+	delete_textures_and_imgs(info);
+	mlx_terminate(info->mlx);
+	//free_map();
 	exit(0);
 }
 
@@ -44,12 +46,12 @@ void	clear_image(t_cub3d *info)
 /* Checks if any movement or rotation keys are pressed */
 int	check_keys(t_cub3d *info)
 {
-	if (mlx_is_key_down(info->handle, MLX_KEY_W)
-		|| mlx_is_key_down(info->handle, MLX_KEY_A)
-		|| mlx_is_key_down(info->handle, MLX_KEY_S)
-		|| mlx_is_key_down(info->handle, MLX_KEY_D)
-		|| mlx_is_key_down(info->handle, MLX_KEY_LEFT)
-		|| mlx_is_key_down(info->handle, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(info->mlx, MLX_KEY_W)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_A)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_D)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
 		return (1);
 	else
 		return (0);
@@ -64,8 +66,9 @@ void	handle_esc_key(mlx_key_data_t keydata, void *param)
 	info = (t_cub3d *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
-		mlx_delete_image(info->handle, info->img);
-		mlx_terminate(info->handle);
+		mlx_delete_image(info->mlx, info->img);
+		delete_textures_and_imgs(info);
+		mlx_terminate(info->mlx);
 		exit(0);
 	}
 }
