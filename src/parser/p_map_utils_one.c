@@ -6,13 +6,13 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 06:39:03 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 09:09:04 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	counting_the_len(t_node	*map)
+int	node_len(t_node	*map)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	counting_the_len(t_node	*map)
 	return (i);
 }
 
-char	**from_list_to_array(t_node *map, int len)
+char	**node_to_array(t_node *map, int len)
 {
 	char	**tested_map;
 

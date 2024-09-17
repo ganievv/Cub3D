@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/17 07:09:34 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 09:09:04 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ typedef struct s_map
 	char			**map;
 	int				width;
 	int				height;
-	int				x_player;
-	int				y_player;
+	int				i_player;
+	int				j_player;
 	t_compass_dir	dir;
 }	t_map;
 
@@ -293,8 +293,8 @@ int			map_valid_by_chars(t_node *map);
 int			success_to_cover(t_node *map);
 int			valid_map(t_node *map);
 //--------------Parsing_map_utils_one--------------------------
-int			counting_the_len(t_node	*map);
-char		**from_list_to_array(t_node *map, int len);
+int			node_len(t_node	*map);
+char		**node_to_array(t_node *map, int len);
 //--------------Parsing_map_utils_two--------------------------
 int			is_compass_dir_letter(char c);
 int			char_not_one(char c);
