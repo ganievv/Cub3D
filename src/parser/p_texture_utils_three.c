@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 01:44:14 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 02:12:12 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ int	colors_are_valid(t_node *compass_dir)
 		compass_dir = compass_dir->next;
 	}
 	return (1);
+}
+
+int	valid_textures(t_node *compass_dir)
+{
+	return (order_is_valid(compass_dir)
+		&& paths_are_valid(compass_dir)
+		&& colors_are_valid(compass_dir));
 }
 // int	compass_dir_p_or_c_are_valid(t_node	*dir)
 // {

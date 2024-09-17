@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/17 01:47:21 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 02:46:15 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,5 +294,7 @@ bool		is_valid_color_arg(char	*str);
 int			order_is_valid(t_node *dir);
 int			paths_are_valid(t_node *compass_dir);
 int			colors_are_valid(t_node *compass_dir);
-
+int			valid_textures(t_node *compass_dir);
+//--------------Parsing_map------------------------------------
+int			map_valid_by_chars(t_node *map);
 #endif
