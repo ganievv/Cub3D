@@ -1,107 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_texture.c                                        :+:      :+:    :+:   */
+/*   p_texture_utils_three.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 15:37:32 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 00:56:58 by tnakas           ###   ########.fr       */
+/*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
+/*   Updated: 2024/09/17 06:55:00 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-bool	is_valid_splited_color_arg( char **splited)
+int	order_is_valid(t_node *dir)
 {
-	bool	is_valid;
-	int		i;
-
-	is_valid = true;
-	i = -1;
-	while (splited[++i] && is_valid)
-		is_valid = is_valid_color_arg(splited[i]);
-	return (is_valid && (i == 3));
-}
-
-void	set_color(t_color *c, char	**splited)
-{
-	if (!splited || *splited)
-		return ;
-	if (is_valid_splited_color_arg(splited))
+	while (dir && dir->next)
 	{
-		c->red = (uint8_t)ft_pos_atol(splited[0]);
-		c->green = (uint8_t)ft_pos_atol(splited[1]);
-		c->blue = (uint8_t)ft_pos_atol(splited[2]);
+		if (dir->next->type != dir->type + 1)
+			return (0);
+		dir = dir->next;
 	}
-	else
-		ft_putstr_fd("Error: invalid color fields", 2);
+	return (dir->type == 5);
 }
 
-long	ft_pos_atol(char *str)
+int	paths_are_valid(t_node *compass_dir)
 {
-	long	l;
-	int		i;
-
-	i = 0;
-	l = 0;
-	while (str[i] && ft_isspace(str[i]))
-		i++;
-	if (str[i] == '\0')
-		return (-1);
-	while (str[i] && ft_isdigit(str[i]))
+	while (compass_dir && compass_dir->type <= 3)
 	{
-		l = l * 10 + (str[i] - '0');
-		i++;
+		if (open(compass_dir->p_or_c, O_RDONLY) < 0)
+			return (0);
+		compass_dir = compass_dir->next;
 	}
-	if (str[i])
-		return (-1);
-	if (l > INT_MAX)
-		return (-1);
-	return (l % (256));
+	return (1);
 }
 
-bool	is_valid_color_arg(char	*str)
+int	colors_are_valid(t_node *compass_dir)
 {
-	return (ft_pos_atol(str) != -1);
+	char	**splitted_colors;
+
+	splitted_colors = NULL;
+	while (compass_dir && compass_dir->type <= 3)
+		compass_dir = compass_dir->next;
+	while (compass_dir && compass_dir->type <= 5)
+	{
+		if (splitted_colors)
+			free_double_array(splitted_colors);
+		splitted_colors = ft_split(compass_dir->p_or_c, ',');
+		if (!splitted_colors)
+			return (0);
+		if (!is_valid_splited_color_arg(splitted_colors))
+			return (0);
+		compass_dir = compass_dir->next;
+	}
+	return (1);
 }
 
-// void	set_path(char **path, char *str)
-// {
-// 	if (!str[0] || str[0] == '\0')
-// 		return ;
-// 	if (is_valid_path(str))
-// 	{
-// 		*(path) = ft_strdup(str);
-// 		if (!(*(path)))
-// 			ft_putstr_fd("Error: failed memory allocation", 2);
-// 		return ;
-// 	}
-// 	else
-// 		ft_putstr_fd("Error: invalid path", 2);
-// 	*path = NULL;
-// }
-
-// void	texture_node_update(t_texture *t, char *str)
-// {
-// 	char		**splited;
-
-// 	t->defined = true;
-// 	splited = NULL;
-// 	if (is_path(str))
-// 	{
-// 		t->is_path = 1;
-// 		set_path(&(t->path), str);
-// 		if (str && t->path == NULL)
-// 			return ;
-// 	}
-// 	else if (is_color(str))
-// 	{
-// 		t->is_color = 1;
-// 		splited = splited_by_comma(str);
-// 		if (!splited)
-// 			return ;
-// 		set_color(&(t->color), splited);
-// 	}
-// 	free_double_array(splited);
-// }
+int	valid_textures(t_node *compass_dir)
+{
+	return (order_is_valid(compass_dir)
+		&& paths_are_valid(compass_dir)
+		&& colors_are_valid(compass_dir));
+}

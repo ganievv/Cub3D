@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/17 02:46:15 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 07:09:34 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,32 +269,35 @@ char		**arr_strdup(char **arr, int size);
 int			is_empty_line(char *str);
 char		**open_and_get_all_lines(char	*path_to_the_file);
 //--------------Parsing_texture------------------------------
-bool		is_valid_splited_color_arg( char **splited);
-void		set_color(t_color *c, char	**splited);
-long		ft_pos_atol(char *str);
-bool		is_valid_color_arg(char	*str);
+int			order_is_valid(t_node *dir);
+int			paths_are_valid(t_node *compass_dir);
+int			colors_are_valid(t_node *compass_dir);
+int			valid_textures(t_node *compass_dir);
 //--------------Parsing_texture_utils_one--------------------
 void		print_node_list(t_node *parse_node);
 char		*take_out_all_spaces(t_compass_dir type, char *str);
 t_node		*node_new(t_compass_dir type, char *p_or_c);
 void		node_add_back(t_node **lst, t_node *new);
-// bool		is_path(char *str);
-// bool		is_valid_path(char *str);
-// bool		is_color(char *str);
-// char		**splited_by_comma(char *str);
 //--------------Parsing_texture_utils_two--------------------
 void		array_to_list(char **res, t_node **parse_node, t_node **map);
 void		define_the_type(char *str, t_node **parse_node, int *f);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
-// bool		is_valid_splited_color_arg( char **splited);
-// void		skip_spaces(char	*str, int *j);
-// void		skip_spaces_and_empty_lines(char	**arr, int *i, int *j);
-//--------------Parsing_texture_utils_three-------------------
-int			order_is_valid(t_node *dir);
-int			paths_are_valid(t_node *compass_dir);
-int			colors_are_valid(t_node *compass_dir);
-int			valid_textures(t_node *compass_dir);
+//--------------Parsing_texture_three------------------------
+bool		is_valid_splited_color_arg( char **splited);
+void		set_color(t_color *c, char	**splited);
+long		ft_pos_atol(char *str);
+bool		is_valid_color_arg(char	*str);
 //--------------Parsing_map------------------------------------
 int			map_valid_by_chars(t_node *map);
+int			success_to_cover(t_node *map);
+int			valid_map(t_node *map);
+//--------------Parsing_map_utils_one--------------------------
+int			counting_the_len(t_node	*map);
+char		**from_list_to_array(t_node *map, int len);
+//--------------Parsing_map_utils_two--------------------------
+int			is_compass_dir_letter(char c);
+int			char_not_one(char c);
+void		replace_the_chars_with_s(char ***map, int i, int j);
+int			count_zeros(char **map);
 #endif

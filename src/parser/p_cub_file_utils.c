@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:44:01 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/16 23:57:56 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 04:55:06 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_double_str_array(char	**array)
 
 	i = -1;
 	while (array && array[++i])
-		printf("%s", array[i]);
+		printf("%s\n", array[i]);
 }
 
 void	print_splited_str(char	**array)

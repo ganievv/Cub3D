@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 00:46:39 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/09/17 06:55:21 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,3 @@ void	define_the_type(char *str, t_node **parse_node, int *f)
 	else
 		define_helper(str, parse_node, f);
 }
-
-// void	skip_spaces(char	*str, int *j)
-// {
-// 	if (!str)
-// 		return ;
-// 	*j = *j - 1;
-// 	while (str && ft_isspace(str[++(*j)]))
-// 		;
-// }
-
-// void	skip_spaces_and_empty_lines(char	**arr, int *i, int *j)
-// {
-// 	if (!arr || !(*arr))
-// 		return ;
-// 	*j = *j - 1;
-// 	while (arr[*i] && ft_isspace(arr[*i][++(*j)]))
-// 	{
-// 		if (arr[*i] && (arr[*i][*j] == '\0' || arr[*i][*j] == '\n'))
-// 		{
-// 			(*i)++;
-// 			(*j) = 0;
-// 		}
-// 	}
-// }
