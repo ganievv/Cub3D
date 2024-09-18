@@ -66,18 +66,15 @@ void	set_ray_angle(int i, t_cub3d *info)
 *  check_points_h() and check_points_v() */
 void	cast_rays(t_cub3d *info)
 {
-	t_coords_d	step;
-	int			i;
+	int	i;
 
 	i = -1;
-	step.x = 1;
-	step.y = 1;
-	//info->player.viewing_angle = 135.0;
+	//info->player.viewing_angle = 45.0;
 	while (++i < info->plane.width)
 	{
 		set_ray_angle(i, info);
-		check_points_h(&info->ray[i], &info->player.pixel, &step, info);
-		check_points_v(&info->ray[i], &info->player.pixel, &step, info);
+		check_points_h(&info->ray[i], &info->player.pixel, info);
+		check_points_v(&info->ray[i], &info->player.pixel, info);
 		find_ray_len(&info->ray[i], &info->player.pixel);
 		remove_distortion(&info->ray[i], info);
 		calc_proj_slice_len(&info->ray[i], info);
@@ -94,9 +91,9 @@ char	**set_map(void)
 	if (!map)
 		exit(1);
 	map[0] = ft_strdup(" 111 111111         11");
-	map[1] = ft_strdup("1N1011000011      1100111");
+	map[1] = ft_strdup("101011000011      1100111");
 	map[2] = ft_strdup("1010110000001111111100111");
-	map[3] = ft_strdup("1000110001000000000000111");
+	map[3] = ft_strdup("1000110001000000000S00111");
 	map[4] = ft_strdup("1000000000000000000000111");
 	map[5] = ft_strdup("1000000000000000000010111");
 	map[6] = ft_strdup("1000000000000000000110111");
@@ -162,7 +159,6 @@ int	main(void)
 	free_map(&info.map.map);
 	return (0);
 }
-/*-0.9999  ??? */
 
 /* apt-get update -y
 *  apt-get install cmake -y

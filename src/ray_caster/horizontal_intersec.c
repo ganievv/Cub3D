@@ -20,7 +20,6 @@ void	calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size;
-
 	if (ray->angle == 90.0)
 		ray->h_intersec.x = p->x;
 	else
@@ -36,7 +35,6 @@ void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->h_intersec.y = floor(p->y / info->game_dims.cube_size)
 		* info->game_dims.cube_size + info->game_dims.cube_size;
-
 	if (ray->angle == 270.0)
 		ray->h_intersec.x = p->x;
 	else
@@ -49,7 +47,8 @@ void	calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 *  'p' - player's pixel coordinates. */
 void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
-	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle) || ray->angle == 90.0)
+	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle)
+		|| ray->angle == 90.0)
 		calc_up_intersec(ray, p, info);
 	else if (is_ray_southwest(ray->angle) || is_ray_southeast(ray->angle)
 		|| ray->angle == 270.0)
@@ -60,19 +59,19 @@ void	check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 *  to find where the ray hits a wall.
 *
 * 'p' - player's pixel coordinates. */
-void	check_points_h(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info)
+void	check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	t_coords_d	move;
 	t_coords	grid;
 
-	if (ray->angle == 0.0 && ray->angle == 180.0)
+	if ((ray->angle == 0.0) || (ray->angle == 180.0))
 	{
-		ray->h_intersec.x = -1;
-		ray->h_intersec.y = -1;
+		ray->h_intersec.x = -50;
+		ray->h_intersec.y = -50;
 		return ;
 	}
 	check_first_point_h(ray, p, info);
-	step_inside_grid(&ray->h_intersec, ray->angle, step);
+	step_inside_grid(&ray->h_intersec, ray->angle);
 	set_movement_len_h(&move, ray, info);
 	while (true)
 	{

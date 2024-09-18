@@ -27,7 +27,8 @@ int	rotate_keys(t_cub3d *info)
 }
 
 /* Calculates the movement vector */
-void	calculate_move(t_coords_d *move, double rad, double angle_offset, int sign)
+void	calculate_move(t_coords_d *move, double rad,
+	double angle_offset, int sign)
 {
 	move->x = cos(rad + angle_offset) * MOVE_SPEED * sign;
 	move->y = sin(rad + angle_offset) * MOVE_SPEED * sign;
@@ -49,19 +50,14 @@ int	check_new_position(t_coords_d *new_p, t_cub3d *info)
 {
 	if (!check_grid(new_p->x, new_p->y, info))
 		return (0);
-
 	if (!check_grid(new_p->x - PIXEL_BUFFER, new_p->y, info))
 		return (0);
-
 	if (!check_grid(new_p->x + PIXEL_BUFFER, new_p->y, info))
 		return (0);
-
 	if (!check_grid(new_p->x, new_p->y - PIXEL_BUFFER, info))
 		return (0);
-
 	if (!check_grid(new_p->x, new_p->y + PIXEL_BUFFER, info))
 		return (0);
-
 	return (1);
 }
 

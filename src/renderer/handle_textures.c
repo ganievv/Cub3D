@@ -18,7 +18,6 @@ void	load_textures(t_cub3d *info)
 	info->input.we.path = "./textures/theme_01/west.png";
 	info->input.no.path = "./textures/theme_01/north.png";
 	info->input.so.path = "./textures/theme_01/south.png";
-
 	info->input.ea.texture = mlx_load_png(info->input.ea.path);
 	info->input.no.texture = mlx_load_png(info->input.no.path);
 	info->input.we.texture = mlx_load_png(info->input.we.path);
@@ -31,7 +30,6 @@ void	delete_textures_and_imgs(t_cub3d *info)
 	mlx_delete_texture(info->input.no.texture);
 	mlx_delete_texture(info->input.we.texture);
 	mlx_delete_texture(info->input.so.texture);
-
 	mlx_delete_image(info->mlx, info->input.ea.img);
 	mlx_delete_image(info->mlx, info->input.no.img);
 	mlx_delete_image(info->mlx, info->input.we.img);
@@ -41,13 +39,13 @@ void	delete_textures_and_imgs(t_cub3d *info)
 void	textures_to_img(t_cub3d *info)
 {
 	info->input.ea.img = mlx_texture_to_image(info->mlx,
-		info->input.ea.texture);
+			info->input.ea.texture);
 	info->input.no.img = mlx_texture_to_image(info->mlx,
-		info->input.no.texture);
+			info->input.no.texture);
 	info->input.we.img = mlx_texture_to_image(info->mlx,
-		info->input.we.texture);
+			info->input.we.texture);
 	info->input.so.img = mlx_texture_to_image(info->mlx,
-		info->input.so.texture);
+			info->input.so.texture);
 }
 
 void	resize_imgs(t_cub3d *info)

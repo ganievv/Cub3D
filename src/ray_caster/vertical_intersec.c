@@ -16,7 +16,6 @@ void	calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->v_intersec.x = floor(p->x / info->game_dims.cube_size)
 		* info->game_dims.cube_size + info->game_dims.cube_size;
-
 	if (ray->angle == 0.0)
 		ray->v_intersec.y = p->y;
 	else
@@ -28,7 +27,6 @@ void	calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	ray->v_intersec.x = floor(p->x / info->game_dims.cube_size)
 		* info->game_dims.cube_size;
-
 	if (ray->angle == 180.0)
 		ray->v_intersec.y = p->y;
 	else
@@ -39,7 +37,8 @@ void	calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info)
 /* Calculates the first vertical intersection point of a ray. */
 void	check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
-	if (is_ray_northeast(ray->angle) || is_ray_southeast(ray->angle) || ray->angle == 0.0)
+	if (is_ray_northeast(ray->angle) || is_ray_southeast(ray->angle)
+		|| ray->angle == 0.0)
 		calc_right_intersec(ray, p, info);
 	else if (is_ray_northwest(ray->angle) || is_ray_southwest(ray->angle)
 		|| ray->angle == 180.0)
@@ -50,19 +49,19 @@ void	check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info)
 *  ray intersects a wall vertically.
 *
 *  'p' - player's pixel coordinates. */
-void	check_points_v(t_ray *ray, t_coords_d *p, t_coords_d *step, t_cub3d *info)
+void	check_points_v(t_ray *ray, t_coords_d *p, t_cub3d *info)
 {
 	t_coords_d	move;
 	t_coords	grid;
 
-	if (ray->angle == 90.0 && ray->angle == 270.0)
+	if ((ray->angle == 90.0) || (ray->angle == 270.0))
 	{
-		ray->v_intersec.x = -1;
-		ray->v_intersec.y = -1;
+		ray->v_intersec.x = -50;
+		ray->v_intersec.y = -50;
 		return ;
 	}
 	check_first_point_v(ray, p, info);
-	step_inside_grid(&ray->v_intersec, ray->angle, step);
+	step_inside_grid(&ray->v_intersec, ray->angle);
 	set_movement_len_v(&move, ray, info);
 	while (true)
 	{

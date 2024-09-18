@@ -27,9 +27,9 @@
 # define FOV_ANGLE 60.0
 # define CUBE_SIZE 1080
 # define MOVE_SPEED CUBE_SIZE / 16
-//# define MOVE_SPEED 15
 # define ROTATION_SPEED 2.0
 # define PIXEL_BUFFER 220
+# define BYTES_PER_PIXEL 4
 
 /* Compass directions */
 typedef enum e_compass_dir
@@ -168,8 +168,6 @@ typedef struct s_dimensions
 	double			wall_floor_angle;
 	double			len_to_plane_center;
 	double			ray_angle_step;
-	double			min_dist_x;
-	double			min_dist_y;
 }	t_dimensions;
 
 // ahelping struct for the ray not necessayry to keep it until the end
@@ -225,15 +223,18 @@ bool		is_ray_northeast(double angle);
 bool		is_ray_northwest(double angle);
 bool		is_ray_southwest(double angle);
 bool		is_ray_southeast(double angle);
+/*----------------------------direction_checks---------------------------*/
+bool		is_ray_up(double angle);
+bool		is_ray_down(double angle);
+bool		is_ray_left(double angle);
+bool		is_ray_right(double angle);
 /*-----	---------------------horizontal_intersec--------------------------*/
-void		check_points_h(t_ray *ray, t_coords_d *p,
-				t_coords_d *step, t_cub3d *info);
+void		check_points_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		check_first_point_h(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		calc_up_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		calc_down_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 /*---------------------------vertical_intersec---------------------------*/
-void		check_points_v(t_ray *ray, t_coords_d *p,
-				t_coords_d *step, t_cub3d *info);
+void		check_points_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		check_first_point_v(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		calc_right_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
 void		calc_left_intersec(t_ray *ray, t_coords_d *p, t_cub3d *info);
@@ -242,8 +243,7 @@ void		set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info);
 void		set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info);
 void		move_to_new_point(t_coords_d *move, t_coords_d *intersec);
 /*----------------------------step_inside_grid---------------------------*/
-void		step_inside_grid(t_coords_d *coords,
-				double angle, t_coords_d *step);
+void		step_inside_grid(t_coords_d *coords, double angle);
 /*----------------------------boundary_checks----------------------------*/
 bool		is_wall(t_coords *i, t_cub3d *info);
 bool		is_out_of_map(t_coords *i, t_cub3d *info);

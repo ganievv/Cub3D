@@ -15,26 +15,21 @@
 void	ray_caster_init(t_cub3d *info)
 {
 	info->game_dims.wall_floor_angle = 90.0;
-	info->game_dims.cube_size = CUBE_SIZE; /*64x64x64*/
-
+	info->game_dims.cube_size = CUBE_SIZE;
 	info->player.fov_angle = FOV_ANGLE;
 	info->player.height = info->game_dims.cube_size / 2;
 	set_player_coordinates(info);
 	set_player_viewing_angle(info);
 	info->player.pixel.x = grid_to_pixel(info->player.coords.x,
-		info->game_dims.cube_size);
+			info->game_dims.cube_size);
 	info->player.pixel.y = grid_to_pixel(info->player.coords.y,
-		info->game_dims.cube_size);
-
+			info->game_dims.cube_size);
 	info->plane.height = PLANE_HEIGHT;
 	info->plane.width = PLANE_WIDTH;
-	info->plane.center.x = info->plane.width / 2;  // 160
-	info->plane.center.y = info->plane.height / 2; // 100
-
+	info->plane.center.x = info->plane.width / 2;
+	info->plane.center.y = info->plane.height / 2;
 	info->game_dims.len_to_plane_center = calc_len_to_plane_center(info);
 	info->game_dims.ray_angle_step = calc_ray_angle_step(info);
-	info->game_dims.min_dist_x = CUBE_SIZE;
-	info->game_dims.min_dist_y = CUBE_SIZE;
 }
 
 /* Calculates the distance from the player to the center of 

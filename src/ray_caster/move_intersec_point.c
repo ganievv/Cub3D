@@ -16,12 +16,12 @@
 *  as it steps through horizontal grid lines */
 void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info)
 {
-	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle) || ray->angle == 90.0)
+	if (is_ray_northeast(ray->angle) || is_ray_northwest(ray->angle)
+		|| ray->angle == 90.0)
 		move->y = -info->game_dims.cube_size;
 	else if (is_ray_southwest(ray->angle) || is_ray_southeast(ray->angle)
 		|| ray->angle == 270.0)
 		move->y = info->game_dims.cube_size;
-
 	if (ray->angle == 90.0 || ray->angle == 270.0)
 		move->x = 0;
 	else
@@ -37,12 +37,12 @@ void	set_movement_len_h(t_coords_d *move, t_ray *ray, t_cub3d *info)
 *  as it steps through vertical grid lines */
 void	set_movement_len_v(t_coords_d *move, t_ray *ray, t_cub3d *info)
 {
-	if (is_ray_northeast(ray->angle) || is_ray_southeast(ray->angle) || ray->angle == 0.0)
+	if (is_ray_northeast(ray->angle) || is_ray_southeast(ray->angle)
+		|| ray->angle == 0.0)
 		move->x = info->game_dims.cube_size;
 	else if (is_ray_northwest(ray->angle) || is_ray_southwest(ray->angle)
 		|| ray->angle == 180.0)
 		move->x = -info->game_dims.cube_size;
-
 	if (ray->angle == 0.0 || ray->angle == 180.0)
 		move->y = 0;
 	else
