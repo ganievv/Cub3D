@@ -14,10 +14,10 @@
 
 void	load_textures(t_cub3d *info)
 {
-	info->input.ea.path = "./textures/theme_03/east.png";
-	info->input.we.path = "./textures/theme_03/west.png";
-	info->input.no.path = "./textures/theme_03/north.png";
-	info->input.so.path = "./textures/theme_03/south.png";
+	info->input.ea.path = "./textures/theme_04/east.png";
+	info->input.we.path = "./textures/theme_04/west.png";
+	info->input.no.path = "./textures/theme_04/north.png";
+	info->input.so.path = "./textures/theme_04/south.png";
 	info->input.ea.texture = mlx_load_png(info->input.ea.path);
 	info->input.no.texture = mlx_load_png(info->input.no.path);
 	info->input.we.texture = mlx_load_png(info->input.we.path);
