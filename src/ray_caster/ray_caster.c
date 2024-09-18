@@ -84,21 +84,25 @@ void	cast_rays(t_cub3d *info)
 		calc_top_wall_y(&info->ray[i], info);
 	}
 }
+
 // If I change this one will continue t
 char	**set_map(void)
 {
 	char	**map;
 
-	map = (char **)malloc(sizeof(char *) * 6);
+	map = (char **)malloc(sizeof(char *) * 10);
 	if (!map)
 		exit(1);
-	map[0] = ft_strdup("11111111111");
-	map[1] = ft_strdup("101011000011");
-	map[2] = ft_strdup("1010110000001111111111111");
+	map[0] = ft_strdup(" 111 111111         11");
+	map[1] = ft_strdup("1N1011000011      1100111");
+	map[2] = ft_strdup("1010110000001111111100111");
 	map[3] = ft_strdup("1000110001000000000000111");
-	map[3] = ft_strdup("100000000000000000000N111");
-	map[4] = ft_strdup("1111111111111111111111111");
-	map[5] = NULL;
+	map[4] = ft_strdup("1000000000000000000000111");
+	map[5] = ft_strdup("1000000000000000000010111");
+	map[6] = ft_strdup("1000000000000000000110111");
+	map[7] = ft_strdup("1111111111111111111000111");
+	map[8] = ft_strdup("                   111");
+	map[9] = NULL;
 	return (map);
 }
 
@@ -149,7 +153,7 @@ int	main(void)
 	t_cub3d	info;
 
 	info.map.map = set_map();
-	info.map.height = 6;
+	info.map.height = 9;
 	info.map.width = 25;
 	ray_caster_init(&info);
 	cast_rays(&info);

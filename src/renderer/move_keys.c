@@ -23,7 +23,6 @@ int	rotate_keys(t_cub3d *info)
 	else
 		return (1);
 	info->player.viewing_angle = normalize_angle(info->player.viewing_angle);
-	//printf("viewing_angle: %4.1f\n", info->player.viewing_angle);
 	return (1);
 }
 
@@ -34,17 +33,35 @@ void	calculate_move(t_coords_d *move, double rad, double angle_offset, int sign)
 	move->y = sin(rad + angle_offset) * MOVE_SPEED * sign;
 }
 
-int	check_new_position(t_coords_d *new_p, t_cub3d *info)
+int	check_grid(double x, double y, t_cub3d *info)
 {
 	t_coords	grid;
-	//int			x;
 
-	grid.x = pixel_to_grid(new_p->x, info->game_dims.cube_size);
-	grid.y = pixel_to_grid(new_p->y, info->game_dims.cube_size);
+	grid.x = pixel_to_grid(x, info->game_dims.cube_size);
+	grid.y = pixel_to_grid(y, info->game_dims.cube_size);
 	if (is_out_of_map(&grid, info) || is_wall(&grid, info)
 		|| is_whitespace(&grid, info))
 		return (0);
-	//x = CUBE_SIZE / 5;
+	return (1);
+}
+
+int	check_new_position(t_coords_d *new_p, t_cub3d *info)
+{
+	if (!check_grid(new_p->x, new_p->y, info))
+		return (0);
+
+	if (!check_grid(new_p->x - PIXEL_BUFFER, new_p->y, info))
+		return (0);
+
+	if (!check_grid(new_p->x + PIXEL_BUFFER, new_p->y, info))
+		return (0);
+
+	if (!check_grid(new_p->x, new_p->y - PIXEL_BUFFER, info))
+		return (0);
+
+	if (!check_grid(new_p->x, new_p->y + PIXEL_BUFFER, info))
+		return (0);
+
 	return (1);
 }
 
@@ -67,10 +84,6 @@ int	move_keys(t_coords_d *new_p, t_cub3d *info)
 		return (1);
 	new_p->x += move.x;
 	new_p->y -= move.y;
-	printf("viewing_angle: %4.1f\n", info->player.viewing_angle);
-	printf("move.x: %4.1f, move.y: %4.1f\n", move.x, move.y);
-	printf("old.x: %4.1f, old.y: %4.1f\n", new_p->x, new_p->y);
-	printf("new.x: %4.1f, new.y: %4.1f\n\n", new_p->x, new_p->y);
 	if (!check_new_position(new_p, info))
 		return (0);
 	info->player.pixel = *new_p;

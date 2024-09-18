@@ -22,12 +22,14 @@
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define PLANE_WIDTH 800
-# define PLANE_HEIGHT 500
+# define PLANE_WIDTH 1920
+# define PLANE_HEIGHT 1080
 # define FOV_ANGLE 60.0
-# define CUBE_SIZE 1000
-# define MOVE_SPEED CUBE_SIZE /16
+# define CUBE_SIZE 1080
+# define MOVE_SPEED CUBE_SIZE / 16
+//# define MOVE_SPEED 15
 # define ROTATION_SPEED 2.0
+# define PIXEL_BUFFER 220
 
 /* Compass directions */
 typedef enum e_compass_dir

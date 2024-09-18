@@ -17,12 +17,12 @@ void	calc_proj_slice_len(t_ray *ray, t_cub3d *info)
 {
 	ray->proj_slice_len = (info->game_dims.cube_size / ray->dist)
 		* info->game_dims.len_to_plane_center;
-	if (ray->proj_slice_len > info->plane.height)
-		ray->proj_slice_len = info->plane.height;
 }
 
 /* Calculates the top position where the wall slice should be drawn */
 void	calc_top_wall_y(t_ray *ray, t_cub3d *info)
 {
 	ray->top_wall_y = (info->plane.height / 2) - (ray->proj_slice_len / 2);
+	if (ray->top_wall_y < 0)
+		ray->top_wall_y = 0;
 }
