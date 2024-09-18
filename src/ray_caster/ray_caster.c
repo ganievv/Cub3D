@@ -12,6 +12,8 @@
 
 #include "../../include/cub3d.h"
 
+/* you need to add checking of return values of mlx functions */
+
 /*---Used_coordinate_systems----*/
 /*  1:                          */
 /*         90°                  */
