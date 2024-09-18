@@ -39,7 +39,7 @@ uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info)
 	else if (!ray->is_v_intersec && is_ray_down(ray->angle))
 		img = info->input.so.img;
 	else
-		return (0x000000fc);
+		return (0x000000FC);
 	index = (y * img->width + x) * BYTES_PER_PIXEL;
 	rgba[0] = img->pixels[index];
 	rgba[1] = img->pixels[index + 1];
@@ -52,31 +52,23 @@ uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info)
 /* Renders vertical wall slices on the projection plane */
 void	render_wall_slices(t_cub3d *info)
 {
-	int		texture_x;
-	double	texture_y;
-	double	step;
-	int		i;
+	t_coords_d	texture;
+	double		step;
+	int			i;
 
 	i = -1;
 	while (++i < info->plane.width)
 	{
-		texture_y = 0;
-		texture_x = calc_texture_x(&info->ray[i], info);
+		texture.y = 0;
+		texture.x = calc_texture_x(&info->ray[i], info);
 		step = (double)info->game_dims.cube_size
 			/ (double)info->ray[i].proj_slice_len;
 		if (info->ray[i].proj_slice_len > info->plane.height)
-			texture_y = (info->ray[i].proj_slice_len - info->plane.height)
+			texture.y = (info->ray[i].proj_slice_len - info->plane.height)
 				/ 2 * step;
-		while (info->ray[i].proj_slice_len
-			&& info->ray[i].top_wall_y < info->plane.height)
-		{
-			mlx_put_pixel(info->img, i, info->ray[i].top_wall_y,
-				calc_texture_color(texture_x, (int)texture_y,
-					&info->ray[i], info));
-			info->ray[i].proj_slice_len--;
-			info->ray[i].top_wall_y++;
-			texture_y += step;
-		}
+		draw_ceiling(i, info);
+		draw_wall_slice(i, step, &texture, info);
+		draw_floor(i, info);
 	}
 }
 

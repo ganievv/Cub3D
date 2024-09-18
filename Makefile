@@ -35,6 +35,7 @@ SRC_RAY_CASTER	:= boundary_checks.c convert.c direction_checks.c \
 				   vertical_intersec.c wall_projection.c \
 
 SRC_RENDERER	:= renderer.c events.c move_keys.c handle_textures.c \
+				   draw_elements.c \
 
 SRC				:= $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAY_CASTER) $(SRC_RENDERER)
 

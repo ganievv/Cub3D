@@ -28,21 +28,6 @@ void	close_window(void *param)
 	exit(0);
 }
 
-/* Clears the entire image by setting every pixel to black*/
-void	clear_image(t_cub3d *info)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < info->plane.height)
-	{
-		x = -1;
-		while (++x < info->plane.width)
-			mlx_put_pixel(info->img, x, y, 0x00000000);
-	}
-}
-
 /* Checks if any movement or rotation keys are pressed */
 int	check_keys(t_cub3d *info)
 {
@@ -87,6 +72,5 @@ void	handle_keys(void *param)
 		return ;
 	rotate_keys(info);
 	cast_rays(info);
-	clear_image(info);
 	render_wall_slices(info);
 }

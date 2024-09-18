@@ -28,8 +28,10 @@
 # define CUBE_SIZE 1080
 # define MOVE_SPEED CUBE_SIZE / 16
 # define ROTATION_SPEED 2.0
-# define PIXEL_BUFFER 220
+# define PIXEL_BUFFER CUBE_SIZE / 5
 # define BYTES_PER_PIXEL 4
+# define FLOOR_COLOR 0x4A6E72E6
+# define CEILING_COLOR 0x5C4A72E6
 
 /* Compass directions */
 typedef enum e_compass_dir
@@ -257,6 +259,8 @@ void		calc_top_wall_y(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
 void		rendering(t_cub3d *info);
 void		render_wall_slices(t_cub3d *info);
+int			calc_texture_x(t_ray *ray, t_cub3d *info);
+uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info);
 /*--------------------------------events---------------------------------*/
 void		close_window(void *param);
 void		handle_keys(void *param);
@@ -270,6 +274,11 @@ void		load_textures(t_cub3d *info);
 void		delete_textures_and_imgs(t_cub3d *info);
 void		textures_to_img(t_cub3d *info);
 void		resize_imgs(t_cub3d *info);
+/*-----------------------------draw_elements-----------------------------*/
+void		draw_wall_slice(int i, double step, t_coords_d *texture,
+				t_cub3d *info);
+void		draw_ceiling(int i, t_cub3d *info);
+void		draw_floor(int i, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------
