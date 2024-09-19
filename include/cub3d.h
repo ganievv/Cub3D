@@ -258,9 +258,7 @@ void		calc_proj_slice_len(t_ray *ray, t_cub3d *info);
 void		calc_top_wall_y(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
 void		rendering(t_cub3d *info);
-void		render_wall_slices(t_cub3d *info);
-int			calc_texture_x(t_ray *ray, t_cub3d *info);
-uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info);
+void		draw_frame(t_cub3d *info);
 /*--------------------------------events---------------------------------*/
 void		close_window(void *param);
 void		handle_keys(void *param);
@@ -275,10 +273,11 @@ void		delete_textures_and_imgs(t_cub3d *info);
 void		textures_to_img(t_cub3d *info);
 void		resize_imgs(t_cub3d *info);
 /*-----------------------------draw_elements-----------------------------*/
-void		draw_wall_slice(int i, double step, t_coords_d *texture,
-				t_cub3d *info);
-void		draw_ceiling(int i, t_cub3d *info);
-void		draw_floor(int i, t_cub3d *info);
+int			calc_texture_x(t_ray *ray, t_cub3d *info);
+uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info);
+void		draw_wall_slice(int i, t_ray *ray, t_cub3d *info);
+void		draw_ceiling(int i, t_ray *ray, t_cub3d *info);
+void		draw_floor(int i, t_ray *ray, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
 //--------------Parsing_cub_file_unfiltered------------------

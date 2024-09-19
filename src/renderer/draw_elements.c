@@ -12,32 +12,74 @@
 
 #include "../../include/cub3d.h"
 
-void	draw_floor(int i, t_cub3d *info)
+int	calc_texture_x(t_ray *ray, t_cub3d *info)
 {
-	while (info->ray[i].top_wall_y < info->plane.height)
-		mlx_put_pixel(info->img, i, info->ray[i].top_wall_y++, FLOOR_COLOR);
+	int	x;
+
+	if (ray->is_v_intersec)
+		x = (int)ray->v_intersec.y % info->game_dims.cube_size;
+	else
+		x = (int)ray->h_intersec.x % info->game_dims.cube_size;
+	return (x);
 }
 
-void	draw_ceiling(int i, t_cub3d *info)
+uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info)
+{
+	mlx_image_t	*img;
+	uint32_t	index;
+	uint32_t	color;
+	uint8_t		rgba[4];
+
+	if (ray->is_v_intersec && is_ray_right(ray->angle))
+		img = info->input.ea.img;
+	else if (ray->is_v_intersec && is_ray_left(ray->angle))
+		img = info->input.we.img;
+	else if (!ray->is_v_intersec && is_ray_up(ray->angle))
+		img = info->input.no.img;
+	else if (!ray->is_v_intersec && is_ray_down(ray->angle))
+		img = info->input.so.img;
+	else
+		return (0x000000FC);
+	index = (y * img->width + x) * BYTES_PER_PIXEL;
+	rgba[0] = img->pixels[index];
+	rgba[1] = img->pixels[index + 1];
+	rgba[2] = img->pixels[index + 2];
+	rgba[3] = img->pixels[index + 3];
+	color = (rgba[0] << 24) | (rgba[1] << 16) | (rgba[2] << 8) | rgba[3];
+	return (color);
+}
+
+void	draw_floor(int i, t_ray *ray, t_cub3d *info)
+{
+	while (ray->top_wall_y < info->plane.height)
+		mlx_put_pixel(info->img, i, ray->top_wall_y++, FLOOR_COLOR);
+}
+
+void	draw_ceiling(int i, t_ray *ray, t_cub3d *info)
 {
 	int	start;
 
 	start = 0;
-	while (start < info->ray[i].top_wall_y)
+	while (start < ray->top_wall_y)
 		mlx_put_pixel(info->img, i, start++, CEILING_COLOR);
 }
 
-void	draw_wall_slice(int i, double step,
-	t_coords_d *texture, t_cub3d *info)
+void	draw_wall_slice(int i, t_ray *ray, t_cub3d *info)
 {
-	while (info->ray[i].proj_slice_len
-		&& info->ray[i].top_wall_y < info->plane.height)
+	t_coords_d	texture;
+	double		step;
+
+	texture.y = 0;
+	texture.x = calc_texture_x(ray, info);
+	step = (double)info->game_dims.cube_size / (double)ray->proj_slice_len;
+	if (ray->proj_slice_len > info->plane.height)
+		texture.y = (ray->proj_slice_len - info->plane.height) / 2 * step;
+	while (ray->proj_slice_len && (ray->top_wall_y < info->plane.height))
 	{
-		mlx_put_pixel(info->img, i, info->ray[i].top_wall_y,
-			calc_texture_color((int)texture->x, (int)texture->y,
-				&info->ray[i], info));
-		info->ray[i].proj_slice_len--;
-		info->ray[i].top_wall_y++;
-		texture->y += step;
+		mlx_put_pixel(info->img, i, ray->top_wall_y,
+			calc_texture_color((int)texture.x, (int)texture.y, ray, info));
+		ray->proj_slice_len--;
+		ray->top_wall_y++;
+		texture.y += step;
 	}
 }

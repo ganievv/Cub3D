@@ -72,5 +72,5 @@ void	handle_keys(void *param)
 		return ;
 	rotate_keys(info);
 	cast_rays(info);
-	render_wall_slices(info);
+	draw_frame(info);
 }
