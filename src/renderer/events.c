@@ -72,5 +72,7 @@ void	handle_keys(void *param)
 		return ;
 	rotate_keys(info);
 	cast_rays(info);
+	info->img->enabled = false;
 	draw_frame(info);
+	info->img->enabled = true;
 }
