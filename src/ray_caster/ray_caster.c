@@ -105,6 +105,22 @@ char	**set_map(void)
 	return (map);
 }
 
+//map[0] = ft_strdup(" 1 11 1111 11         11");
+//map[1] = ft_strdup("10 1011000 011      1100111");
+//map[2] = ft_strdup("10 1011000 0001111111100111");
+//map[3] = ft_strdup("10 0011000 1000000000S00111");
+//map[4] = ft_strdup("10 0000000 0000000000000111");
+//map[5] = ft_strdup("11 1111111 1111111111111111");
+//map[6] = ft_strdup("                         ");
+//map[7] = ft_strdup("11 1111111 1111111111111111");
+//map[8] = ft_strdup("                         ");
+//map[9] = ft_strdup("                         ");
+//map[10] = ft_strdup("10 0000000 0000000000010111");
+//map[11] = ft_strdup("10 0000000 0000000000110111");
+//map[12] = ft_strdup("11 1111111 1111111111000111");
+//map[13] = ft_strdup("                   111");
+//map[14] = NULL;
+
 void	free_map(char ***map)
 {
 	int	i;
