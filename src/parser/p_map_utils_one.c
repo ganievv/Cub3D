@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 09:09:04 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/09 19:19:14 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,19 @@ char	**node_to_array(t_node *map, int len)
 	}
 	tested_map[len] = NULL;
 	return (tested_map);
+}
+
+void	node_clear(t_node *lst)
+{
+	t_node	*temp;
+
+	temp = NULL;
+	if (!lst)
+		return ;
+	while (lst->next)
+	{
+		temp = lst->next;
+		free(lst);
+		lst = temp;
+	}
 }

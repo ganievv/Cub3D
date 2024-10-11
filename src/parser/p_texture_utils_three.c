@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_texture.c                                        :+:      :+:    :+:   */
+/*   p_texture_utils_three.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:37:32 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 06:55:29 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/11 00:20:46 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ bool	is_valid_splited_color_arg( char **splited)
 	return (is_valid && (i == 3));
 }
 
-void	set_color(t_color *c, char	**splited)
-{
-	if (!splited || *splited)
-		return ;
-	if (is_valid_splited_color_arg(splited))
-	{
-		c->red = (uint8_t)ft_pos_atol(splited[0]);
-		c->green = (uint8_t)ft_pos_atol(splited[1]);
-		c->blue = (uint8_t)ft_pos_atol(splited[2]);
-	}
-	else
-		ft_putstr_fd("Error: invalid color fields", 2);
-}
+// void	set_color(t_color *c, char	**splited)
+// {
+// 	if (!splited || *splited)
+// 		return ;
+// 	if (is_valid_splited_color_arg(splited))
+// 	{
+// 		c->red = (uint8_t)ft_pos_atol(splited[0]);
+// 		c->green = (uint8_t)ft_pos_atol(splited[1]);
+// 		c->blue = (uint8_t)ft_pos_atol(splited[2]);
+// 	}
+// }
 
 long	ft_pos_atol(char *str)
 {

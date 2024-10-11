@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
+/*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-14 15:15:16 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-14 15:15:16 by sganiev          ###   ########.fr       */
+/*   Created: 2024/09/14 15:15:16 by sganiev           #+#    #+#             */
+/*   Updated: 2024/10/11 04:09:17 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ void	close_window(void *param)
 
 	info = (t_cub3d *)param;
 	(void)info;
-	/*clean_up_functions*/
 	mlx_delete_image(info->mlx, info->img);
 	delete_textures_and_imgs(info);
 	mlx_terminate(info->mlx);
-	//free_map();
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 23:07:21 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/16 17:05:22 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/11 03:26:06 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	**open_and_get_all_lines(char	*path_to_the_file)
 	if (fd < 0)
 		return (NULL);
 	next_line = get_next_line(fd);
+	if (!next_line)
+		return (NULL);
 	unfiltered_lines_loop(&next_line, &unf_input, fd);
 	close(fd);
 	return (unf_input);

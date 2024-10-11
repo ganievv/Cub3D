@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
+/*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-17 13:10:50 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-17 13:10:50 by sganiev          ###   ########.fr       */
+/*   Created: 2024/09/17 13:10:50 by sganiev           #+#    #+#             */
+/*   Updated: 2024/10/11 04:08:51 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	load_textures(t_cub3d *info)
 {
-	info->input.ea.path = "./textures/theme_01/east.png";
-	info->input.we.path = "./textures/theme_01/west.png";
-	info->input.no.path = "./textures/theme_01/north.png";
-	info->input.so.path = "./textures/theme_01/south.png";
 	info->input.ea.texture = mlx_load_png(info->input.ea.path);
 	info->input.no.texture = mlx_load_png(info->input.no.path);
 	info->input.we.texture = mlx_load_png(info->input.we.path);

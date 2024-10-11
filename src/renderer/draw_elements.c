@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
+/*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-18 18:24:31 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-18 18:24:31 by sganiev          ###   ########.fr       */
+/*   Created: 2024/09/18 18:24:31 by sganiev           #+#    #+#             */
+/*   Updated: 2024/10/11 02:34:52 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ uint32_t	calc_texture_color(int x, int y, t_ray *ray, t_cub3d *info)
 void	draw_floor(int i, t_ray *ray, t_cub3d *info)
 {
 	while (ray->top_wall_y < info->plane.height)
-		mlx_put_pixel(info->img, i, ray->top_wall_y++, FLOOR_COLOR);
+		mlx_put_pixel(info->img, i, ray->top_wall_y++,
+			info->input.floor.color);
 }
 
 void	draw_ceiling(int i, t_ray *ray, t_cub3d *info)
 {
-	int	start;
+	int			start;
 
 	start = 0;
 	while (start < ray->top_wall_y)
-		mlx_put_pixel(info->img, i, start++, CEILING_COLOR);
+		mlx_put_pixel(info->img, i, start++,
+			info->input.ceilling.color);
 }
 
 void	draw_wall_slice(int i, t_ray *ray, t_cub3d *info)
