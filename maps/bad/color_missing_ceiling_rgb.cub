@@ -1,7 +1,7 @@
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO ./textures/theme_02/east.png
+SO ./textures/theme_02/north.png
+WE ./textures/theme_02/south.png   
+EA ./textures/theme_02/west.png
 
 F 20,20,20
 C 200,200,
