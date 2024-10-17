@@ -4,8 +4,8 @@ WE ./textures/theme_02/south.png
 EA ./textures/theme_02/west.png
 
 
-
-C 235, 198, 52
+F 102,0,204
+C 235,198,52
 
 111111111111111111111111
 100000000000000000000001

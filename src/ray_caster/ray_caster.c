@@ -85,17 +85,6 @@ void	cast_rays(t_cub3d *info)
 	}
 }
 
-void	free_map(char ***map)
-{
-	int	i;
-
-	i = 0;
-	while ((*map)[i])
-		free((*map)[i++]);
-	free(*map);
-	*map = NULL;
-}
-
 /* function for debugging */
 /*	void	save_calculated_data(t_cub3d *info)
 	{

@@ -3,8 +3,8 @@ SO ./textures/theme_02/north.png
 WE ./textures/theme_02/south.png   
 EA ./textures/theme_02/west.png
 
-C 53,41,34
 F 45,33,27
+C 53,41,34
 
 111111111111111
 111111000111111
