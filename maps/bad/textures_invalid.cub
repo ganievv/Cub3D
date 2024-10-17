@@ -1,6 +1,6 @@
 NO ./textures/theme_02/east.png
 SO ./textures/theme_02/north.png
-WE ./textures/theme_02/south.png   
+WE ./textures/theme_02/x 
 EA ./textures/theme_02/west.png
 
 F 20,20,20

@@ -12,6 +12,18 @@
 
 #include "../../include/cub3d.h"
 
+/* maps to check:
+*  ./cub3D maps/bad/map_missing.cub
+*  ./cub3D maps/bad/file_letter_end.cub
+*  ./cub3D maps/bad/player_on_edge.cub
+*  ./cub3D maps/bad/textures_dir.cub
+*  ./cub3D maps/bad/textures_none.cub
+*  ./cub3D maps/bad/wall_hole_east.cub
+*  ./cub3D maps/bad/wall_hole_north.cub
+*  ./cub3D maps/bad/wall_hole_south.cub
+*  ./cub3D maps/bad/wall_hole_west.cub
+*  ./cub3D maps/bad/wall_none.cub */
+
 //finding the height
 static uint32_t	char_to_hex(char *c)
 {
