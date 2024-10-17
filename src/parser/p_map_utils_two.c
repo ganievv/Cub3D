@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 06:38:18 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 06:49:54 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/17 22:33:27 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,28 @@ int	char_not_one(char c)
 	return (c == ('0') || is_compass_dir_letter(c));
 }
 
-void	replace_the_chars_with_s(char ***map, int i, int j)
+// static void	updating_the_map(char ***map, int i, int j, int *is_valid)
+// {
+// 	if (!ft_isspace((*map)[i][j]))
+// 		(*map)[i][j] = ' ';
+// 	replace_the_chars_with_s(map, i, j, is_valid);
+// }
+
+void	replace_the_chars_with_s(char ***map, int i, int j, int	*is_valid)
 {
-	if (i < 0 || j < 0 || !(*map)[i] || !(*map)[i][j])
-		return ;
-	if ((*map)[i][j] == ' ')
+	if (i < 0 || j < 0 || !(*map)[i] || !(*map)[i][j] || (*map)[i][j] == 'V'
+		|| ft_isspace((*map)[i][j]) || (*map)[i][j] == '\0'
+		|| (*map)[i][j] == '1' || is_valid == 0)
 	{
-		if (i - 1 >= 0 && (*map)[i - 1] && char_not_one((*map)[i - 1][j]))
-		{
-			(*map)[i - 1][j] = ' ';
-			replace_the_chars_with_s(map, i - 1, j);
-		}
-		if ((*map)[i + 1] && char_not_one((*map)[i + 1][j]))
-		{
-			(*map)[i + 1][j] = ' ';
-			replace_the_chars_with_s(map, i + 1, j);
-		}
-		if (j - 1 >= 0 && char_not_one((*map)[i][j - 1]))
-		{
-			(*map)[i][j - 1] = ' ';
-			replace_the_chars_with_s(map, i, j - 1);
-		}
-		if (char_not_one((*map)[i][j + 1]))
-		{
-			(*map)[i][j + 1] = ' ';
-			replace_the_chars_with_s(map, i, j + 1);
-		}
+		if (ft_isspace((*map)[i][j]) || (*map)[i][j] == '\0')
+			*is_valid = 0;
+		return ;
 	}
+	(*map)[i][j] = 'V';
+	replace_the_chars_with_s(map, i + 1, j, is_valid);
+	replace_the_chars_with_s(map, i, j + 1, is_valid);
+	replace_the_chars_with_s(map, i - 1, j, is_valid);
+	replace_the_chars_with_s(map, i, j - 1, is_valid);
 }
 
 int	count_zeros(char **map)

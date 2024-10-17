@@ -64,3 +64,14 @@ I need to parse the lines with get next line ---- ok (should I make nodes with t
 I need to take out all the empty lines ---- ??
 //-------------------(Tuesday)--------16/9/2024--------------------------------------
 Still I need to take out all the empty lines ---- ??
+
+
+
+what are the non accepted conditions 
+
+position 0---> not 0 position before the enter not 0
+0 not close to space must be surrounded by 1
+
+if is space return if is one return
+if is 0 or orientation go in a cross formation
+if one of them is space return

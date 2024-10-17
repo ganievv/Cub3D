@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 09:09:04 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/17 22:14:58 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,28 @@ int	map_valid_by_chars(t_node *map)
 int	success_to_cover(t_node *map)
 {
 	char	**tested_map;
-	int		before;
-	int		after;
 	int		i;
 	int		j;
+	int		is_valid;
 
 	i = -1;
 	j = 0;
+	is_valid = 1;
 	tested_map = node_to_array(map, node_len(map));
-	before = count_zeros(tested_map);
+	print_double_str_array(tested_map);
 	if (!tested_map)
 		return (0);
-	while (tested_map && tested_map[++i])
+	while (tested_map && tested_map[++i] && is_valid == 1)
 	{
 		j = -1;
 		while (tested_map[i] && tested_map[i][++j])
-			if (ft_isspace(tested_map[i][j]))
-				replace_the_chars_with_s(&tested_map, i, j);
+		{
+			if (char_not_one(tested_map[i][j]))
+				replace_the_chars_with_s(&tested_map, i, j, &is_valid);
+		}
 	}
-	after = count_zeros(tested_map);
 	free_double_array(tested_map);
-	return (before == after);
+	return (is_valid);
 }
 
 int	valid_map(t_node *map)

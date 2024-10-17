@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/11 04:42:00 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/17 22:37:12 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,8 @@ void		node_clear(t_node *lst);
 /*--------------Parsing_map_utils_two--------------------------*/
 int			is_compass_dir_letter(char c);
 int			char_not_one(char c);
-void		replace_the_chars_with_s(char ***map, int i, int j);
+void		replace_the_chars_with_s(char ***map, int i, int j,
+				int *is_valid);
 int			count_zeros(char **map);
 /*---------------Passing_map_and_colors------------------------*/
 int			find_map_height(char **map);
