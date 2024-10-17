@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:25:54 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/11 04:14:55 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/17 16:48:48 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,23 @@ int	main(int argc, char **argv)
 	t_node	*compass_dir;
 
 	if (!cub_name_is_valid(argc, argv))
-	{
-		perror("Error\n");
-		return (1);
-	}
+		return (ft_putstr_fd("Error\n", 2), 1);
 	res = open_and_get_all_lines(argv[1]);
 	if (!res)
-		return (1);
+		return (ft_putstr_fd("Error\n", 2), 1);
 	array_to_list(res, &compass_dir, &map);
 	if (!compass_dir || !map)
-		return (1);
+		return (ft_putstr_fd("Error\n", 2), 1);
 	free(res);
 	if (valid_map(map) && valid_textures(compass_dir))
 		pass_cub_file(&info, map, compass_dir);
 	else
-		return (perror("Error\n"), node_clear(map), node_clear(compass_dir), 1);
+		return (ft_putstr_fd("Error\n", 2),
+			node_clear(map), node_clear(compass_dir), 1);
 	raycast_render_free(&info);
 	return (0);
 }
+
+/* apt-get update -y
+*  apt-get install cmake -y
+*  apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev -y */

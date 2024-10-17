@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/10/11 00:59:32 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/17 16:07:40 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
 MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 #for Ubuntu:
-#MLX42FLAGS		:= -lglfw -ldl -lGL
+# MLX42FLAGS		:= -lglfw -ldl -lGL
 
 #****************************************************************************#
 #                                   COLORS                                   #
@@ -81,7 +81,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 	@echo "$(GREEN)Library libft created successfully!$(RESET)"
 
-$(ODIR)/%.o: %.c
+$(ODIR)/%.o: %.c | $(ODIR) $(DDIR)
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 $(MLX42LIB):
@@ -120,7 +120,9 @@ re: fclean all
 
 leaks:
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/map1.cub
+leaks_1:
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/good/creepy.cub
 
 -include $(DEPFILES)
 
-.PHONY: all, clean, fclean, re, submodules_init, leaks
+.PHONY: all, clean, fclean, re, submodules_init, leaks, leaks_1

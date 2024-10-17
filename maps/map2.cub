@@ -1,7 +1,7 @@
-NO ./textures/theme_03/east.png
-SO ./textures/theme_03/north.png
-WE ./textures/theme_03/south.png        
-EA ./textures/theme_03/west.png
+NO ./textures/theme_02/east.png
+SO ./textures/theme_02/north.png
+WE ./textures/theme_02/south.png   
+EA ./textures/theme_02/west.png
 
 F 225,127,80
 C 245,222,0

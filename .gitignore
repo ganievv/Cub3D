@@ -11,6 +11,7 @@ Dockerfile
 start.sh
 *notes*
 *.txt*
-net_practice
+*net*
 mushishi.jpeg
 notes.txt
+working_dir
