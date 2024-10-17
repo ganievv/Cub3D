@@ -81,7 +81,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 	@echo "$(GREEN)Library libft created successfully!$(RESET)"
 
-$(ODIR)/%.o: %.c | $(ODIR) $(DDIR)
+$(ODIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 $(MLX42LIB):
@@ -118,6 +118,9 @@ fclean: clean
 
 re: fclean all
 
+leaks:
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/map1.cub
+
 -include $(DEPFILES)
 
-.PHONY: all, clean, fclean, re, submodules_init
+.PHONY: all, clean, fclean, re, submodules_init, leaks

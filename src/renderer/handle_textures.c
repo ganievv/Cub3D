@@ -22,14 +22,22 @@ void	load_textures(t_cub3d *info)
 
 void	delete_textures_and_imgs(t_cub3d *info)
 {
-	mlx_delete_texture(info->input.ea.texture);
-	mlx_delete_texture(info->input.no.texture);
-	mlx_delete_texture(info->input.we.texture);
-	mlx_delete_texture(info->input.so.texture);
-	mlx_delete_image(info->mlx, info->input.ea.img);
-	mlx_delete_image(info->mlx, info->input.no.img);
-	mlx_delete_image(info->mlx, info->input.we.img);
-	mlx_delete_image(info->mlx, info->input.so.img);
+	if (info->input.ea.texture)
+		mlx_delete_texture(info->input.ea.texture);
+	if (info->input.no.texture)
+		mlx_delete_texture(info->input.no.texture);
+	if (info->input.we.texture)
+		mlx_delete_texture(info->input.we.texture);
+	if (info->input.so.texture)
+		mlx_delete_texture(info->input.so.texture);
+	if (info->input.ea.img)
+		mlx_delete_image(info->mlx, info->input.ea.img);
+	if (info->input.no.img)
+		mlx_delete_image(info->mlx, info->input.no.img);
+	if (info->input.we.img)
+		mlx_delete_image(info->mlx, info->input.we.img);
+	if (info->input.so.img)
+		mlx_delete_image(info->mlx, info->input.so.img);
 }
 
 void	textures_to_img(t_cub3d *info)

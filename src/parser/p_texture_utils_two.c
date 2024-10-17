@@ -30,14 +30,12 @@ void	array_to_list(char **res, t_node **parse_node, t_node **map)
 {
 	int		i;
 	int		j;
-	t_node	*temp;
 	int		not_a_dir;
 
 	i = -1;
 	not_a_dir = 0;
 	while (res[++i])
 	{
-		temp = *parse_node;
 		while (res[i] && is_empty_line(res[i]))
 			i++;
 		j = -1;

@@ -36,6 +36,8 @@ static size_t	ft_strnewlen(char *src, char *char_set)
 	return (new_len);
 }
 
+// if (src != NULL)
+// 	free(*src);
 void	ft_strfltr(char **src, char *char_set)
 {
 	char	*temp;
@@ -51,8 +53,6 @@ void	ft_strfltr(char **src, char *char_set)
 		if (!is_char_on_charset((*src)[j], char_set))
 			temp[++i] = (*src)[j];
 	temp[i + 1] = '\0';
-	// if (src != NULL)
-	// 	free(*src);
 	*src = temp;
 }
 

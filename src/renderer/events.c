@@ -20,10 +20,7 @@ void	close_window(void *param)
 
 	info = (t_cub3d *)param;
 	(void)info;
-	mlx_delete_image(info->mlx, info->img);
-	delete_textures_and_imgs(info);
-	mlx_terminate(info->mlx);
-	exit(0);
+	free_cub3d(info, 0, true);
 }
 
 /* Checks if any movement or rotation keys are pressed */
@@ -48,12 +45,7 @@ void	handle_esc_key(mlx_key_data_t keydata, void *param)
 
 	info = (t_cub3d *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		mlx_delete_image(info->mlx, info->img);
-		delete_textures_and_imgs(info);
-		mlx_terminate(info->mlx);
-		exit(0);
-	}
+		free_cub3d(info, 0, true);
 }
 
 /* Handles key press events for movements and rotations*/

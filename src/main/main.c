@@ -44,7 +44,7 @@ static void	pass_cub_file(t_cub3d *info,
 	node_clear(compass_dir);
 }
 
-static void	free_cub3d(t_cub3d *info)
+void	free_cub3d_input(t_cub3d *info)
 {
 	free_double_array(info->map.map);
 	free(info->input.no.path);
@@ -58,7 +58,7 @@ static void	raycast_render_free(t_cub3d *info)
 	ray_caster_init(info);
 	cast_rays(info);
 	rendering(info);
-	free_cub3d(info);
+	free_cub3d_input(info);
 }
 
 //./src/parser/input.cub

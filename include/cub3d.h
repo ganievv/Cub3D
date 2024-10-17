@@ -28,7 +28,7 @@
 # define CUBE_SIZE 1080
 # define MOVE_SPEED 250
 # define ROTATION_SPEED 3.0
-# define PIXEL_BUFFER CUBE_SIZE / 5 // reminder
+# define PIXEL_BUFFER 216
 # define BYTES_PER_PIXEL 4
 
 /* Compass directions */
@@ -167,12 +167,12 @@ typedef struct s_dimensions
 	double			ray_angle_step;
 }	t_dimensions;
 
-// ahelping struct for the ray not necessayry to keep it until the end
-// the angle is includes in the total range of the view plane (ex. -60 to 60)
-// the dist  is the distance from the plane
-//=========
-// is_wall is a flag that is notifing us if it's a wall
-// in the player to not move if the is in the wall
+/* ahelping struct for the ray not necessayry to keep it until the end
+*  the angle is includes in the total range of the view plane (ex. -60 to 60)
+*  the dist  is the distance from the plane */
+/*=========*/
+/* is_wall is a flag that is notifing us if it's a wall
+*  in the player to not move if the is in the wall	 */
 /* 'h_intersec' - horizontal intersection with a wall
 *  'v_intersec' - vertical intersection with a wall */
 typedef struct s_ray
@@ -187,7 +187,7 @@ typedef struct s_ray
 	bool		is_v_intersec;
 }	t_ray;
 
-//here is the struct that is including all the other structs
+/* here is the struct that is including all the other structs */
 typedef struct s_cub3d
 {
 	t_input			input;
@@ -274,55 +274,59 @@ void		draw_wall_slice(int i, t_ray *ray, t_cub3d *info);
 void		draw_ceiling(int i, t_ray *ray, t_cub3d *info);
 void		draw_floor(int i, t_ray *ray, t_cub3d *info);
 
-//===============PARSING_CUBE3D_FILE=========================
-//--------------Parsing_cub_file_name------------------------
+/*===============PARSING_CUBE3D_FILE=========================*/
+/*--------------Parsing_cub_file_name------------------------*/
 int			cub_name_is_valid(int argc, char **argv);
-//--------------Parsing_cub_file_unfiltered------------------
+/*--------------Parsing_cub_file_unfiltered------------------*/
 void		print_empty_or_not(char	**res);
 void		print_double_str_array(char	**array);
 void		print_splited_str(char	**array);
 void		free_double_array(char **str);
 char		**arr_strdup(char **arr, int size);
-//--------------Parsing_cub_file-----------------------------
+/*--------------Parsing_cub_file-----------------------------*/
 int			is_empty_line(char *str);
 char		**open_and_get_all_lines(char	*path_to_the_file);
-//--------------Parsing_texture------------------------------
+/*--------------Parsing_texture------------------------------*/
 int			order_is_valid(t_node *dir);
 int			paths_are_valid(t_node *compass_dir);
 int			colors_are_valid(t_node *compass_dir);
 int			valid_textures(t_node *compass_dir);
-//--------------Parsing_texture_utils_one--------------------
+/*--------------Parsing_texture_utils_one--------------------*/
 void		print_node_list(t_node *parse_node);
 char		*take_out_all_spaces(t_compass_dir type, char *str);
 t_node		*node_new(t_compass_dir type, char *p_or_c);
 void		node_add_back(t_node **lst, t_node *new);
-//--------------Parsing_texture_utils_two--------------------
+/*--------------Parsing_texture_utils_two--------------------*/
 void		array_to_list(char **res, t_node **parse_node, t_node **map);
 void		define_the_type(char *str, t_node **parse_node, int *f);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
-//--------------Parsing_texture_three------------------------
+/*--------------Parsing_texture_three------------------------*/
 bool		is_valid_splited_color_arg( char **splited);
 void		set_color(t_color *c, char	**splited);
 long		ft_pos_atol(char *str);
 bool		is_valid_color_arg(char	*str);
-//--------------Parsing_map------------------------------------
+/*--------------Parsing_map------------------------------------*/
 int			map_valid_by_chars(t_node *map);
 int			success_to_cover(t_node *map);
 int			valid_map(t_node *map);
-//--------------Parsing_map_utils_one--------------------------
+/*--------------Parsing_map_utils_one--------------------------*/
 int			node_len(t_node	*map);
 char		**node_to_array(t_node *map, int len);
 void		node_clear(t_node *lst);
-//--------------Parsing_map_utils_two--------------------------
+/*--------------Parsing_map_utils_two--------------------------*/
 int			is_compass_dir_letter(char c);
 int			char_not_one(char c);
 void		replace_the_chars_with_s(char ***map, int i, int j);
 int			count_zeros(char **map);
-//---------------Passing_map_and_colors------------------------
+/*---------------Passing_map_and_colors------------------------*/
 int			find_map_height(char **map);
 int			find_map_width(char **map);
 char		**char_to_splited(char *color_set);
 void		set_color(t_color *c, char	**splited);
 uint32_t	three_to_hex(t_color c);
+
+void		free_cub3d_input(t_cub3d *info);
+void		free_cub3d(t_cub3d *info, int ret, bool mlx_term);
+
 #endif
