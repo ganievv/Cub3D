@@ -23,7 +23,8 @@ static uint32_t	char_to_hex(char *c)
 	int_colors[1] = ft_pos_atol(char_colors[1]) % 256;
 	int_colors[2] = ft_pos_atol(char_colors[2]) % 256;
 	free_double_array(char_colors);
-	return ((int_colors[0] << 16) + (int_colors[1] << 8) + int_colors[2]);
+	return ((int_colors[0] << 24) | (int_colors[1] << 16)
+		| (int_colors[2] << 8) | 0xFF);
 }
 
 static void	pass_cub_file(t_cub3d *info,

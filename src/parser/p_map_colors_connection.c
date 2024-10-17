@@ -22,17 +22,33 @@ int	find_map_height(char **map)
 	return (i);
 }
 
+int	find_line_len(char *line)
+{
+	int	i;
+
+	i = (int)ft_strlen(line);
+	while (i)
+	{
+		if (line[i - 1] == '1')
+			return (i);
+		i--;
+	}
+	return (0);
+}
+
 int	find_map_width(char **map)
 {
 	int	length;
+	int	tmp;
 	int	i;
 
 	i = -1;
 	length = 0;
 	while (map[++i])
 	{
-		if (length < (int)ft_strlen(map[i]))
-			length = (int)ft_strlen(map[i]);
+		tmp = find_line_len(map[i]);
+		if (length < tmp)
+			length = tmp;
 	}
 	return (length);
 }

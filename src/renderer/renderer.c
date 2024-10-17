@@ -15,10 +15,6 @@
 void	free_cub3d(t_cub3d *info, int ret, bool mlx_term)
 {
 	free_cub3d_input(info);
-	if (mlx_term == false)
-		printf("mlx_term: false\n");
-	else if (mlx_term == true)
-		printf("mlx_term: true\n");
 	if (info->img)
 		mlx_delete_image(info->mlx, info->img);
 	delete_textures_and_imgs(info);
