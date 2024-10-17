@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:28:10 by tnakas            #+#    #+#             */
-/*   Updated: 2024/08/12 18:03:16 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/09 20:36:45 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	ft_strfltr(char **src, char *char_set)
 		if (!is_char_on_charset((*src)[j], char_set))
 			temp[++i] = (*src)[j];
 	temp[i + 1] = '\0';
-	free(*src);
+	// if (src != NULL)
+	// 	free(*src);
 	*src = temp;
 }
 

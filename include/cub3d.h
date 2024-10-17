@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/09/17 09:09:04 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/11 04:42:00 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@
 # define CUBE_SIZE 1080
 # define MOVE_SPEED 250
 # define ROTATION_SPEED 3.0
-# define PIXEL_BUFFER CUBE_SIZE / 5
+# define PIXEL_BUFFER CUBE_SIZE / 5 // reminder
 # define BYTES_PER_PIXEL 4
-# define FLOOR_COLOR 0x4A6E72E6
-# define CEILING_COLOR 0x5C4A72E6
 
 /* Compass directions */
 typedef enum e_compass_dir
@@ -89,12 +87,9 @@ typedef struct s_texture
 {
 	mlx_texture_t			*texture;
 	mlx_image_t				*img;
-	bool					defined;
 	t_compass_dir			dir;
-	bool					is_path;
 	char					*path;
-	bool					is_color;
-	t_color					color;
+	uint32_t				color;
 }	t_texture;
 
 /* here is the struct for the map
@@ -280,6 +275,8 @@ void		draw_ceiling(int i, t_ray *ray, t_cub3d *info);
 void		draw_floor(int i, t_ray *ray, t_cub3d *info);
 
 //===============PARSING_CUBE3D_FILE=========================
+//--------------Parsing_cub_file_name------------------------
+int			cub_name_is_valid(int argc, char **argv);
 //--------------Parsing_cub_file_unfiltered------------------
 void		print_empty_or_not(char	**res);
 void		print_double_str_array(char	**array);
@@ -316,10 +313,16 @@ int			valid_map(t_node *map);
 //--------------Parsing_map_utils_one--------------------------
 int			node_len(t_node	*map);
 char		**node_to_array(t_node *map, int len);
+void		node_clear(t_node *lst);
 //--------------Parsing_map_utils_two--------------------------
 int			is_compass_dir_letter(char c);
 int			char_not_one(char c);
 void		replace_the_chars_with_s(char ***map, int i, int j);
 int			count_zeros(char **map);
-
+//---------------Passing_map_and_colors------------------------
+int			find_map_height(char **map);
+int			find_map_width(char **map);
+char		**char_to_splited(char *color_set);
+void		set_color(t_color *c, char	**splited);
+uint32_t	three_to_hex(t_color c);
 #endif

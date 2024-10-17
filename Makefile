@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/09/17 06:39:25 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/11 00:59:32 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,14 @@ CFLAGS			:= -g -Wall -Wextra -Werror $(INCDIRS)
 
 VPATH			:=  ./src/main ./src/parser ./src/ray_caster ./src/renderer
 
-#SRC_MAIN		:= main.c
+SRC_MAIN		:= main.c
 
-#SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
-#				   p_cub_file_utils.c p_texture.c \
-#				   p_texture_utils_one.c p_texture_utils_two.c \
-#				   p_texture_utils_three.c p_map_utils_one.c \
-#				   p_map_utils_two.c \
+SRC_PARSER		:= p_cub_file.c p_map.c p_nsew.c parser.c \
+				   p_cub_file_utils.c p_texture.c \
+				   p_texture_utils_one.c p_texture_utils_two.c \
+				   p_texture_utils_three.c p_map_utils_one.c \
+				   p_map_utils_two.c p_cub_file_name_validation.c \
+				   p_map_colors_connection.c \
 
 SRC_RAY_CASTER	:= boundary_checks.c convert.c direction_checks.c \
 				   horizontal_intersec.c move_intersec_point.c \
