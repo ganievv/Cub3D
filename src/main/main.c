@@ -6,23 +6,11 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:25:54 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/18 23:13:36 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/19 00:09:28 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-/* maps to check:
-*  ./cub3D maps/bad/map_missing.cub
-*  ./cub3D maps/bad/file_letter_end.cub
-*  ./cub3D maps/bad/player_on_edge.cub
-*  ./cub3D maps/bad/textures_dir.cub
-*  ./cub3D maps/bad/textures_none.cub
-*  ./cub3D maps/bad/wall_hole_east.cub
-*  ./cub3D maps/bad/wall_hole_north.cub
-*  ./cub3D maps/bad/wall_hole_south.cub
-*  ./cub3D maps/bad/wall_hole_west.cub
-*  ./cub3D maps/bad/wall_none.cub */
 
 //finding the height
 static uint32_t	char_to_hex(char *c)
@@ -52,20 +40,6 @@ static void	pass_cub_file(t_cub3d *info,
 		= char_to_hex(c_dir->next->next->next->next->p_or_c);
 	info->input.floor.color
 		= char_to_hex(c_dir->next->next->next->next->next->p_or_c);
-}
-
-void	free_cub3d_input(t_cub3d *info)
-{
-	if (info->map.map)
-		free_double_array(info->map.map);
-	if (info->input.no.path)
-		free(info->input.no.path);
-	if (info->input.so.path)
-		free(info->input.so.path);
-	if (info->input.we.path)
-		free(info->input.we.path);
-	if (info->input.ea.path)
-		free(info->input.ea.path);
 }
 
 static void	r_rc_free(t_cub3d *info)

@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:43:48 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 19:46:16 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/19 00:09:40 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,18 @@ int	cub_name_is_valid(int argc, char **argv)
 		|| open(argv[1], O_RDONLY) < 0)
 		return (0);
 	return (1);
+}
+
+void	free_cub3d_input(t_cub3d *info)
+{
+	if (info->map.map)
+		free_double_array(info->map.map);
+	if (info->input.no.path)
+		free(info->input.no.path);
+	if (info->input.so.path)
+		free(info->input.so.path);
+	if (info->input.we.path)
+		free(info->input.we.path);
+	if (info->input.ea.path)
+		free(info->input.ea.path);
 }
