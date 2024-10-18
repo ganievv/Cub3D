@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:33:24 by tnakas            #+#    #+#             */
-/*   Updated: 2024/09/17 06:55:11 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 22:10:33 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	print_node_list(t_node *parse_node)
 	printf("{[NULL], [NULL]}\n");
 }
 
-static void	skip_by_type(t_compass_dir type, char *str, int *i)
+static void	skip_by_type(t_c_dir type, char *str, int *i)
 {
 	if (type != NON)
 		while (ft_isspace(str[*i]))
 			(*i)++;
 }
 
-char	*take_out_all_spaces(t_compass_dir type, char *str)
+char	*take_out_all_spaces(t_c_dir type, char *str)
 {
 	int	start;
 	int	end;
@@ -59,7 +59,7 @@ char	*take_out_all_spaces(t_compass_dir type, char *str)
 		return (NULL);
 }
 
-t_node	*node_new(t_compass_dir type, char *p_or_c)
+t_node	*node_new(t_c_dir type, char *p_or_c)
 {
 	t_node	*new;
 

@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/18 19:38:05 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 22:11:17 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define BYTES_PER_PIXEL 4
 
 /* Compass directions */
-typedef enum e_compass_dir
+typedef enum e_c_dir
 {
 	NORTH,
 	SOUTH,
@@ -41,7 +41,7 @@ typedef enum e_compass_dir
 	FLOOR,
 	CIELLING,
 	NON,
-}	t_compass_dir;
+}	t_c_dir;
 
 /*
 	my though is to create a link list with the type and the path or color
@@ -51,7 +51,7 @@ typedef enum e_compass_dir
 */
 typedef struct s_node
 {
-	t_compass_dir	type;
+	t_c_dir	type;
 	char			*p_or_c;
 	struct s_node	*next;
 }	t_node;
@@ -87,7 +87,7 @@ typedef struct s_texture
 {
 	mlx_texture_t			*texture;
 	mlx_image_t				*img;
-	t_compass_dir			dir;
+	t_c_dir			dir;
 	char					*path;
 	uint32_t				color;
 }	t_texture;
@@ -101,7 +101,7 @@ typedef struct s_map
 	int				height;
 	int				i_player;
 	int				j_player;
-	t_compass_dir	dir;
+	t_c_dir	dir;
 }	t_map;
 
 typedef struct s_input
@@ -254,6 +254,7 @@ void		calc_top_wall_y(t_ray *ray, t_cub3d *info);
 /*===============================RENDERER================================*/
 void		rendering(t_cub3d *info);
 void		draw_frame(t_cub3d *info);
+void		init_render_data(t_cub3d *info);
 /*--------------------------------events---------------------------------*/
 void		close_window(void *param);
 void		handle_keys(void *param);
@@ -288,14 +289,14 @@ int			is_empty_line(char *str);
 char		**open_and_get_all_lines(char	*path_to_the_file);
 /*--------------Parsing_texture------------------------------*/
 int			order_is_valid(t_node *dir);
-int			paths_are_valid(t_node *compass_dir);
-int			colors_are_valid(t_node *compass_dir);
-int			valid_textures(t_node *compass_dir);
+int			paths_are_valid(t_node *c_dir);
+int			colors_are_valid(t_node *c_dir);
+int			valid_textures(t_node *c_dir);
 int			is_x_filetype(char *str, char *filetype);
 /*--------------Parsing_texture_utils_one--------------------*/
 void		print_node_list(t_node *parse_node);
-char		*take_out_all_spaces(t_compass_dir type, char *str);
-t_node		*node_new(t_compass_dir type, char *p_or_c);
+char		*take_out_all_spaces(t_c_dir type, char *str);
+t_node		*node_new(t_c_dir type, char *p_or_c);
 void		node_add_back(t_node **lst, t_node *new);
 /*--------------Parsing_texture_utils_two--------------------*/
 void		array_to_list(char **res, t_node **parse_node, t_node **map);
@@ -314,9 +315,9 @@ int			valid_map(t_node *map);
 /*--------------Parsing_map_utils_one--------------------------*/
 int			node_len(t_node	*map);
 char		**node_to_array(t_node *map, int len);
-void		node_clear(t_node *lst);
+void		n_clear(t_node *lst);
 /*--------------Parsing_map_utils_two--------------------------*/
-int			is_compass_dir_letter(char c);
+int			is_c_dir_letter(char c);
 int			char_not_one(char c);
 void		recursive_check(char ***map, int i, int j,
 				int *is_valid);

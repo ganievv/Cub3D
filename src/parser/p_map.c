@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 19:31:02 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 22:10:33 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	map_valid_by_chars(t_node *map)
 		skip_zeros_ones_spaces(map, &i);
 		if (map && map->p_or_c[i])
 		{
-			if (is_compass_dir_letter(map->p_or_c[i]))
+			if (is_c_dir_letter(map->p_or_c[i]))
 			{
 				if (player_found == 1)
 					return (0);

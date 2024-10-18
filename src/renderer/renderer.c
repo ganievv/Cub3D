@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sganiev <sganiev@student.42heilbronn.de>   #+#  +:+       +#+        */
+/*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-09-12 13:18:41 by sganiev           #+#    #+#             */
-/*   Updated: 2024-09-12 13:18:41 by sganiev          ###   ########.fr       */
+/*   Created: 2024/09/12 13:18:41 by sganiev           #+#    #+#             */
+/*   Updated: 2024/10/18 22:40:51 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	init_render_data(t_cub3d *info)
 	info->input.no.img = NULL;
 	info->input.we.img = NULL;
 	info->input.so.img = NULL;
+	info->map.map = NULL;
+	info->input.no.path = NULL;
+	info->input.so.path = NULL;
+	info->input.we.path = NULL;
+	info->input.ea.path = NULL;
 }
 
 void	draw_frame(t_cub3d *info)
@@ -54,7 +59,6 @@ void	draw_frame(t_cub3d *info)
 
 void	rendering(t_cub3d *info)
 {
-	init_render_data(info);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	info->mlx = mlx_init(PLANE_WIDTH, PLANE_HEIGHT, "cub3d", true);
 	if (!info->mlx)

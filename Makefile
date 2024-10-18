@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/10/18 20:49:33 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/18 22:54:50 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,9 @@ DEPFLAGS		=  -MMD -MP -MF $(DDIR)/$*.d
 #****************************************************************************#
 MLXBUILDDIR		:= ./mlx42/build
 MLX42LIB		:= $(MLXBUILDDIR)/libmlx42.a
-MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+# MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 #for Ubuntu:
-# MLX42FLAGS		:= -lglfw -ldl -lGL
+MLX42FLAGS		:= -lglfw -ldl -lGL
 
 #****************************************************************************#
 #                                   COLORS                                   #

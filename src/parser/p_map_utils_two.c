@@ -6,20 +6,20 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 06:38:18 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 12:51:44 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 22:10:33 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	is_compass_dir_letter(char c)
+int	is_c_dir_letter(char c)
 {
 	return (c == 'N' || c == 'W' || c == 'E' || c == 'S');
 }
 
 int	char_not_one(char c)
 {
-	return (c == ('0') || is_compass_dir_letter(c));
+	return (c == ('0') || is_c_dir_letter(c));
 }
 
 void	recursive_check(char ***map, int i, int j, int	*is_valid)
