@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 06:38:18 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/17 22:33:27 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 12:51:44 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,30 @@ int	char_not_one(char c)
 	return (c == ('0') || is_compass_dir_letter(c));
 }
 
-// static void	updating_the_map(char ***map, int i, int j, int *is_valid)
-// {
-// 	if (!ft_isspace((*map)[i][j]))
-// 		(*map)[i][j] = ' ';
-// 	replace_the_chars_with_s(map, i, j, is_valid);
-// }
-
-void	replace_the_chars_with_s(char ***map, int i, int j, int	*is_valid)
+void	recursive_check(char ***map, int i, int j, int	*is_valid)
 {
-	if (i < 0 || j < 0 || !(*map)[i] || !(*map)[i][j] || (*map)[i][j] == 'V'
-		|| ft_isspace((*map)[i][j]) || (*map)[i][j] == '\0'
-		|| (*map)[i][j] == '1' || is_valid == 0)
+	int	i_max;
+
+	i_max = 0;
+	while ((*map)[i_max] != NULL)
+		i_max++;
+	if (is_valid == 0 || !(*map)[i] || j > (int)ft_strlen((*map)[i])
+		|| i >= i_max || i < 0 || j < 0)
+		return ;
+	if ((i == 0 || j == 0 || i == i_max - 1) && char_not_one((*map)[i][j]))
+		*is_valid = 0;
+	if (*is_valid == 0 || (*map)[i][j] == 'V' || ft_isspace((*map)[i][j])
+	|| (*map)[i][j] == '\0' || (*map)[i][j] == '1')
 	{
-		if (ft_isspace((*map)[i][j]) || (*map)[i][j] == '\0')
+		if ((ft_isspace((*map)[i][j]) || (*map)[i][j] == '\0'))
 			*is_valid = 0;
 		return ;
 	}
 	(*map)[i][j] = 'V';
-	replace_the_chars_with_s(map, i + 1, j, is_valid);
-	replace_the_chars_with_s(map, i, j + 1, is_valid);
-	replace_the_chars_with_s(map, i - 1, j, is_valid);
-	replace_the_chars_with_s(map, i, j - 1, is_valid);
+	recursive_check(map, i + 1, j, is_valid);
+	recursive_check(map, i, j + 1, is_valid);
+	recursive_check(map, i - 1, j, is_valid);
+	recursive_check(map, i, j - 1, is_valid);
 }
 
 int	count_zeros(char **map)
