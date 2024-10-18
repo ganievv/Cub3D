@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:25:54 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/17 17:17:17 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 20:26:36 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	pass_cub_file(t_cub3d *info,
 		t_node *map, t_node *compass_dir)
 {
 	info->map.map = node_to_array(map, node_len(map));
-	node_clear(map);
 	info->map.height = find_map_height(info->map.map);
 	info->input.no.path = ft_strdup(compass_dir->p_or_c);
 	info->input.so.path = ft_strdup(compass_dir->next->p_or_c);
@@ -53,7 +52,6 @@ static void	pass_cub_file(t_cub3d *info,
 		= char_to_hex(compass_dir->next->next->next->next->p_or_c);
 	info->input.floor.color
 		= char_to_hex(compass_dir->next->next->next->next->next->p_or_c);
-	node_clear(compass_dir);
 }
 
 void	free_cub3d_input(t_cub3d *info)
@@ -86,18 +84,20 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd("Error\n", 2), 1);
 	res = open_and_get_all_lines(argv[1]);
 	if (!res)
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd("Error\n", 2), res = NULL, 1);
 	array_to_list(res, &compass_dir, &map);
-	if (!compass_dir || !map)
-		return (ft_putstr_fd("Error\n", 2), 1);
-	free(res);
+	free_double_array(res);
+	if (!compass_dir)
+		return (ft_putstr_fd("Error\n", 2), node_clear(map), 1);
+	if (!map)
+		return (ft_putstr_fd("Error\n", 2), node_clear(compass_dir), 1);
 	if (valid_map(map) && valid_textures(compass_dir))
 		pass_cub_file(&info, map, compass_dir);
 	else
 		return (ft_putstr_fd("Error\n", 2),
 			node_clear(map), node_clear(compass_dir), 1);
-	raycast_render_free(&info);
-	return (0);
+	return (node_clear(map), map = NULL, node_clear(compass_dir),
+		compass_dir = NULL, raycast_render_free(&info), 0);
 }
 
 /* apt-get update -y

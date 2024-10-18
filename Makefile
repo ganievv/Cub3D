@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/10/17 16:07:40 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/18 20:49:33 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,16 +73,16 @@ all: $(BUILDDIR) $(NAME)
 
 $(NAME): $(MLX42LIB) $(OBJ) $(LIBFT)
 	@echo "$(BLUE)Linking $@...$(RESET)"
-	@$(CC) $(OBJ) $(LIBFT) $(MLX42LIB) $(MLX42FLAGS) -lm -o $@
+	@$(CC) $(OBJ) $(LIBFT) $(MLX42LIB) $(MLX42FLAGS) -lm -o $@ > /dev/null 2>&1
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):
 	@echo "$(BLUE)Compiling libft...$(RESET)"
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) > /dev/null 2>&1
 	@echo "$(GREEN)Library libft created successfully!$(RESET)"
 
 $(ODIR)/%.o: %.c | $(ODIR) $(DDIR)
-	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $< > /dev/null 2>&1
 
 $(MLX42LIB):
 	@$(MAKE) submodules_init

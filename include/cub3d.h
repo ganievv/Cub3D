@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/18 11:56:54 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:38:05 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,7 @@ int			order_is_valid(t_node *dir);
 int			paths_are_valid(t_node *compass_dir);
 int			colors_are_valid(t_node *compass_dir);
 int			valid_textures(t_node *compass_dir);
+int			is_x_filetype(char *str, char *filetype);
 /*--------------Parsing_texture_utils_one--------------------*/
 void		print_node_list(t_node *parse_node);
 char		*take_out_all_spaces(t_compass_dir type, char *str);

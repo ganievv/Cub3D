@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 15:11:18 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:37:02 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	order_is_valid(t_node *dir)
 {
+	if (dir->type != 0)
+		return (0);
 	while (dir && dir->next)
 	{
 		if (dir->next->type != dir->type + 1)
@@ -23,10 +25,12 @@ int	order_is_valid(t_node *dir)
 	return (dir->type == 5);
 }
 
-int	is_png(char *str)
+int	is_x_filetype(char *str, char *filetype)
 {
 	int	len;
+	int	len_filetype;
 
+	len_filetype = (int)ft_strlen(filetype);
 	if (!str)
 		return (0);
 	len = ft_strlen(str);
@@ -36,7 +40,7 @@ int	is_png(char *str)
 		len--;
 	if (len < 4)
 		return (0);
-	if (ft_strncmp(&str[len - 4], ".png", 4) == 0)
+	if (ft_strncmp(&str[len - len_filetype], filetype, len_filetype) == 0)
 		return (1);
 	return (0);
 }
@@ -45,7 +49,7 @@ int	paths_are_valid(t_node *compass_dir)
 {
 	while (compass_dir && compass_dir->type <= 3)
 	{
-		if (!(is_png(compass_dir->p_or_c))
+		if (!(is_x_filetype(compass_dir->p_or_c, ".png"))
 			|| open(compass_dir->p_or_c, O_RDONLY) < 0)
 			return (0);
 		compass_dir = compass_dir->next;

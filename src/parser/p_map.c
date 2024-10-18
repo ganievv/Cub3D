@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 12:15:04 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:31:02 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	success_to_cover(t_node *map)
 	j = 0;
 	is_valid = 1;
 	t_map = node_to_array(map, node_len(map));
-	print_double_str_array(t_map);
 	if (!t_map)
 		return (0);
 	while (t_map && t_map[++i] && is_valid == 1)

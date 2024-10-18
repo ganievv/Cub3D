@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 16:40:40 by tnakas            #+#    #+#              #
-#    Updated: 2024/08/30 20:22:54 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/18 20:33:43 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAGS			= -Wall -Wextra -Werror -I.
 
 
 $(NAME):		$(OBJS) $(LST_OBJS)
-				ar rcs $(NAME) $(OBJS) $(LST_OBJS)
+				@ar rcs $(NAME) $(OBJS) $(LST_OBJS)
 
 all:			$(NAME)
 
@@ -49,6 +49,6 @@ fclean:			clean
 re:				fclean $(NAME)
 
 bonus:			$(OBJS) $(LST_OBJS)
-				ar rcs $(NAME) $(OBJS) $(LST_OBJS)
+				@ar rcs $(NAME) $(OBJS) $(LST_OBJS)
 
 .PHONY:			all clean fclean re bonus
