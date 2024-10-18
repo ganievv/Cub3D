@@ -6,7 +6,7 @@
 #    By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 11:32:04 by sganiev           #+#    #+#              #
-#    Updated: 2024/10/18 23:56:16 by tnakas           ###   ########.fr        #
+#    Updated: 2024/10/19 00:19:36 by tnakas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ all: $(BUILDDIR) $(NAME)
 
 $(NAME): $(MLX42LIB) $(OBJ) $(LIBFT)
 	@echo "$(BLUE)Linking $@...$(RESET)"
-	@$(CC) $(OBJ) $(LIBFT) $(MLX42LIB) $(MLX42FLAGS) -lm -o $@ > /dev/null 2>&1
+	@$(CC) $(OBJ) $(LIBFT) $(MLX42LIB) $(MLX42FLAGS) -lm -o $@
 	@echo "$(GREEN)Executable $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):
@@ -118,11 +118,6 @@ fclean: clean
 
 re: fclean all
 
-leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/map1.cub
-leaks_1:
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/good/creepy.cub
-
 -include $(DEPFILES)
 
-.PHONY: all, clean, fclean, re, submodules_init, leaks, leaks_1
+.PHONY: all, clean, fclean, re, submodules_init
