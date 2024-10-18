@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 13:41:05 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:11:18 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,30 @@ int	order_is_valid(t_node *dir)
 	return (dir->type == 5);
 }
 
+int	is_png(char *str)
+{
+	int	len;
+
+	if (!str)
+		return (0);
+	len = ft_strlen(str);
+	if (len < 4)
+		return (0);
+	while (len > 0 && ft_isspace(str[len - 1]))
+		len--;
+	if (len < 4)
+		return (0);
+	if (ft_strncmp(&str[len - 4], ".png", 4) == 0)
+		return (1);
+	return (0);
+}
+
 int	paths_are_valid(t_node *compass_dir)
 {
 	while (compass_dir && compass_dir->type <= 3)
 	{
-		if (open(compass_dir->p_or_c, O_RDONLY) < 0)
+		if (!(is_png(compass_dir->p_or_c))
+			|| open(compass_dir->p_or_c, O_RDONLY) < 0)
 			return (0);
 		compass_dir = compass_dir->next;
 	}
