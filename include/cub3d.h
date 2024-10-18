@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:28:13 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/18 22:11:17 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 23:55:44 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_c_dir
 */
 typedef struct s_node
 {
-	t_c_dir	type;
+	t_c_dir			type;
 	char			*p_or_c;
 	struct s_node	*next;
 }	t_node;
@@ -87,7 +87,7 @@ typedef struct s_texture
 {
 	mlx_texture_t			*texture;
 	mlx_image_t				*img;
-	t_c_dir			dir;
+	t_c_dir					dir;
 	char					*path;
 	uint32_t				color;
 }	t_texture;
@@ -101,7 +101,7 @@ typedef struct s_map
 	int				height;
 	int				i_player;
 	int				j_player;
-	t_c_dir	dir;
+	t_c_dir			dir;
 }	t_map;
 
 typedef struct s_input
@@ -325,9 +325,6 @@ int			count_zeros(char **map);
 /*---------------Passing_map_and_colors------------------------*/
 int			find_map_height(char **map);
 int			find_map_width(char **map);
-char		**char_to_splited(char *color_set);
-void		set_color(t_color *c, char	**splited);
-uint32_t	three_to_hex(t_color c);
 
 void		free_cub3d_input(t_cub3d *info);
 void		free_cub3d(t_cub3d *info, int ret, bool mlx_term);
