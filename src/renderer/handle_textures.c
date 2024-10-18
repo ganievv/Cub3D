@@ -15,9 +15,17 @@
 void	load_textures(t_cub3d *info)
 {
 	info->input.ea.texture = mlx_load_png(info->input.ea.path);
+	if (!info->input.ea.texture)
+		free_cub3d(info, 1, true);
 	info->input.no.texture = mlx_load_png(info->input.no.path);
+	if (!info->input.no.texture)
+		free_cub3d(info, 1, true);
 	info->input.we.texture = mlx_load_png(info->input.we.path);
+	if (!info->input.we.texture)
+		free_cub3d(info, 1, true);
 	info->input.so.texture = mlx_load_png(info->input.so.path);
+	if (!info->input.so.texture)
+		free_cub3d(info, 1, true);
 }
 
 void	delete_textures_and_imgs(t_cub3d *info)

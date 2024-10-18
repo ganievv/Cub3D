@@ -45,7 +45,6 @@ static void	pass_cub_file(t_cub3d *info,
 	info->map.map = node_to_array(map, node_len(map));
 	node_clear(map);
 	info->map.height = find_map_height(info->map.map);
-	info->map.width = find_map_width(info->map.map);
 	info->input.no.path = ft_strdup(compass_dir->p_or_c);
 	info->input.so.path = ft_strdup(compass_dir->next->p_or_c);
 	info->input.we.path = ft_strdup(compass_dir->next->next->p_or_c);

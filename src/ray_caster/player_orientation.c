@@ -18,12 +18,14 @@ void	set_player_coordinates(t_cub3d *info)
 {
 	int	x;
 	int	y;
+	int	map_width;
 
 	y = -1;
 	while (++y < info->map.height)
 	{
 		x = -1;
-		while (++x < info->map.width)
+		map_width = find_map_row_len(info->map.map[y]);
+		while (++x < map_width)
 		{
 			if (info->map.map[y][x] == 'N' || info->map.map[y][x] == 'S'
 				|| info->map.map[y][x] == 'E' || info->map.map[y][x] == 'W')

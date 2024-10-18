@@ -26,7 +26,7 @@
 # define PLANE_HEIGHT 1080
 # define FOV_ANGLE 60.0
 # define CUBE_SIZE 1080
-# define MOVE_SPEED 150
+# define MOVE_SPEED 200
 # define ROTATION_SPEED 3.0
 # define PIXEL_BUFFER 216
 # define BYTES_PER_PIXEL 4
@@ -329,5 +329,6 @@ uint32_t	three_to_hex(t_color c);
 
 void		free_cub3d_input(t_cub3d *info);
 void		free_cub3d(t_cub3d *info, int ret, bool mlx_term);
+int			find_map_row_len(char *line);
 
 #endif

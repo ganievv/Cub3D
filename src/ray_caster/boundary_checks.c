@@ -21,10 +21,9 @@ bool	is_wall(t_coords *i, t_cub3d *info)
 /* Checks if a intersection is outside the boundaries of the map. */
 bool	is_out_of_map(t_coords *i, t_cub3d *info)
 {
-	if (i->x < 0 || i->y < 0
-		|| i->x >= info->map.width || i->y >= info->map.height)
+	if (i->x < 0 || i->y < 0 || i->y >= info->map.height)
 		return (1);
-	if ((long unsigned int)i->x >= ft_strlen(info->map.map[i->y]))
+	if (i->x >= find_map_row_len(info->map.map[i->y]))
 		return (1);
 	return (0);
 }

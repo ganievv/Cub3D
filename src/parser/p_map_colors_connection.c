@@ -22,7 +22,10 @@ int	find_map_height(char **map)
 	return (i);
 }
 
-int	find_line_len(char *line)
+/* Finds the actual length of a map
+*  row, excluding any whitespace after
+*  the last '1' (last wall block)	*/
+int	find_map_row_len(char *line)
 {
 	int	i;
 
@@ -46,7 +49,7 @@ int	find_map_width(char **map)
 	length = 0;
 	while (map[++i])
 	{
-		tmp = find_line_len(map[i]);
+		tmp = find_map_row_len(map[i]);
 		if (length < tmp)
 			length = tmp;
 	}

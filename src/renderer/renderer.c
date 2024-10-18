@@ -14,6 +14,8 @@
 
 void	free_cub3d(t_cub3d *info, int ret, bool mlx_term)
 {
+	if (ret)
+		ft_putstr_fd("Error\n", 2);
 	free_cub3d_input(info);
 	if (info->img)
 		mlx_delete_image(info->mlx, info->img);
