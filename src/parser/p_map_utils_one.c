@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:42:22 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 22:11:17 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 23:27:30 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ void	n_clear(t_node *lst)
 	t_node	*temp;
 
 	temp = NULL;
-	if (!lst)
-		return ;
-	while (lst->next)
+	while (lst)
 	{
 		temp = lst->next;
+		free(lst->p_or_c);
 		free(lst);
 		lst = temp;
 	}

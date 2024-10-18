@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/18 22:10:33 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 23:02:08 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	colors_are_valid(t_node *c_dir)
 		if (!splitted_colors)
 			return (0);
 		if (!is_valid_splited_color_arg(splitted_colors))
-			return (0);
+			return (free_double_array(splitted_colors), 0);
 		c_dir = c_dir->next;
 	}
-	return (1);
+	return (free_double_array(splitted_colors), 1);
 }
 
 int	valid_textures(t_node *c_dir)

@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:47:55 by tnakas            #+#    #+#             */
-/*   Updated: 2024/10/17 15:52:31 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 23:07:13 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	map_list_version(char **res, t_node	**map, int *dir)
 	}
 }
 
-void	array_to_list(char **res, t_node **parse_node, t_node **map)
+void	array_to_list(char **res, t_node **textures_node, t_node **map)
 {
 	int		i;
 	int		j;
@@ -41,7 +41,7 @@ void	array_to_list(char **res, t_node **parse_node, t_node **map)
 		j = -1;
 		while (ft_isspace(res[i][++j]))
 			;
-		define_the_type(res[i] + j, parse_node, &not_a_dir);
+		define_the_type(res[i] + j, textures_node, &not_a_dir);
 		if (not_a_dir)
 			break ;
 	}

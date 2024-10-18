@@ -6,7 +6,7 @@
 /*   By: tnakas <tnakas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:25:54 by sganiev           #+#    #+#             */
-/*   Updated: 2024/10/18 22:35:18 by tnakas           ###   ########.fr       */
+/*   Updated: 2024/10/18 23:13:36 by tnakas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ int	main(int argc, char **argv)
 	else
 		return (ft_putstr_fd("Error\n", 2),
 			n_clear(map), n_clear(c_dir), 1);
-	n_scs_inf(&info, map, c_dir);
-	r_rc_free(&info);
-	return (0);
+	return (n_scs_inf(&info, map, c_dir), r_rc_free(&info), 0);
 }
 
 /* apt-get update -y
