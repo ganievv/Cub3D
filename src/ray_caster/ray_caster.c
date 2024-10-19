@@ -86,35 +86,34 @@ void	cast_rays(t_cub3d *info)
 }
 
 /* function for debugging */
-/*	void	save_calculated_data(t_cub3d *info)
-	{
-		FILE	*fp;
-		int		i;
+/*void	save_calculated_data(t_cub3d *info)
+{
+FILE	*fp;
+int		i = -1;
 
-		i = -1;
-		fp = fopen("calc_data.txt", "w");
-		if (!fp)
-			return (perror("Error opening file for writing"));
-		while (++i < info->plane.width)
-		{
-			fprintf(fp, "%3d-ray (angle: %6.1f): h_pixel.x: %4.1f, h_pixel.y: %4.1f"
-				"\th_grid.x: %d, h_grid.y: %d", i, info->ray[i].angle,
-				info->ray[i].h_intersec.x, info->ray[i].h_intersec.y,
-				pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
-				pixel_to_grid(info->ray[i].h_intersec.y,
-					info->game_dims.cube_size));
-			fprintf(fp, "\n\t\t\t\t\t\t v_pixel.x: %4.1f, v_pixel.y: %4.1f"
-				"\tv_grid.x: %d, v_grid.y: %d",
-				info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
-				pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
-				pixel_to_grid(info->ray[i].v_intersec.y,
-					info->game_dims.cube_size));
-			fprintf(fp, "\n\t\t\t\t\t\t ray_dist:       %4.1f", info->ray[i].dist);
-			fprintf(fp, "\n\t\t\t\t\t\t proj_slice_len:%4d\n\n",
-				info->ray[i].proj_slice_len);
-		}
-		fclose(fp);
-	} */
+fp = fopen("calc_data.txt", "w");
+if (!fp)
+	return (perror("Error opening file for writing"));
+while (++i < info->plane.width)
+{
+fprintf(fp, "%3d-ray (angle: %6.1f): h_pixel.x: %4.1f, h_pixel.y: %4.1f"
+"\th_grid.x: %d, h_grid.y: %d", i, info->ray[i].angle,
+info->ray[i].h_intersec.x, info->ray[i].h_intersec.y,
+pixel_to_grid(info->ray[i].h_intersec.x, info->game_dims.cube_size),
+pixel_to_grid(info->ray[i].h_intersec.y,
+info->game_dims.cube_size));
+fprintf(fp, "\n\t\t\t\t\t\t v_pixel.x: %4.1f, v_pixel.y: %4.1f"
+"\tv_grid.x: %d, v_grid.y: %d",
+info->ray[i].v_intersec.x, info->ray[i].v_intersec.y,
+pixel_to_grid(info->ray[i].v_intersec.x, info->game_dims.cube_size),
+pixel_to_grid(info->ray[i].v_intersec.y,
+info->game_dims.cube_size));
+fprintf(fp, "\n\t\t\t\t\t\t ray_dist:       %4.1f", info->ray[i].dist);
+fprintf(fp, "\n\t\t\t\t\t\t proj_slice_len:%4d\n\n",
+info->ray[i].proj_slice_len);
+}
+fclose(fp);
+}*/
 
 /* apt-get update -y
 *  apt-get install cmake -y
