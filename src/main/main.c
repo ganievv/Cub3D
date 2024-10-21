@@ -36,9 +36,9 @@ static void	pass_cub_file(t_cub3d *info,
 	info->input.so.path = ft_strdup(c_dir->next->p_or_c);
 	info->input.we.path = ft_strdup(c_dir->next->next->p_or_c);
 	info->input.ea.path = ft_strdup(c_dir->next->next->next->p_or_c);
-	info->input.ceilling.color
-		= char_to_hex(c_dir->next->next->next->next->p_or_c);
 	info->input.floor.color
+		= char_to_hex(c_dir->next->next->next->next->p_or_c);
+	info->input.ceilling.color
 		= char_to_hex(c_dir->next->next->next->next->next->p_or_c);
 }
 
