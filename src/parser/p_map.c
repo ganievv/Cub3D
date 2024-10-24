@@ -12,42 +12,24 @@
 
 #include "../../include/cub3d.h"
 
-static void	skip_zeros_ones_spaces(t_node *map, int *i)
-{
-	while (map && map->p_or_c[(*i)]
-		&& (map->p_or_c[(*i)] == '0'
-			|| map->p_or_c[(*i)] == '1'
-			|| (ft_isspace(map->p_or_c[(*i)]))))
-		(*i)++;
-}
-
 int	map_valid_by_chars(t_node *map)
 {
-	int	player_found;
+	int	player_num;
 	int	i;
 
-	i = 0;
-	player_found = 0;
+	player_num = 0;
 	while (map && map->p_or_c)
 	{
 		i = 0;
-		skip_zeros_ones_spaces(map, &i);
-		if (map && map->p_or_c[i])
+		while (map && map->p_or_c[i])
 		{
 			if (is_c_dir_letter(map->p_or_c[i]))
-			{
-				if (player_found == 1)
-					return (0);
-				else
-					player_found = 1;
-			}
-			else
-				return (0);
+				player_num++;
+			i++;
 		}
-		skip_zeros_ones_spaces(map, &i);
 		map = map->next;
 	}
-	return (player_found);
+	return (player_num == 1);
 }
 
 int	success_to_cover(t_node *map)
