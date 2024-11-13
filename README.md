@@ -77,6 +77,6 @@ C 225,30,0
 ## Examples
 Check out some examples of what the project looks like with different map configurations in the `maps/` directory!
 
-## Contributor
+## Project Partner
 
 - [Thomas Nakas](link-to-profile)
