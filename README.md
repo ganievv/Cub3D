@@ -15,8 +15,10 @@ Cub3D is a ray-casting project inspired by the legendary Wolfenstein 3D game. Bu
 
 ## Installation and Usage
 **Note:**
-This project is designed to work on Mac systems only.
-For Linux: replace the line `MLX42FLAGS := -lglfw -framework Cocoa -framework OpenGL -framework IOKit` in the Makefile with this line - `MLX42FLAGS := -lglfw -ldl -lGL`. Install `cmake`, `build-essential`, `libx11-dev`, `libglfw3-dev`, `libglfw3` and `xorg-dev` if you don't have them.
+
+This project is designed to work on Mac systems.
+
+For Linux systems: replace the line `MLX42FLAGS := -lglfw -framework Cocoa -framework OpenGL -framework IOKit` in the Makefile with this line - `MLX42FLAGS := -lglfw -ldl -lGL`. Install `cmake`, `build-essential`, `libx11-dev`, `libglfw3-dev`, `libglfw3` and `xorg-dev` if you don't have them.
 ### Clone the Repository
 First, clone the repository and navigate into the project directory:
 ```bash
