@@ -53,6 +53,8 @@ C 225,30,0
   - `0` - Empty space
   - `1` - Wall
   - `N/S/E/W` - Player start position and orientation
+  - `F` - Defines the RGB color for the floor. Example: `F 220,100,0` sets the floor color to a reddish-orange shade.
+  - `C` - Defines the RGB color for the ceiling. Example: `C 225,30,0` sets the ceiling color to a red shade.
 
 ## Controls
 - **Movement**: `W` (forward), `A` (left), `S` (backward), `D` (right)
