@@ -14,6 +14,12 @@ Cub3D is a ray-casting project inspired by the legendary Wolfenstein 3D game. Bu
 - Map files with `.cub` extensions for scene configuration.
 
 ## Installation and Usage
+### Clone the Repository
+First, clone the repository and navigate into the project directory:
+```bash
+git clone https://github.com/ganievv/Cub3D.git
+cd Cub3D
+```
 ### Compilation
 Run the following command:
 ```bash
