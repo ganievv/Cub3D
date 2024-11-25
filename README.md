@@ -79,4 +79,4 @@ Check out some examples of what the project looks like with different map config
 
 ## Project Partner
 
-- [Thomas Nakas](link-to-profile)
+- [Thomas Nakas](https://github.com/ThomasNakas)
